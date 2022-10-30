@@ -1,5 +1,51 @@
-@extends('layouts.app')
+@extends('layouts.frontapp')
 
+@section('title','login')
+@section('frontPageContent')
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+
+        <div class="register_header text-center">
+            <h4 class="text-danger py-3">Login</h4>
+          </div> 
+
+        <div class="register_wrap tab-content">
+            <div class="tab-pane show active" id="signin_tab" role="tabpanel">
+                <form action="#">
+                    <div class="form_item_wrap">
+                        <h3 class="input_title">User Name*</h3>
+                        <div class="form_item">
+                            <label for="username_input"><i class="fas fa-user"></i></label>
+                            <input id="username_input" type="text" name="username" placeholder="User Name">
+                        </div>
+                    </div>
+
+                    <div class="form_item_wrap">
+                        <h3 class="input_title">Password*</h3>
+                        <div class="form_item">
+                            <label for="password_input"><i class="fas fa-lock"></i></label>
+                            <input id="password_input" type="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="checkbox_item">
+                            <input id="remember_checkbox" type="checkbox">
+                            <label for="remember_checkbox">Remember Me</label>
+                        </div>
+                    </div>
+
+                    <div class="form_item_wrap">
+                        <button type="submit" class="btn btn_primary">Sign In</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@endsection
+
+{{-- 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -70,4 +116,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}
