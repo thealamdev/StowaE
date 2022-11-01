@@ -12,12 +12,18 @@
 
         <div class="register_wrap tab-content">
             <div class="tab-pane show active" id="signin_tab" role="tabpanel">
-                <form action="#">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
                     <div class="form_item_wrap">
                         <h3 class="input_title">User Name*</h3>
                         <div class="form_item">
                             <label for="username_input"><i class="fas fa-user"></i></label>
                             <input id="username_input" type="text" name="username" placeholder="User Name">
+                            @error('username')
+                            <span class="invalid-feedback" role="alert">
+                                <strong class="text-danger">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
 
@@ -26,9 +32,14 @@
                         <div class="form_item">
                             <label for="password_input"><i class="fas fa-lock"></i></label>
                             <input id="password_input" type="password" name="password" placeholder="Password">
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong class="text-danger">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
-                        <div class="checkbox_item">
-                            <input id="remember_checkbox" type="checkbox">
+                        <div class="checkbox_item">               
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                             <label for="remember_checkbox">Remember Me</label>
                         </div>
                     </div>

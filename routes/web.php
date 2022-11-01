@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\frontend\frontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,9 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+ 
 // Frontend show route:
 Route::get('/',[frontendController::class, 'index'])->name('frontend.home');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Dashboard show route:
+Route::get('/dashboard', [BackendController::class, 'index'])->name('dashboard');

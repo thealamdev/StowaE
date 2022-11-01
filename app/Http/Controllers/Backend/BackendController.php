@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+
+class BackendController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -15,14 +18,14 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-
+    // Dashboard show function:
+    
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('home');
+    public function index(){
+        return view('backend.index');
     }
 }
