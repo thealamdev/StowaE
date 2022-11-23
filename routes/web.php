@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Backend\RolePermissionController;
 use App\Http\Controllers\frontend\frontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[frontendController::class, 'index'])->name('frontend.home');
 
 Auth::routes();
-//Dashboard show route:
-Route::get('/dashboard', [BackendController::class, 'index'])->name('dashboard');
+
+
+Route::prefix('dashboard')->name('dashboard.')->group(function(){
+    //Dashboard index route:
+    Route::get('/', [BackendController::class, 'index'])->name('dashboard');
+
+    //role and permission route:
+     Route::group(['middleware' =>['role:super-admin']],function(){
+         Route::get('role/index',[RolePermissionController::class, "index"])->name('role.index');
+     });
+
+});
+ 
+ 
