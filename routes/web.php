@@ -31,6 +31,7 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
     //role and permission route:
      Route::group(['middleware' =>['role:super-admin']],function(){
          Route::get('role/index',[RolePermissionController::class, "index"])->name('role.index');
+         Route::post('role/store',[RolePermissionController::class, "store"])->name('role.store');
      });
 
 });

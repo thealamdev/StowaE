@@ -39,7 +39,16 @@ class RolePermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 
+        $request->validate([
+            "role" => "required"
+        ]);
+
+        $role = new Role();
+        $role->name = $request->role;
+        $role->save();
+
+        return back();
     }
 
     /**

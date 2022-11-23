@@ -58,7 +58,8 @@
                 </div>
             </div>
             <div class="col-lg-4 card-form__body card-body">
-                <form>
+                <form action="{{ route('dashboard.role.store') }}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail1">Enter Role</label>
                         <input type="text" class="form-control" name="role" id="exampleInputEmail1"
