@@ -15,7 +15,7 @@ class RolePermissionController extends Controller
     public function index()
     {
         // role index page:
-        return "role page";
+        return view('backend.role');
     }
 
     /**
