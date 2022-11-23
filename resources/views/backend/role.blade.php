@@ -28,24 +28,27 @@
                                         </tr>
                                     </thead>
                                     <tbody class="list" id="staff">
+                                        @foreach ($roles as $role)
+                                            
+                                        
                                         <tr class="selected">
 
                                             <td>
-                                                <p>01</p>
+                                                <p>{{ $role->id }}</p>
                                             </td>
 
                                             <td>
 
-                                                <p>Super Admin</p>
+                                                <p>{{ $role->name }}</p>
 
                                             </td>
                                             <td>
                                                 <a href="#">Edit</a>
                                                 <a href="#">Delete</a>
                                             </td>
+                                        </tr>
 
-
-
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

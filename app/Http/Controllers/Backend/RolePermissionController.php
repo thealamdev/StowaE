@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 
 class RolePermissionController extends Controller
 {
@@ -15,7 +16,9 @@ class RolePermissionController extends Controller
     public function index()
     {
         // role index page:
-        return view('backend.role');
+        $roles = Role::all();
+         
+        return view('backend.role',compact('roles'));
     }
 
     /**
