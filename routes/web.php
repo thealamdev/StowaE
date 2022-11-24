@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\RolePermissionController;
 use App\Http\Controllers\frontend\frontendController;
+use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,9 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
      Route::group(['middleware' =>['role:super-admin']],function(){
          Route::get('role/index',[RolePermissionController::class, "index"])->name('role.index');
          Route::post('role/store',[RolePermissionController::class, "store"])->name('role.store');
+         Route::get('role/edit/{id}',[RolePermissionController::class, "edit"])->name('role.edit');
+         Route::put('role/update/{id}',[RolePermissionController::class, "update"])->name('role.update');
+         Route::delete('role/delete/{id}',[RolePermissionController::class,"delete"])->name('role.delete');
      });
 
 });

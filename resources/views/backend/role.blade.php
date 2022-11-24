@@ -43,8 +43,8 @@
 
                                             </td>
                                             <td>
-                                                <a href="#">Edit</a>
-                                                <a href="#">Delete</a>
+                                                <a href="{{ route('dashboard.role.edit', $role->id) }}">Edit</a>
+                                                <a href="{{ route('dashboard.role.delete', $role->id) }}">Delete</a>
                                             </td>
                                         </tr>
 

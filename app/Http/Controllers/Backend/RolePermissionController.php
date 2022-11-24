@@ -71,6 +71,9 @@ class RolePermissionController extends Controller
     public function edit($id)
     {
         //
+        $roles = Role::where('id',$id)->get();
+       
+        return view('backend.role-edit',compact('roles'));
     }
 
     /**
@@ -83,6 +86,15 @@ class RolePermissionController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'role' => 'required',
+        ]);
+
+        $role = Role::find($id);
+        $role->name = $request->role;
+        $role->save();
+        return redirect()->route('dashboard.role.index');
+
     }
 
     /**
@@ -94,5 +106,6 @@ class RolePermissionController extends Controller
     public function destroy($id)
     {
         //
+        Role::delete($id);
     }
 }
