@@ -382,8 +382,18 @@
                                             id="role_permission">
                                             <li class="sidebar-menu-item active">
                                                 <a class="sidebar-menu-button"
+                                                   href="{{ route('dashboard.role.create') }}">
+                                                    <span class="sidebar-menu-text">Add Role</span>
+                                                </a>
+                                            </li>                                         
+                                        </ul>
+
+                                        <ul class="sidebar-submenu collapse"
+                                            id="role_permission">
+                                            <li class="sidebar-menu-item active">
+                                                <a class="sidebar-menu-button"
                                                    href="{{ route('dashboard.role.index') }}">
-                                                    <span class="sidebar-menu-text">Role</span>
+                                                    <span class="sidebar-menu-text">All Role</span>
                                                 </a>
                                             </li>                                         
                                         </ul>

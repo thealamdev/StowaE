@@ -32,6 +32,7 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
     //role and permission route:
      Route::group(['middleware' =>['role:super-admin']],function(){
          Route::get('role/index',[RolePermissionController::class, "index"])->name('role.index');
+         Route::get('role/create',[RolePermissionController::class, "create"])->name('role.create');
          Route::post('role/store',[RolePermissionController::class, "store"])->name('role.store');
          Route::get('role/edit/{id}',[RolePermissionController::class, "edit"])->name('role.edit');
          Route::put('role/update/{id}',[RolePermissionController::class, "update"])->name('role.update');
