@@ -16,9 +16,9 @@ class RolePermissionController extends Controller
     public function index()
     {
         // role index page:
-        $roles = Role::all();
+        $roles = Role::whereNotIn('name',['super-admin'])->get();
          
-        return view('backend.role',compact('roles'));
+        return view('backend.role.index',compact('roles'));
     }
 
     /**
@@ -29,6 +29,9 @@ class RolePermissionController extends Controller
     public function create()
     {
         //
+        $roles = Role::whereNotIn('name',['super-admin'])->get();
+         
+        return view('backend.role.create',compact('roles'));
     }
 
     /**

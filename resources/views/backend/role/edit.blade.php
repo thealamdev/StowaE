@@ -1,7 +1,7 @@
  
 
 @extends('layouts.backendapp')
-@section('title','role-edit')
+@section('title','Role Edit')
 @section('backendContent')
     <div class="row">
          
