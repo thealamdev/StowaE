@@ -106,6 +106,7 @@ class RolePermissionController extends Controller
     public function destroy($id)
     {
         //
-        Role::delete($id);
+        Role::find($id)->delete();
+        return back();
     }
 }

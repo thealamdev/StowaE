@@ -35,7 +35,7 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
          Route::post('role/store',[RolePermissionController::class, "store"])->name('role.store');
          Route::get('role/edit/{id}',[RolePermissionController::class, "edit"])->name('role.edit');
          Route::put('role/update/{id}',[RolePermissionController::class, "update"])->name('role.update');
-         Route::delete('role/delete/{id}',[RolePermissionController::class,"delete"])->name('role.delete');
+         Route::delete('role/delete/{id}',[RolePermissionController::class,"destroy"])->name('role.delete');
      });
 
 });

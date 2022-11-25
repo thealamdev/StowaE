@@ -43,8 +43,15 @@
 
                                             </td>
                                             <td>
+                                                
                                                 <a href="{{ route('dashboard.role.edit', $role->id) }}">Edit</a>
-                                                <a href="{{ route('dashboard.role.delete', $role->id) }}">Delete</a>
+                                                <form action="{{ route('dashboard.role.delete',$role->id) }}" method="POST" style="display: inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                      <button type="submit">Delete</button>
+                                                </form>
+                                               
+                                                 
                                             </td>
                                         </tr>
 
