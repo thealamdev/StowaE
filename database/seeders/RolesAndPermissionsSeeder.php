@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RolesAndPermissionsSeeder extends Seeder
@@ -34,6 +35,13 @@ class RolesAndPermissionsSeeder extends Seeder
             "name" => "super-admin",
         ]);
         $user->assignRole($role);
+
+        $arrayOfPermissionNames = ['writer', 'editor'];
+        $permissions = collect($arrayOfPermissionNames)->map(function ($permission) {
+            return ['name' => $permission, 'guard_name' => 'web'];
+        });
+    
+        Permission::insert($permissions->toArray());
        
     }
 }
