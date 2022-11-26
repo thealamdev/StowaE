@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Permission;
+use Illuminate\Http\Request;
 
-class RolePermissionController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +14,7 @@ class RolePermissionController extends Controller
      */
     public function index()
     {
-        // role index page:
-        $roles = Role::whereNotIn('name',['super-admin'])->get();
-         
-        return view('backend.role.index',compact('roles'));
+        //
     }
 
     /**
@@ -30,10 +25,6 @@ class RolePermissionController extends Controller
     public function create()
     {
         //
-        $roles = Role::whereNotIn('name',['super-admin'])->get();
-        $permissions = Permission::all();
-         
-        return view('backend.role.create',compact('roles','permissions'));
     }
 
     /**
@@ -44,16 +35,8 @@ class RolePermissionController extends Controller
      */
     public function store(Request $request)
     {
-        // 
-        $request->validate([
-            "role" => "required"
-        ]);
-
-        $role = new Role();
-        $role->name = $request->role;
-        $role->save();
-
-        return back();
+        //
+        return "ok";
     }
 
     /**
@@ -76,9 +59,6 @@ class RolePermissionController extends Controller
     public function edit($id)
     {
         //
-        $roles = Role::where('id',$id)->get();
-       
-        return view('backend.role-edit',compact('roles'));
     }
 
     /**
@@ -91,15 +71,6 @@ class RolePermissionController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $request->validate([
-            'role' => 'required',
-        ]);
-
-        $role = Role::find($id);
-        $role->name = $request->role;
-        $role->save();
-        return redirect()->route('dashboard.role.index');
-
     }
 
     /**
@@ -111,7 +82,5 @@ class RolePermissionController extends Controller
     public function destroy($id)
     {
         //
-        Role::find($id)->delete();
-        return back();
     }
 }

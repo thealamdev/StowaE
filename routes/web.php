@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\RolePermissionController;
 use App\Http\Controllers\frontend\frontendController;
 use Faker\Guesser\Name;
@@ -37,6 +38,10 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
          Route::get('role/edit/{id}',[RolePermissionController::class, "edit"])->name('role.edit');
          Route::put('role/update/{id}',[RolePermissionController::class, "update"])->name('role.update');
          Route::delete('role/delete/{id}',[RolePermissionController::class,"destroy"])->name('role.delete');
+     });
+
+     Route::group(['middleware' =>['role:super-admin']],function(){
+        Route::post('permission/store', [PermissionController::class, 'store'])->name('permission.store');
      });
 
 });
