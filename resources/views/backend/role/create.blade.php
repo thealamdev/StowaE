@@ -8,7 +8,7 @@
     <div class="card card-form mt-4">
         
          <div class="row">
-            <!-- Set Permission and Role -->
+            <!-- Create Permission -->
             <div class="col-lg-6 card-form__body card-body">
                 <form action="{{ route('dashboard.permission.store') }}" method="POST">
                     @csrf
@@ -22,7 +22,7 @@
                 </form>
             </div>
 
-             <!--  Create Roll -->
+             <!--  Set Permission of Roll -->
             <div class="col-lg-6 card-form__body card-body">
                 <form action="{{ route('dashboard.role.store') }}" method="POST">
                     @csrf
@@ -37,7 +37,7 @@
                         <br>
                         @foreach ($permissions as $permission)
                          <div class="checkbox_design my-2">
-                            <input type="checkbox" value="{{ $permission->id }}" name="role" > <span>{{ $permission->name }} </span>
+                            <input type="checkbox" value="{{ $permission->id }}" name="permissions[]" > <span>{{ $permission->name }} </span>
                          </div>
                         @endforeach
                          

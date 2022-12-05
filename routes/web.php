@@ -30,18 +30,18 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
     //Dashboard index route:
     Route::get('/', [BackendController::class, 'index'])->name('dashboard');
 
-    //role and permission route:
-     Route::group(['middleware' =>['role:super-admin']],function(){
-         Route::get('role/index',[RolePermissionController::class, "index"])->name('role.index');
-         Route::get('role/create',[RolePermissionController::class, "create"])->name('role.create');
-         Route::post('role/store',[RolePermissionController::class, "store"])->name('role.store');
-         Route::get('role/edit/{id}',[RolePermissionController::class, "edit"])->name('role.edit');
-         Route::put('role/update/{id}',[RolePermissionController::class, "update"])->name('role.update');
-         Route::delete('role/delete/{id}',[RolePermissionController::class,"destroy"])->name('role.delete');
-     });
+    Route::controller(RolePermissionController::class)->middleware(['role:super-admin'])->prefix('role')->name('role.')->group(function(){
+        Route::get('/','index')->name('index');
+        Route::get('create','create')->name('create');
+        Route::post('store','store')->name('store');
+        Route::get('edit/{id}','edit')->name('edit');
+        Route::put('update/{id}','update')->name('update');
+        Route::delete('delete/{id}','destroy')->name('delete');
+    });
 
-     Route::group(['middleware' =>['role:super-admin']],function(){
-        Route::post('permission/store', [PermissionController::class, 'store'])->name('permission.store');
+     Route::controller(PermissionController::class)->middleware(['role:super-admin'])->prefix('permission')->name('permission.')->group(function(){
+        Route::post('/', 'store')->name('store');
+
      });
 
 });

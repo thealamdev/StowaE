@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -36,7 +37,10 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         //
-        return "ok";
+        $permissions = new Permission();
+        $permissions->name = $request->permission;
+        $permissions->save();
+        return redirect(route('dashboard.role.index'));
     }
 
     /**

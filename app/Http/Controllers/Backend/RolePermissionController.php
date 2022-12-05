@@ -18,7 +18,6 @@ class RolePermissionController extends Controller
     {
         // role index page:
         $roles = Role::whereNotIn('name',['super-admin'])->get();
-         
         return view('backend.role.index',compact('roles'));
     }
 
@@ -46,13 +45,17 @@ class RolePermissionController extends Controller
     {
         // 
         $request->validate([
-            "role" => "required"
+            "role" => "required",
+            "permissions" => "required"
         ]);
 
         $role = new Role();
         $role->name = $request->role;
         $role->save();
 
+
+        $role->givePermissionTo($request->permissions);
+         
         return back();
     }
 
@@ -76,9 +79,12 @@ class RolePermissionController extends Controller
     public function edit($id)
     {
         //
-        $roles = Role::where('id',$id)->get();
+        // $roles = Role::where('id',$id)->get();
+        $roles = Role::where('id',$id)->with('permissions')->get();
+        $permissions = Permission::all();
+        
        
-        return view('backend.role-edit',compact('roles'));
+        return view('backend.role.edit',compact('roles','permissions'));
     }
 
     /**
