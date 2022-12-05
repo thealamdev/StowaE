@@ -21,7 +21,7 @@ class RolesAndPermissionsSeeder extends Seeder
     {
 
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-        // Create User:
+        // Create Super Admin:
         $user =User::create([
             'name' => "Shah alam",
             'email' =>"admin@gmail.com",
@@ -30,10 +30,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'password' => Hash::make('2125702006'), // password
             'remember_token' => Str::random(10),
         ]);
-
+        // Role for super admin:
         $role = Role::create([
             "name" => "super-admin",
         ]);
+
+       // super admin role assign:
         $user->assignRole($role);
 
         $arrayOfPermissionNames = ['writer', 'editor'];
@@ -42,6 +44,12 @@ class RolesAndPermissionsSeeder extends Seeder
         });
     
         Permission::insert($permissions->toArray());
-       
+
+
+
+        // Normal user Roles define:
+        Role::create([
+            'name' => 'user',
+        ]);
     }
 }

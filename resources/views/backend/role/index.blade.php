@@ -1,4 +1,5 @@
 
+{{-- {{ $roles }} --}}
 @extends('layouts.backendapp')
 @section('title', 'Role')
 @section('backendContent')
@@ -31,23 +32,34 @@
                             <tr class="selected">
 
                                 <td>
-                                    <p>{{ $role->id }}</p>
+                                    <p class="badge bg-success">{{ $role->id }}</p>
                                 </td>
 
                                 <td>
 
-                                    <p>{{ $role->name }}</p>
+                                    <p class="badge bg-info">{{ $role->name }}</p>
 
                                 </td>
-                                <td>Writter</td>
                                 <td>
+                                    @foreach ($role->permissions as $permission)
+                                    <p class="badge bg-primary">
+                                        {{ $permission->name}}
+                                    </p>
+                                    @endforeach
+                                </td>
+                                <td class="d-flex justify-content-center align-item-center">
                                     
-                                    <a href="{{ route('dashboard.role.edit', $role->id) }}">Edit</a>
-                                    <form action="{{ route('dashboard.role.delete',$role->id) }}" method="POST" style="display: inline-block">
+                                    <a href="{{ route('dashboard.role.edit', $role->id) }}">
+                                    <p class="badge bg-primary mr-3" style="color:#222">Edit</p>
+                                    </a>
+                                    @can('show')
+                                    <form action="{{ route('dashboard.role.delete',$role->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                          <button type="submit">Delete</button>
+                                          <button type="submit" style="border:none!important;" class="badge bg-danger">Delete</button>
                                     </form>
+                                    @endcan
+                                   
                                    
                                      
                                 </td>

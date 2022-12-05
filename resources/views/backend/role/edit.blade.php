@@ -1,4 +1,4 @@
-{{-- {{ $roles }} --}}
+{{-- {{ $roles->permissions }} --}}
 {{-- @foreach ($roles as $pp)
     @foreach ($pp->permissions as $xx)
         {{ $xx }}
@@ -25,18 +25,19 @@
                     <div class="form-group">
                         <label for="permissions">Give the permission</label>
                         <br>
-                       
-                        @foreach ($role->permissions as $roleP)
-                            
+
+                        
                        
                         @foreach ($permissions as $permission)
-                        @if($roleP->id == $permission->id)
                          <div class="checkbox_design my-2">
-                            <input type="checkbox" value="{{ $permission->id }}" name="permissions[]" {{ $roleP->id == $permission->id ? 'checked' :'' }} > <span>{{ $permission->name }} </span>
+                            <input type="checkbox" value="{{ $permission->id }}" name="permissions[]" @foreach ($role->permissions as $pp) {{ $permission->id == $pp->id ? 'checked' : '' }} 
+                            @endforeach
+                            />
+                            <span>{{ $permission->name }} </span>
                          </div>
-                         @endif
-                        @endforeach
-                        @endforeach
+                         @endforeach
+                         
+                        
                          
                     </div>
                    

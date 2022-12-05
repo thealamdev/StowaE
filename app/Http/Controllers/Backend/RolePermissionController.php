@@ -17,7 +17,8 @@ class RolePermissionController extends Controller
     public function index()
     {
         // role index page:
-        $roles = Role::whereNotIn('name',['super-admin'])->get();
+        $roles = Role::with('permissions')->whereNotIn('name',['super-admin'])->get();
+        // print_r($roles);
         return view('backend.role.index',compact('roles'));
     }
 
@@ -103,6 +104,7 @@ class RolePermissionController extends Controller
 
         $role = Role::find($id);
         $role->name = $request->role;
+        $role->syncPermissions($request->permissions);
         $role->save();
         return redirect()->route('dashboard.role.index');
 
