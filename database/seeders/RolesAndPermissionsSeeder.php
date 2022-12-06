@@ -38,7 +38,7 @@ class RolesAndPermissionsSeeder extends Seeder
        // super admin role assign:
         $user->assignRole($role);
 
-        $arrayOfPermissionNames = ['writer', 'editor'];
+        $arrayOfPermissionNames = ['delete', 'edit','show'];
         $permissions = collect($arrayOfPermissionNames)->map(function ($permission) {
             return ['name' => $permission, 'guard_name' => 'web'];
         });

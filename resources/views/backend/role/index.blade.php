@@ -21,7 +21,10 @@
                                 <th>ID</th>
                                 <th>Role Name</th>
                                 <th>Permissions</th>
+                                @can('show|delete')
                                 <th>Action</th>
+                                @endcan
+                                
 
                             </tr>
                         </thead>
@@ -47,12 +50,16 @@
                                     </p>
                                     @endforeach
                                 </td>
+
+                                @can('edit|delete')
                                 <td class="d-flex justify-content-center align-item-center">
-                                    
+                                    @can('edit')
                                     <a href="{{ route('dashboard.role.edit', $role->id) }}">
-                                    <p class="badge bg-primary mr-3" style="color:#222">Edit</p>
-                                    </a>
-                                    @can('show')
+                                        <p class="badge bg-primary mr-3" style="color:#222">Edit</p>
+                                        </a> 
+                                    @endcan
+                                    
+                                    @can('delete')
                                     <form action="{{ route('dashboard.role.delete',$role->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
@@ -63,6 +70,7 @@
                                    
                                      
                                 </td>
+                                @endcan
                             </tr>
 
                             @endforeach
