@@ -32,7 +32,8 @@
             <div class="card">
                 <div class="card-body">
                     
-                    <form action="">
+                    <form action="{{ route('dashboard.category.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                          <div class="form-group">
                             <label for="name">Category Name</label>
                            <input type="text" name="name" class="form-control" placeholder="Enter Category name">

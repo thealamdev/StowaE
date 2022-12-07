@@ -1,3 +1,4 @@
+
 @extends('layouts.backendapp')
 @section('title','Category')
 @section('backendContent')
@@ -36,22 +37,28 @@
                 <thead>
                     <th>Id</th>
                     <th>Name</th>
+                    <th>Description</th>
                     <th>Image</th>
                     <th>Slug</th>
+                    <th>Parent Category</th>
                     <th>Action</th>
                 </thead>
 
+                @foreach ($categories as $category)
                 <tr>
-                    <td>01</td>
-                    <td>Shah alam</td>
-                    <td>img</td>
-                    <td>Shah-alam</td>
+                    <td>{{ $category->id }}</td>
+                    <td>{{ $category->name }}</td>
+                    <td>{{ $category->description }}</td>
+                    <td>{{ $category->name }}</td>
+                    <td>{{ $category->slug }}</td>
+                    <td>{{ $category->parent_id }}</td>
                     <td>
                         <a href="#" class="badge bg-success">Edit</a>
                         <a href="#" class="badge bg-danger">Delete</a>
                     </td>
                     
                 </tr>
+                @endforeach
                 
             </table>
         </div>

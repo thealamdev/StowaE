@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend\Category;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -15,7 +17,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        return view('backend.category.index');
+        $categories = Category::select('id','name','description','slug','parent_id','image')->get();
+        return view('backend.category.index',compact('categories'));
     }
 
     /**
@@ -38,6 +41,20 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+
+
+        $categories = new Category();
+        $categories->name = $request->name;
+        $categories->slug = Str::slug($request->name);
+        $categories->description = $request->description;
+        $categories->parent_id = $request->parent_id;
+        $categories->user_id = auth()->user()->id;
+        $categories->image = $request->name;
+
+        $categories->save();
+
+        return redirect(route('dashboard.category.index'))->with('success','Category inserted successfully');
+        
     }
 
     /**
