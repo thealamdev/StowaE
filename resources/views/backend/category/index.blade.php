@@ -57,7 +57,7 @@
                     <td>{{ $category->slug }}</td>
                     <td>{{ $category->parent_id }}</td>
                     <td>
-                        <a href="#" class="badge bg-success">Edit</a>
+                        <a href="{{ route('dashboard.category.edit', $category->id) }}" class="badge bg-success">Edit</a>
                         <a href="#" class="badge bg-danger">Delete</a>
                     </td>
                     

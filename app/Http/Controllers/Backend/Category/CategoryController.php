@@ -95,10 +95,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         //
-        return view('backend.category.edit');
+        $categories = Category::where('id',$id)->get(['id','name','description','image','parent_id']);
+        $all_category = Category::get(['id','name']);
+        return view('backend.category.edit',compact('categories','all_category'));
     }
 
     /**
@@ -108,7 +110,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $category)
     {
         //
     }
