@@ -37,12 +37,18 @@
                         @csrf
                          <div class="form-group">
                             <label for="name">Category Name</label>
+                            @error('name')
+                                {{ $message }}
+                            @enderror
                            <input type="text" name="name" class="form-control" placeholder="Enter Category name">
                          </div>
 
                          <div class="form-group">
-                            <label for="name">Category Parent</label>
+                            <label for="parent_id">Category Parent</label>
                            <select name="parent_id" class="form-control">
+                            @error('name')
+                            {{ $message }}
+                            @enderror
                             <option selected disabled>select parent category</option>
                             @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -53,6 +59,10 @@
                          <div class="form-group">
                             <label for="name">Category Description</label>
                            <textarea name="description" class="form-control" cols="30" rows="6" placeholder="Enter category description"></textarea>
+
+                           @error('description')
+                               {{ $message }}
+                           @enderror
                          </div>
 
                          <div class="form-group">

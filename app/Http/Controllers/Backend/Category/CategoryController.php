@@ -41,21 +41,41 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //find the image:
+        $category_img = $request->file('image');
 
+        //Sending before validation:
+        $validated = $request->validate([
+            'name'=>'required|unique:categories|max:20',
+            'slug'=>'unique:categories|max:20',
+            'description'=>'required|max:255',
+            'image'=>'max:255'
+        ]);
 
-        $categories = new Category();
-        $categories->name = $request->name;
-        $categories->slug = Str::slug($request->name);
-        $categories->description = $request->description;
-        $categories->parent_id = $request->parent_id;
-        $categories->user_id = auth()->user()->id;
-        $categories->image = $request->name;
-
-        $categories->save();
-
-        return redirect(route('dashboard.category.index'))->with('success','Category inserted successfully');
         
+        if($validated == true){
+
+            if($category_img->isValid()){
+            $image_name = Str::slug($request->name) . time() . ".". $category_img->getClientOriginalExtension();
+            $category_img->move(public_path('/storage/category'),$image_name);
+                 
+            $categories = new Category();
+            $categories->name = $request->name;
+            $categories->slug = Str::slug($request->name);
+            $categories->description = $request->description;
+            $categories->parent_id = $request->parent_id;
+            $categories->user_id = auth()->user()->id;
+            $categories->image = $image_name;
+             
+
+            $categories->save();
+    
+            return redirect(route('dashboard.category.index'))->with('success','Category inserted successfully');
+            }
+
+            
+        }
+
     }
 
     /**

@@ -51,7 +51,9 @@
                     <td>{{ $category->user->name }}</td>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->description }}</td>
-                    <td>{{ $category->name }}</td>
+                    <td>
+                        <img src="{{ asset('storage/category/'.$category->image) }}" alt="" width="60">
+                    </td>
                     <td>{{ $category->slug }}</td>
                     <td>{{ $category->parent_id }}</td>
                     <td>
