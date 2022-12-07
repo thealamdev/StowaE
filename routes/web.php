@@ -46,8 +46,15 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
      });
 
      // redirect to category folder:
-     Route::controller(CategoryController::class)->prefix('categories')->name('category.')->group(function(){
-        require __DIR__.'category/category.php';
+    //  Route::group(function(){
+    //     require __DIR__.'/category/category.php';
+    //  });
+
+     Route::middleware(['auth'])->group(function(){
+        Route::prefix('categories')->name('category.')->group(function(){
+            require __DIR__.'/category/category.php';
+        });
+         
      });
 
 
