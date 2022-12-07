@@ -369,7 +369,9 @@
                                             </li>                                         
                                         </ul>
                                     </li>  
-
+                                 
+                                      
+                                  
                                     <li class="sidebar-menu-item active">
                                         <a class="sidebar-menu-button"
                                            data-toggle="collapse"
@@ -378,6 +380,8 @@
                                             <span class="sidebar-menu-text">Role-Permission</span>
                                             <span class="ml-auto sidebar-menu-toggle-icon"></span>
                                         </a>
+
+                                        @can('edit')
                                         <ul class="sidebar-submenu collapse"
                                             id="role_permission">
                                             <li class="sidebar-menu-item active">
@@ -387,17 +391,24 @@
                                                 </a>
                                             </li>                                         
                                         </ul>
+                                        @endcan
+                                       
 
-                                        <ul class="sidebar-submenu collapse"
+                                        @can('show')
+                                            <ul class="sidebar-submenu collapse"
                                             id="role_permission">
                                             <li class="sidebar-menu-item active">
                                                 <a class="sidebar-menu-button"
-                                                   href="{{ route('dashboard.role.index') }}">
+                                                href="{{ route('dashboard.role.index') }}">
                                                     <span class="sidebar-menu-text">All Role</span>
                                                 </a>
                                             </li>                                         
-                                        </ul>
+                                            </ul>
+                                        @endcan
+                                        
                                     </li>  
+                                   
+                                   
                                 </ul>
 
                                 <div class="sidebar-heading"></div>
@@ -427,8 +438,8 @@
                                                  class="avatar-img rounded-circle">
                                         </span>
                                         <span class="flex d-flex flex-column">
-                                            <strong>Adrian Demian</strong>
-                                            <small class="text-muted text-uppercase">Site Manager</small>
+                                            <strong>{{ auth()->user()->name }}</strong>
+                                            <small class="text-muted text-uppercase"> {{ auth()->user()->roles->pluck('name') }}</small>
                                         </span>
                                     </a>
                                     <div class="dropdown ml-auto">

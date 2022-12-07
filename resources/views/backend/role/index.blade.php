@@ -21,7 +21,7 @@
                                 <th>ID</th>
                                 <th>Role Name</th>
                                 <th>Permissions</th>
-                                @can('show|delete')
+                                @can('edit')
                                 <th>Action</th>
                                 @endcan
                                 
@@ -51,7 +51,7 @@
                                     @endforeach
                                 </td>
 
-                                @can('edit|delete')
+                                @can('edit')
                                 <td class="d-flex justify-content-center align-item-center">
                                     @can('edit')
                                     <a href="{{ route('dashboard.role.edit', $role->id) }}">

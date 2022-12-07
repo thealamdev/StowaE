@@ -1,10 +1,7 @@
+
 @extends('layouts.backendapp')
 @section('title', 'Role Create')
 @section('backendContent')
-
-
-
-
     <div class="card card-form mt-4">
         
          <div class="row">
@@ -27,9 +24,11 @@
                 <form action="{{ route('dashboard.role.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Enter Role</label>
+                        <label for="role">Enter Role</label>
                         <input type="text" class="form-control" name="role" id="exampleInputEmail1"
-                            placeholder="Enter  role">
+                        placeholder="Enter  role">
+                        
+                        
                     </div>
 
                     <div class="">
@@ -49,5 +48,5 @@
          </div>
              
  
-    </div>
-@endsection
+        </div>
+    @endsection
