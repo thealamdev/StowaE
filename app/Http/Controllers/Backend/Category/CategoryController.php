@@ -83,4 +83,9 @@ class CategoryController extends Controller
     {
         //
     }
+
+    // Archieve function:
+    public function archieve(){
+        //
+    }
 }
