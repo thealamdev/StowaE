@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::select('id','name','description','slug','parent_id','image')->get();
+        $categories = Category::with('user')->get(['id','name','description','slug','parent_id','image','user_id']);
         return view('backend.category.index',compact('categories'));
     }
 
@@ -29,7 +29,8 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('backend.category.create');
+        $categories = Category::select('id','parent_id','name')->get();
+        return view('backend.category.create',compact('categories'));
     }
 
     /**

@@ -1,4 +1,4 @@
-
+{{-- {{ $categories }} --}}
 @extends('layouts.backendapp')
 @section('title','Category')
 @section('backendContent')
@@ -36,6 +36,7 @@
             <table class="table mb-0 thead-border-top-0">
                 <thead>
                     <th>Id</th>
+                    <th>User</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Image</th>
@@ -47,6 +48,7 @@
                 @foreach ($categories as $category)
                 <tr>
                     <td>{{ $category->id }}</td>
+                    <td>{{ $category->user->name }}</td>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->description }}</td>
                     <td>{{ $category->name }}</td>

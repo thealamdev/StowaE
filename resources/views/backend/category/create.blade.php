@@ -1,3 +1,4 @@
+{{-- {{ $categories }} --}}
 @extends('layouts.backendapp')
 @section('title','Category Create')
 @section('backendContent')
@@ -43,6 +44,9 @@
                             <label for="name">Category Parent</label>
                            <select name="parent_id" class="form-control">
                             <option selected disabled>select parent category</option>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                            </select>
                          </div>
 
