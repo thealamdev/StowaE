@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Backend\Category\CategoryController;
 use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\RolePermissionController;
 use App\Http\Controllers\frontend\frontendController;
@@ -43,6 +44,12 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
         Route::post('/', 'store')->name('store');
 
      });
+
+     // redirect to category folder:
+     Route::controller(CategoryController::class)->prefix('categories')->name('category.')->group(function(){
+        require __DIR__.'category/category.php';
+     });
+
 
 });
  
