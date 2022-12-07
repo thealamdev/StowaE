@@ -11,4 +11,5 @@ Route::controller(CategoryController::class)->group(function(){
     Route::get('edit/{category}','edit')->name('edit');
     Route::put('update/{category}','update')->name('update');
     Route::get('archieve','archieve')->name('archieve');
+    Route::delete('delete/{category}','destroy')->name('delete');
 });
