@@ -110,9 +110,25 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category_img = $request->file('image');
+        // UPDATE METHOD:
+        $categories = Category::find($id);
+
+        $image_name = Str::slug($request->name) . time() . ".". $category_img->getClientOriginalExtension();
+        $category_img->move(public_path('/storage/category'),$image_name);
+
+        $categories->name = $request->name;
+        $categories->name = $request->name;
+        $categories->slug = Str::slug($request->name);
+        $categories->description = $request->description;
+        $categories->parent_id = $request->parent_id;
+        $categories->image = $image_name;
+             
+
+        $categories->save();
+        return redirect(route('dashboard.category.index'));
     }
 
     /**

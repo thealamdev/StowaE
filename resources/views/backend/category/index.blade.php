@@ -57,7 +57,10 @@
                     <td>{{ $category->slug }}</td>
                     <td>{{ $category->parent_id }}</td>
                     <td>
+                        @can('edit')
                         <a href="{{ route('dashboard.category.edit', $category->id) }}" class="badge bg-success">Edit</a>
+                        @endcan
+                       
                         <a href="#" class="badge bg-danger">Delete</a>
                     </td>
                     

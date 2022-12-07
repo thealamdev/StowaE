@@ -36,8 +36,9 @@
                 <div class="card-body">
 
                     @foreach ($categories as $category)
-                    <form action="{{ route('dashboard.category.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                          <div class="form-group">
                             <label for="name">Category Name</label>
                             @error('name')
