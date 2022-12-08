@@ -120,9 +120,20 @@ class CategoryController extends Controller
         $category_img = $request->file('image');
         // UPDATE METHOD:
         $categories = Category::find($id);
-
-        $image_name = Str::slug($request->name) . time() . ".". $category_img->getClientOriginalExtension();
-        $category_img->move(public_path('/storage/category'),$image_name);
+        // return $categories;
+        // exit();
+        $image_name = $categories->image;
+        if($category_img==true){
+            $file_path = public_path('storage/category/'.$image_name);
+            if(file_exists($file_path)){
+                unlink($file_path);
+            }
+        }
+         
+        if($category_img==true){
+            $image_name = Str::slug($request->name) . time() . ".". $category_img->getClientOriginalExtension();
+            $category_img->move(public_path('/storage/category'),$image_name);
+        }
 
         $categories->name = $request->name;
         $categories->name = $request->name;
@@ -133,7 +144,7 @@ class CategoryController extends Controller
              
 
         $categories->save();
-        return redirect(route('dashboard.category.index'));
+        return redirect(route('dashboard.category.index'))->with('success','Category Update successfully');
     }
 
     /**

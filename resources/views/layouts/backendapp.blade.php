@@ -54,6 +54,8 @@
 
     <body class="layout-default">
 
+        @include('backend.flash-message.message')
+
         <div class="preloader"></div>
 
         <!-- Header Layout -->
@@ -566,6 +568,10 @@
         <script src="{{ asset('assets/backend/vendor/jqvmap/jquery.vmap.min.js') }}"></script>
         <script src="{{ asset('assets/backend/vendor/jqvmap/maps/jquery.vmap.world.js') }}"></script>
         <script src="{{ asset('assets/backend/js/vector-maps.js') }}"></script>
+        
+        <script>
+        $('.toast').toast('show')
+        </script>
 
     </body>
 
