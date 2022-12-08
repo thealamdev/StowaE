@@ -81,7 +81,15 @@
 
                          <div class="form-group">
                             <label for="name">Create Category</label>
-                           <input type="file" name="image" class="form-control">
+                           <input type="file" name="image" class="form-control @error('image')
+                               is-invalid
+                           @enderror">
+                           @error('image')
+                            <div class="text-danger p-1">
+                                <p>{{ $message }}</p>
+                        
+                             </div>
+                            @enderror
                          </div>
 
                          <div class="form-group">

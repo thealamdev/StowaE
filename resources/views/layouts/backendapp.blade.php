@@ -54,7 +54,7 @@
 
     <body class="layout-default">
 
-        @include('backend.flash-message.message')
+         
 
         <div class="preloader"></div>
 
@@ -320,6 +320,7 @@
           <div class="mdk-drawer-layout__content page container-fluid">
 
                         @yield('backendContent')
+                        @include('backend.flash-message.message')
 
          </div>
 

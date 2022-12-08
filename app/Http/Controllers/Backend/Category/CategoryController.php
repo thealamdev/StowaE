@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::with('user')->get(['id','name','description','slug','parent_id','image','user_id']);
+        $categories = Category::with('user')->get(['id','name','description','slug','created_at','image','user_id']);
         return view('backend.category.index',compact('categories'));
     }
 
@@ -49,10 +49,13 @@ class CategoryController extends Controller
             'name'=>'required|unique:categories|max:20',
             'slug'=>'unique:categories|max:20',
             'description'=>'required|max:255',
+            'image'=>'required|mimes:png,jpg,jpeg',
         ],
         [
             'name.required' => 'Please Enter a category',
             'description.required' => 'Please Enter a description',
+            'image.required' => "Please ente a phpto",
+            'image.mimes'=> "Image must be type of JPG, PNG OR JPEG",
         ]);
 
         // custom error message:
@@ -103,7 +106,7 @@ class CategoryController extends Controller
     public function edit(Request $request, $id)
     {
         //
-        $categories = Category::where('id',$id)->get(['id','name','description','image','parent_id']);
+        $categories = Category::where('id',$id)->get(['id','name','description','image','created_at']);
         $all_category = Category::get(['id','name']);
         return view('backend.category.edit',compact('categories','all_category'));
     }

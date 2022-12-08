@@ -40,7 +40,7 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Image</th>
-                    <th>Slug</th>
+                    <th>Modified</th>
                     <th>Parent Category</th>
                     <th>Action</th>
                 </thead>
@@ -53,8 +53,10 @@
                     <td>{{ $category->description }}</td>
                     <td>
                         <img src="{{ asset('storage/category/'.$category->image) }}" alt="" width="60">
+                        
                     </td>
-                    <td>{{ $category->slug }}</td>
+                    {{-- <td>{{  $category->created_at->format('d-M-y') }}</td> --}}
+                    <td>{{ $category->created_at->diffForHumans() }}</td>
                     <td>{{ $category->parent_id }}</td>
                     <td>
                         @can('edit')
@@ -70,10 +72,11 @@
                     
                 </tr>
                 @empty
-                <td>
-                    <h3>{{ "No data found" }}</h3>
-                </td>
-                    
+                    <td colspan="8" width="200" style="text-align:center;vertical-align:middle">
+                        <div class="empty_img m-auto">
+                            <img src="{{ asset('assets/backend/images/logos/empty.png') }}" alt="" class="w-50" >
+                        </div>
+                    </td>
                 @endforelse
                  
                 

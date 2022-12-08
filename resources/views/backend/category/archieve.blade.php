@@ -66,9 +66,12 @@
                     
                 </tr>
                 @empty
-                <td>
-                    <h3>{{ "No data found" }}</h3>
-                </td>
+               
+                    <td colspan="8" width="200" style="text-align:center;vertical-align:middle">
+                        <div class="empty_img m-auto">
+                            <img src="{{ asset('assets/backend/images/logos/empty.png') }}" alt="" class="w-50" >
+                        </div>
+                    </td>
                     
                 @endforelse
                  
