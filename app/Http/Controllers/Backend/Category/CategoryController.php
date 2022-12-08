@@ -49,9 +49,14 @@ class CategoryController extends Controller
             'name'=>'required|unique:categories|max:20',
             'slug'=>'unique:categories|max:20',
             'description'=>'required|max:255',
-            'image'=>'max:255'
+        ],
+        [
+            'name.required' => 'Please Enter a category',
+            'description.required' => 'Please Enter a description',
         ]);
 
+        // custom error message:
+       
         
         if($validated == true){
 

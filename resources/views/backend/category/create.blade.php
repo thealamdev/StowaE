@@ -32,7 +32,7 @@
         <div class="col-lg-6 m-auto">
             <div class="card">
                 <div class="card-body">
-                    @if ($errors->any())
+                    {{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -40,24 +40,25 @@
             @endforeach
         </ul>
     </div>
-@endif
+@endif --}}
                     
                     <form action="{{ route('dashboard.category.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                          <div class="form-group">
                             <label for="name">Category Name</label>
-                            @error('name')
-                                {{ $message }}
-                            @enderror
-                           <input type="text" name="name" class="form-control" placeholder="Enter Category name">
+                           <input type="text" name="name" class="form-control @error('name')
+                               is-invalid
+                           @enderror" placeholder="Enter Category name">
+                           @error('name')
+                           <div class="text-danger pt-1">
+                               <p>{{$message}}</p>
+                           </div>
+                           @enderror
                          </div>
 
                          <div class="form-group">
                             <label for="parent_id">Category Parent</label>
                            <select name="parent_id" class="form-control">
-                            @error('name')
-                            {{ $message }}
-                            @enderror
                             <option selected disabled>select parent category</option>
                             @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -67,11 +68,15 @@
 
                          <div class="form-group">
                             <label for="name">Category Description</label>
-                           <textarea name="description" class="form-control" cols="30" rows="6" placeholder="Enter category description"></textarea>
-
-                           @error('description')
-                               {{ $message }}
-                           @enderror
+                           <textarea name="description" class="form-control @error('description')
+                               is-invalid
+                           @enderror" cols="30" rows="6" placeholder="Enter category description"></textarea>
+                            @error('description')
+                                <div class="text-danger pt-1">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @enderror
+                        
                          </div>
 
                          <div class="form-group">
