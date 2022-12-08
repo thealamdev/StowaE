@@ -1,4 +1,4 @@
-{{-- {{ $categories }} --}}
+{{-- {{ $role }} --}}
 @extends('layouts.backendapp')
 @section('title','role-assign')
 @section('backendContent')
@@ -14,16 +14,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="header_card_links d-flex align-items-center">
-                        <div class="links_item pr-5  ">
-                            <a href="{{ route('dashboard.category.create') }}" class="btn btn-primary">Create</a>
-                        </div>
 
-                        <div class="links_item pr-5 ">
+                        {{-- <div class="links_item pr-5 ">
                             <a href="{{ route('dashboard.category.archieve') }}" class="btn btn-primary">Archieve</a>
-                        </div>
+                        </div> --}}
 
                         <div class="links_item pr-5  ">
-                            <a href="{{ route('dashboard.category.index') }}" class="btn btn-primary">Refresh</a>
+                            <a href="{{ route('dashboard.roleAssign.index') }}" class="btn btn-primary">Refresh</a>
                         </div>
                     </div>
                 </div>
@@ -36,34 +33,30 @@
             <table class="table mb-0 thead-border-top-0">
                 <thead>
                     <th>Id</th>
-                    <th>User</th>
                     <th>Name</th>
-                    <th>Description</th>
-                    <th>Image</th>
-                    <th>Modified</th>
-                    <th>Parent Category</th>
+                    <th>Roles</th>
                     <th>Action</th>
                 </thead>
 
-                @forelse ($categories as $category)
+               
+                    
+                @foreach ($user_roles as $key => $user_role)
+                    
+                 
+                @forelse ($user_roles[$key]['roles'] as $role)
                 <tr>
-                    <td>{{ $category->id }}</td>
-                    <td>{{ $category->user->name }}</td>
-                    <td>{{ $category->name }}</td>
-                    <td>{{ $category->description }}</td>
-                    <td>
-                        <img src="{{ asset('storage/category/'.$category->image) }}" alt="" width="60">
-                        
-                    </td>
-                    {{-- <td>{{  $category->created_at->format('d-M-y') }}</td> --}}
-                    <td>{{ $category->created_at->diffForHumans() }}</td>
-                    <td>{{ $category->parent_id }}</td>
+                    
+                    <td>{{ $user_role->id }}</td>
+                    <td>{{ $user_role->name }}</td>
+                     
+                    <td>{{ $role->name }}</td>
+                     
                     <td>
                         @can('edit')
-                        <a href="{{ route('dashboard.category.edit', $category->id) }}" class="badge bg-success">Edit</a>
+                        <a href="{{ route('dashboard.roleAssign.edit', $user_role->id) }}" class="badge bg-success">Edit</a>
                         @endcan
                        
-                        <form action="{{ route('dashboard.category.delete', $category->id) }}" method="post" style="display: inline-block;">
+                        <form action="" method="post" style="display: inline-block;">
                             @csrf
                             @method('delete')
                              <button class="badge bg-danger border-0">Delete</button>
@@ -79,12 +72,14 @@
                     </td>
                 @endforelse
                  
+                @endforeach
+                
                 
             </table>
         </div>
     </div>
 
-    <p id="test">1</p>
+     
 @endsection
 
 

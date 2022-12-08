@@ -16,11 +16,10 @@ class RoleAssignController extends Controller
     public function index()
     {
         //
-        $user_role = User::with(['roles'=>function($q){
+        $user_roles = User::with(['roles'=>function($q){
             $q->select(['id','name'])->whereNotIn('name',['super-admin']);
-        }])->get(['id','name']);
-        return view('backend.role-assign.index',compact('user_role'));
-         
+        }])->get(['id','name'])->whereNotIn('id',[1]);
+        return view('backend.role-assign.index',compact('user_roles'));    
     }
 
     /**
