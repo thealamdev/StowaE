@@ -139,7 +139,20 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // delete particular id's element:
+        // delete existing image:
+        $categories = Category::where('id',$id)->get(['id','image']);
+         foreach($categories as $category){
+           $image_name = $category->image;
+           $file_path = public_path('storage/category/' . $image_name);
+
+           if(file_exists($file_path)){
+               unlink($file_path);
+           }
+         }
+         
+        $category = Category::find($id);
+        $category->delete();
     }
 
     // Archieve function:
