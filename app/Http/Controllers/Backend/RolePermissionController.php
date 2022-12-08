@@ -122,4 +122,9 @@ class RolePermissionController extends Controller
         Role::find($id)->delete();
         return back();
     }
+
+    // Role assign to user:
+    public function roleAssign(){
+        
+    }
 }

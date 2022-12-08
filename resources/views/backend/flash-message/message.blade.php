@@ -8,7 +8,7 @@
             @php
                 $time = date('s')
             @endphp
-          <small>{{ $time - $time+1 . "s ago" }}</small>
+          <small id="test">{{ $time-$time+1 . " s ago"}}</small>
           <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -19,3 +19,16 @@
     </div>
 </div>
 @endif 
+{{-- 
+<script>
+      // Called the function in each second
+      var number = document.querySelector('#test').text();
+      window.alert(number);
+      var interval = setInterval(function() {
+        document.querySelector('#test').text(number++); // Update the value in paragraph
+
+        if (number > 10) {
+            clearInterval(interval); // If exceeded 100, clear interval
+        }
+    }, 1000); // Run for each second
+</script> --}}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Category;
 
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::with('user')->get(['id','name','description','slug','created_at','image','user_id']);
+        $categories = Category::with(['user:id,name'])->get(['id','name','description','slug','created_at','image','user_id']);
         return view('backend.category.index',compact('categories'));
     }
 

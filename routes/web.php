@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\Category\CategoryController;
 use App\Http\Controllers\Backend\PermissionController;
+use App\Http\Controllers\Backend\RoleAssign\RoleAssignController;
 use App\Http\Controllers\Backend\RolePermissionController;
 use App\Http\Controllers\frontend\frontendController;
 use Faker\Guesser\Name;
@@ -40,15 +41,19 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
         Route::delete('delete/{id}','destroy')->middleware('role_or_permission:super-admin')->name('delete');
     });
 
+
+    Route::controller(RoleAssignController::class)->prefix('roleAssign')->name('roleAssign.')->group(function(){
+        Route::middleware(['auth','role_or_permission:super-admin'])->group(function(){
+            Route::get('/','index')->name('index');
+            Route::get('edit/{id}')->name('edit');
+            Route::put('update/{id}')->name('update');
+        });
+    });
+
      Route::controller(PermissionController::class)->middleware('role_or_permission:super-admin|admin')->prefix('permission')->name('permission.')->group(function(){
         Route::post('/', 'store')->name('store');
 
      });
-
-     // redirect to category folder:
-    //  Route::group(function(){
-    //     require __DIR__.'/category/category.php';
-    //  });
 
      Route::middleware(['auth'])->group(function(){
         Route::prefix('categories')->name('category.')->group(function(){
@@ -56,6 +61,8 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
         });
          
      });
+
+
 
 
 });

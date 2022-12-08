@@ -1,6 +1,6 @@
 {{-- {{ $categories }} --}}
 @extends('layouts.backendapp')
-@section('title','Category')
+@section('title','role-assign')
 @section('backendContent')
 
     <div class="page_header mt-3">

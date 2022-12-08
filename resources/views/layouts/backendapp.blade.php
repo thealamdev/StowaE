@@ -373,7 +373,28 @@
                                         </ul>
                                     </li>  
                                  
-                                      
+                                    <li class="sidebar-menu-item active">
+                                        <a class="sidebar-menu-button"
+                                           data-toggle="collapse"
+                                           href="#role_assign">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
+                                            <span class="sidebar-menu-text">Role-Assign</span>
+                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                        </a>
+
+                                        @can('edit')
+                                        <ul class="sidebar-submenu collapse"
+                                            id="role_assign">
+                                            <li class="sidebar-menu-item active">
+                                                <a class="sidebar-menu-button"
+                                                   href="{{ route('dashboard.roleAssign.index') }}">
+                                                    <span class="sidebar-menu-text">Assign</span>
+                                                </a>
+                                            </li>                                         
+                                        </ul>
+                                        @endcan
+                                    </li> 
+                                    
                                   
                                     <li class="sidebar-menu-item active">
                                         <a class="sidebar-menu-button"
