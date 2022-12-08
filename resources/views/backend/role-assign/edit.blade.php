@@ -11,7 +11,7 @@
         <div class="card">
             <div class="card-body">
                 @foreach ($user_roles as $user_role)
-                <form action="{{  }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('dashboard.roleAssign.update',$user_role->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                      <div class="form-group">
@@ -27,7 +27,7 @@
                 
                      <div class="form-group">
                         <label for="role">User Role</label>
-                        <select name="parent_id" class="form-control">
+                        <select name="role" class="form-control">
                         @error('role')
                         {{ $message }}
                         @enderror
@@ -47,7 +47,7 @@
                      </div>
                  
                      <div class="form-group">
-                         <button type="submit" class="btn btn-primary">Submit</button>
+                         <button type="submit" class="btn btn-primary">Update</button>
                      </div>
                 
                 

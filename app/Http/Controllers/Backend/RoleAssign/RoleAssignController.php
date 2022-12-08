@@ -69,13 +69,6 @@ class RoleAssignController extends Controller
         }])->get(['id','name']);
 
         $roles = Role::get(['id','name'])->whereNotIn('name',['super-admin']);
-
-        // foreach($roles as $role){
-        //     return $role->name;
-             
-        // }
-        // return $roles;
-        // exit();
          return view('backend.role-assign.edit',compact('user_roles','roles'));
     }
 
@@ -89,6 +82,13 @@ class RoleAssignController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->syncRoles($request->role);
+        $user->save();
+        
+        return redirect(route('dashboard.roleAssign.index'))->with('success','Role assign successfully done');
+
     }
 
     /**
