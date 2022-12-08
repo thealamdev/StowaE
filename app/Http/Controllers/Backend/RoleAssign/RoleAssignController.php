@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\RoleAssign;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 
 class RoleAssignController extends Controller
@@ -63,6 +64,19 @@ class RoleAssignController extends Controller
     public function edit($id)
     {
         //
+        $user_roles = User::where('id',$id)->with(['roles'=>function($q){
+            $q->select('id','name');
+        }])->get(['id','name']);
+
+        $roles = Role::get(['id','name'])->whereNotIn('name',['super-admin']);
+
+        // foreach($roles as $role){
+        //     return $role->name;
+             
+        // }
+        // return $roles;
+        // exit();
+         return view('backend.role-assign.edit',compact('user_roles','roles'));
     }
 
     /**

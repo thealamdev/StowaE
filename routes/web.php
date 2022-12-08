@@ -45,8 +45,8 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
     Route::controller(RoleAssignController::class)->prefix('roleAssign')->name('roleAssign.')->group(function(){
         Route::middleware(['auth','role_or_permission:super-admin'])->group(function(){
             Route::get('/','index')->name('index');
-            Route::get('edit/{id}')->name('edit');
-            Route::put('update/{id}')->name('update');
+            Route::get('edit/{id}','edit')->name('edit');
+            Route::put('update/{id}','update')->name('update');
         });
     });
 
