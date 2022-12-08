@@ -139,31 +139,40 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        // delete particular id's element:
-        // delete existing image:
-        $categories = Category::where('id',$id)->get(['id','image']);
-         foreach($categories as $category){
-           $image_name = $category->image;
-           $file_path = public_path('storage/category/' . $image_name);
-
-           if(file_exists($file_path)){
-               unlink($file_path);
-           }
-         }
-         
         $category = Category::find($id);
         $category->delete();
+        return back()->with('success','Delete successfully');
     }
 
     // Archieve function:
     public function archieve(){
         //
-        $categories = Category::with('user')->onlyTrashed()->get();
+        $categories = Category::onlyTrashed()->get();
         return view('backend.category.archieve',compact('categories'));
     }
 
     // hard delete::
     public function hardDelete($id){
+         // delete particular id's element:
+        // delete existing image:
+    
+        $categories = Category::onlyTrashed()->find($id);
 
+           $image_name = $categories->image;
+           $file_path = public_path('storage/category/' . $image_name);
+
+           if(file_exists($file_path)){
+               unlink($file_path);
+           }
+        
+
+         $categories->forceDelete();
+         return back()->with('success','Empty byn successfully');
+    }
+
+    public function restore($id){
+        $categories = Category::onlyTrashed()->find($id);
+        $categories->restore();
+        return back()->with('success','Restore successfully');
     }
 }

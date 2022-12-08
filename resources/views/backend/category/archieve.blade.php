@@ -58,14 +58,10 @@
                     <td>{{ $category->parent_id }}</td>
                     <td>
                         @can('edit')
-                        <a href="{{ route('dashboard.category.edit', $category->id) }}" class="badge bg-success">Edit</a>
+                        <a href="{{ route('dashboard.category.restore', $category->id) }}" class="badge bg-success">Restore</a>
                         @endcan
                        
-                        <form action="{{ route('dashboard.category.delete', $category->id) }}" method="post" style="display: inline-block">
-                            @csrf
-                            @method('delete')
-                             <button class="badge bg-danger">Delete</button>
-                        </form>
+                        <a href="{{ route('dashboard.category.hardDelete',$category->id) }}"  class="badge bg-danger">Emt byn</a>
                     </td>
                     
                 </tr>
