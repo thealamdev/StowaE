@@ -32,6 +32,15 @@
         <div class="col-lg-6 m-auto">
             <div class="card">
                 <div class="card-body">
+                    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                     
                     <form action="{{ route('dashboard.category.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf

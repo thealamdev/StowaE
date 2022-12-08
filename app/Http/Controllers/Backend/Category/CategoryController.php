@@ -158,5 +158,12 @@ class CategoryController extends Controller
     // Archieve function:
     public function archieve(){
         //
+        $categories = Category::with('user')->onlyTrashed()->get();
+        return view('backend.category.archieve',compact('categories'));
+    }
+
+    // hard delete::
+    public function hardDelete($id){
+
     }
 }

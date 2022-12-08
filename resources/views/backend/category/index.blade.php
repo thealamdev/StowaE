@@ -45,7 +45,7 @@
                     <th>Action</th>
                 </thead>
 
-                @foreach ($categories as $category)
+                @forelse ($categories as $category)
                 <tr>
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->user->name }}</td>
@@ -69,7 +69,13 @@
                     </td>
                     
                 </tr>
-                @endforeach
+                @empty
+                <td>
+                    <h3>{{ "No data found" }}</h3>
+                </td>
+                    
+                @endforelse
+                 
                 
             </table>
         </div>
