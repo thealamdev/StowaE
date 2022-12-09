@@ -56,11 +56,12 @@
                         <a href="{{ route('dashboard.roleAssign.edit', $user_role->id) }}" class="badge bg-success">Edit</a>
                         @endcan
                        
-                        <form action="" method="post" style="display: inline-block;">
+                        {{-- <form action="{{ route('dashboard.roleAssign.delete',$user_role->id) }}" method="post" style="display: inline-block;">
                             @csrf
                             @method('delete')
-                             <button class="badge bg-danger border-0">Delete</button>
-                        </form>
+                             <button class="badge bg-danger border-0 delete_btn" type="submit">Delete</button>
+                        </form> --}}
+                        <button class="badge bg-danger border-0 delete_btn" type="submit" value="{{ route('dashboard.roleAssign.delete',$user_role->id) }}">Delete</button>
                     </td>
                     
                 </tr>
@@ -79,8 +80,35 @@
         </div>
     </div>
 
-     
+    @section('sweet-js')
+    <script>
+        $(function($){
+            $('.delete_btn').on('click',function(){
+                Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+             
+                window.location.href = $(this).val();
+            
+        }
+        })
+            })
+        })
+         
+    </script>
+    @endsection
+
 @endsection
 
 
+ 
+
+ 
  

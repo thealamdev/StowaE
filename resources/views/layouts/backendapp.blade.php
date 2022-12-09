@@ -14,7 +14,7 @@
         <link type="text/css" href="{{ asset('assets/backend/vendor/perfect-scrollbar.css') }}" rel="stylesheet"> 
         <link type="text/css" href="{{ asset('assets/backend/vendor/perfect-scrollbar.css') }}" rel="stylesheet"> 
                
-               
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.15/sweetalert2.css" integrity="sha512-JzSVRb7c802/njMbV97pjo1wuJAE/6v9CvthGTDxiaZij/TFpPQmQPTcdXyUVucsvLtJBT6YwRb5LhVxX3pQHQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- App CSS -->
         <link type="text/css" href="{{ asset('assets/backend/css/app.css')}}" rel="stylesheet">
@@ -590,10 +590,11 @@
         <script src="{{ asset('assets/backend/vendor/jqvmap/jquery.vmap.min.js') }}"></script>
         <script src="{{ asset('assets/backend/vendor/jqvmap/maps/jquery.vmap.world.js') }}"></script>
         <script src="{{ asset('assets/backend/js/vector-maps.js') }}"></script>
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.15/sweetalert2.min.js" integrity="sha512-Z4QYNSc2DFv8LrhMEyarEP3rBkODBZT90RwUC7dYQYF29V4dfkh+8oYZHt0R6T3/KNv32/u0W6icGWUUk9V0jA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
         $('.toast').toast('show')
         </script>
+         @yield('sweet-js')
 
     </body>
 

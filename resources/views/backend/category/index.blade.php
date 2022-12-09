@@ -83,8 +83,6 @@
             </table>
         </div>
     </div>
-
-    <p id="test">1</p>
 @endsection
 
 

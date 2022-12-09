@@ -100,5 +100,14 @@ class RoleAssignController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::find($id);
+        $user->delete();
+        if($user->delete()==true){
+            return back()->with('success', 'User delete successfully');
+        }
+        else{
+            return back('danger','Somethng wrong');
+        }
+         
     }
 }

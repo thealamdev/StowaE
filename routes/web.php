@@ -47,6 +47,7 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
             Route::get('/','index')->name('index');
             Route::get('edit/{id}','edit')->name('edit');
             Route::put('update/{id}','update')->name('update');
+            Route::get('delete/{id}','destroy')->name('delete');
         });
     });
 
