@@ -172,7 +172,7 @@ class CategoryController extends Controller
     }
 
     // hard delete::
-    public function hardDelete($id){
+    public function trash($id){
          // delete particular id's element:
         // delete existing image:
     

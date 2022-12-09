@@ -13,5 +13,5 @@ Route::controller(CategoryController::class)->group(function(){
     Route::get('archieve','archieve')->name('archieve');
     Route::get('restore/{id}','restore')->name('restore');
     Route::delete('delete/{id}','destroy')->name('delete');
-    Route::get('hardDelete/{id}','hardDelete')->name('hardDelete');
+    Route::delete('trash/{id}','trash')->name('trash');
 });

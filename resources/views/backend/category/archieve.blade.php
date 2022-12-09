@@ -61,7 +61,12 @@
                         <a href="{{ route('dashboard.category.restore', $category->id) }}" class="badge bg-success">Restore</a>
                         @endcan
                        
-                        <a href="{{ route('dashboard.category.hardDelete',$category->id) }}"  class="badge bg-danger">Emt byn</a>
+                        <form action="{{ route('dashboard.category.trash',$category->id) }}" method="POST" style="display:inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button class="badge bg-danger" style="border:none">Emt byn</button>
+                        </form>
+                         
                     </td>
                     
                 </tr>
