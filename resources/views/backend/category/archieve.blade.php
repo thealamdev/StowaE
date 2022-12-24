@@ -64,7 +64,7 @@
                         <form action="{{ route('dashboard.category.trash',$category->id) }}" method="POST" style="display:inline-block">
                             @csrf
                             @method('DELETE')
-                            <button class="badge bg-danger" style="border:none">Emt byn</button>
+                            <button class="badge bg-danger delete_btn" type="button" style="border:none">Emt byn</button>
                         </form>
                          
                     </td>
@@ -84,4 +84,25 @@
             </table>
         </div>
     </div>
+@endsection
+
+
+@section('sweet-js')
+    <script>
+        $('.delete_btn').on('click',function(){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                     $(this).parent('form').submit();
+                }
+                })
+        })
+    </script>
 @endsection

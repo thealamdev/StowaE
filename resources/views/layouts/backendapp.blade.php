@@ -594,7 +594,7 @@
         <script>
         $('.toast').toast('show')
         </script>
-         @yield('sweet-js')
+        @yield('sweet-js')
 
     </body>
 
