@@ -81,6 +81,7 @@
                  
                 
             </table>
+            {{ $categories->links() }}
         </div>
     </div>
 @endsection
