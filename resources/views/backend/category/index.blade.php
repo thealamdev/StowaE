@@ -63,11 +63,14 @@
                         <a href="{{ route('dashboard.category.edit', $category->id) }}" class="badge bg-success">Edit</a>
                         @endcan
                        
+                        @can('edit')
                         <form action="{{ route('dashboard.category.delete', $category->id) }}" method="post" style="display: inline-block;">
                             @csrf
                             @method('delete')
                              <button class="badge bg-danger border-0 delete_btn" type="button">Delete</button>
                         </form>
+                        @endcan
+                        
                     </td>
                     
                 </tr>
