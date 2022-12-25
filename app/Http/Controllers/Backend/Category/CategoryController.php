@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::with(['user:id,name'])->get(['id','name','description','slug','created_at','image','user_id']);
+        $categories = Category::with(['user:id,name'])->select(['id','name','description','slug','created_at','image','user_id'])->paginate(4);
         return view('backend.category.index',compact('categories'));
     }
 
