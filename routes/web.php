@@ -75,6 +75,13 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
         });
      });
 
+     Route::middleware(['auth'])->group(function(){
+        Route::prefix('product')->name('product.')->group(function(){
+            require __DIR__."/product/product.php";
+        });
+     });
+
+
 
 
 

@@ -84,7 +84,7 @@
                  
                 
             </table>
-            {{ $products->links() }}
+            {{-- {{ $products->links() }} --}}
         </div>
     </div>
 @endsection

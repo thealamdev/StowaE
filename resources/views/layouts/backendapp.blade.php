@@ -444,7 +444,7 @@
                                             id="category_menu">
                                             <li class="sidebar-menu-item active">
                                                 <a class="sidebar-menu-button"
-                                                   href="{{ route('dashboard.category.index') }}">
+                                                   href="{{ route('dashboard.product.index') }}">
                                                     <span class="sidebar-menu-text">All Products</span>
                                                 </a>
                                             </li>                                         
