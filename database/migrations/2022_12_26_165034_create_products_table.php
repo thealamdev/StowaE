@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('image');
             $table->decimal('price');
             $table->decimal('sale_price');
+            $table->decimal('discount')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
