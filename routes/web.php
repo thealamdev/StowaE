@@ -69,6 +69,12 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
         });
      });
 
+     Route::middleware(['auth'])->group(function(){
+        Route::prefix('size')->name('size.')->group(function(){
+            require __DIR__."/size/size.php";
+        });
+     });
+
 
 
 
