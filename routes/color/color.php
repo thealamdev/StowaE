@@ -10,6 +10,7 @@ Route::controller(ColorController::class)->group(function(){
     Route::get('edit{id}','edit')->name('edit');
     Route::put('update/{id}','update')->name('update');
     Route::delete('delete/{id}','destroy')->name('delete');
-    Route::delete('archieve/{id}','trash')->name('archieve');
-    Route::get('archieve','trash')->name('archieve');
+    Route::get('archieve','archieve')->name('archieve');
+    Route::delete('trash/{id}','trash')->name('trash');
+    Route::get('restore/{id}','restore')->name('restore');
 });

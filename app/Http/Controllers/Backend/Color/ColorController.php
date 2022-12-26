@@ -41,12 +41,26 @@ class ColorController extends Controller
     public function store(Request $request)
     {
         //
+
+        $valided = $request->validate([
+            'name' => 'required',
+        ],
+        [
+            'name.required' => 'Please Enter a Color',
+        ]);
        
-        $colors = new Color();
-        $colors->name = $request->name;
-        $colors->slug = Str::slug($request->name);
-        $colors->save();
-        return redirect(route('dashboard.color.index'))->with('success','Color Add successfully');
+        if($valided == true){
+            $colors = new Color();
+            $colors->name = $request->name;
+            $colors->slug = Str::slug($request->name);
+            $colors->save();
+            return redirect(route('dashboard.color.index'))->with('success','Color Add successfully');
+        }
+        else{
+            return back()->with('
+            danger','Data does not enter');
+        }
+       
     }
 
     /**
@@ -69,7 +83,8 @@ class ColorController extends Controller
     public function edit($id)
     {
         //
-        return view('backend.color.edit');
+        $colors = Color::where('id',$id)->get(['id','name']);
+        return view('backend.color.edit',compact('colors'));
     }
 
     /**
@@ -82,6 +97,22 @@ class ColorController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $colors = Color::find($id);
+        // return $colors;
+        // exit();
+        $valided = $request->validate([
+            'name' => 'required',
+        ],
+        [
+            'name.required' => 'Please Enter a Color',
+        ]);
+
+        if($valided == true){
+            $colors->name = $request->name;
+            $colors->slug = Str::slug($request->name); 
+            $colors->save(); 
+            return redirect(route('dashboard.color.index'))->with('success','Color update successfull');
+        }
     }
 
     /**
@@ -93,5 +124,29 @@ class ColorController extends Controller
     public function destroy($id)
     {
         //
+        // return $id;
+        $colors = Color::find($id);
+        $colors->delete();
+        return redirect(route('dashboard.color.index'))->with('success','Trashed successfull');
+    }
+
+
+
+    public function archieve(){
+        $colors = Color::onlyTrashed()->get(['id','name','slug']);
+        return view('backend.color.archieve',compact('colors'));
+    }
+
+    public function trash($id){
+         
+        $colors = Color::onlyTrashed()->find($id);
+        $colors->forceDelete();
+        return redirect(route('dashboard.color.index'))->with('success','Trashed successfull');
+    }
+
+    public function restore($id){
+        $colors = Color::onlyTrashed()->find($id);
+        $colors->restore();
+        return redirect(route('dashboard.color.index'))->with('success','Restore successfull');
     }
 }
