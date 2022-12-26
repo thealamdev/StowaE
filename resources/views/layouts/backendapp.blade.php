@@ -474,7 +474,7 @@
                                             id="category_menu">
                                             <li class="sidebar-menu-item active">
                                                 <a class="sidebar-menu-button"
-                                                   href="{{ route('dashboard.category.index') }}">
+                                                   href="{{ route('dashboard.size.index') }}">
                                                     <span class="sidebar-menu-text">Size</span>
                                                 </a>
                                             </li>                                         

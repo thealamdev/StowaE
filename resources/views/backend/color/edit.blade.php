@@ -40,13 +40,13 @@
                         @csrf
                         @method('PUT')
                          <div class="form-group">
-                            <label for="name">Color Name</label>
-                            @error('name')
-                                {{ $message }}
-                            @enderror
-                            
+                            <label for="name">Color Name</label> 
                             <input type="text" name="name" value="{{ $color->name }}" class="form-control" placeholder="Enter Color name">
-                            
+                            @error('name')
+                            <div class="text-danger pt-1">
+                                <p>{{ $message }}</p>
+                            </div>
+                            @enderror
                             
                          </div>
 

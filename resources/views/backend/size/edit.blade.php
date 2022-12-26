@@ -1,6 +1,6 @@
-{{-- {{ $all_color }} --}}
+{{-- {{ $all_size }} --}}
 @extends('layouts.backendapp')
-@section('title','Color Edit')
+@section('title','Size Edit')
 @section('backendContent')
     <div class="row mt-3">
         <div class="col-lg-12">
@@ -10,15 +10,15 @@
                         <div class="col-lg-12">
                             <div class="header_card_links d-flex align-items-center">
                                 <div class="links_item pr-5  ">
-                                    <a href="{{ route('dashboard.color.index') }}" class="btn btn-primary">Go Back</a>
+                                    <a href="{{ route('dashboard.size.index') }}" class="btn btn-primary">Go Back</a>
                                 </div>
         
                                 <div class="links_item pr-5 ">
-                                    <a href="{{ route('dashboard.color.archieve') }}" class="btn btn-primary">Archieve</a>
+                                    <a href="{{ route('dashboard.size.archieve') }}" class="btn btn-primary">Archieve</a>
                                 </div>
-                                @foreach ($colors as $color)
+                                @foreach ($sizes as $size)
                                 <div class="links_item pr-5  ">
-                                    <a href="{{ route('dashboard.color.edit',$color->id) }}" class="btn btn-primary">Refresh</a>
+                                    <a href="{{ route('dashboard.size.edit',$size->id) }}" class="btn btn-primary">Refresh</a>
                                 </div>
                                 @endforeach
                                  
@@ -35,18 +35,18 @@
             <div class="card">
                 <div class="card-body">
 
-                    @foreach ($colors as $color)
-                    <form action="{{ route('dashboard.color.update', $color->id) }}" method="POST" enctype="multipart/form-data">
+                    @foreach ($sizes as $size)
+                    <form action="{{ route('dashboard.size.update', $size->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                          <div class="form-group">
-                            <label for="name">Color Name</label>
+                            <label for="name">Size Name</label>
+                            <input type="text" name="name" value="{{ $size->name }}" class="form-control" placeholder="Enter Size name">
                             @error('name')
-                                {{ $message }}
+                            <div class="text-danger pt-1">
+                                <p>{{ $message }}</p>
+                            </div>
                             @enderror
-                            
-                            <input type="text" name="name" value="{{ $color->name }}" class="form-control" placeholder="Enter Color name">
-                            
                             
                          </div>
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend\Size;
 
-use App\Http\Controllers\Controller;
+use App\Models\Size;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SizeController extends Controller
 {
@@ -15,6 +17,8 @@ class SizeController extends Controller
     public function index()
     {
         //
+        $sizes = Size::orderBy('name','asc')->get(['id','name','slug']);
+        return view('backend.size.index',compact('sizes'));
     }
 
     /**
@@ -25,6 +29,7 @@ class SizeController extends Controller
     public function create()
     {
         //
+        return view('backend.size.create');
     }
 
     /**
@@ -36,6 +41,20 @@ class SizeController extends Controller
     public function store(Request $request)
     {
         //
+        $valided = $request->validate([
+            'name' => 'required'
+        ],
+        [
+        'name.required' => 'Please enter a size'
+        ]); 
+
+        if($valided == true){
+            $sizes = new Size();
+            $sizes->name = $request->name;
+            $sizes->slug = Str::slug($request->name);
+            $sizes->save();
+            return redirect(route('dashboard.size.index'))->with('success','Sise added successfully');
+        }
     }
 
     /**
@@ -58,6 +77,8 @@ class SizeController extends Controller
     public function edit($id)
     {
         //
+        $sizes =  Size::where('id',$id)->get(['id','name']);
+        return view('backend.size.edit',compact('sizes'));
     }
 
     /**
@@ -70,6 +91,20 @@ class SizeController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $valided = $request->validate([
+            'name' => 'required'
+        ],
+        [
+        'name.required' => 'Please enter a size'
+        ]); 
+
+        if($valided == true){
+            $sizes = Size::find($id);
+            $sizes->name = $request->name;
+            $sizes->slug = Str::slug($request->name);
+            $sizes->save();
+            return redirect(route('dashboard.size.index'))->with('success','Sise Update successfully');
+        }
     }
 
     /**
@@ -81,5 +116,8 @@ class SizeController extends Controller
     public function destroy($id)
     {
         //
+        $sizes = Size::find($id);
+        $sizes->delete();
+        return back()->with('success','Size delete successfull');
     }
 }

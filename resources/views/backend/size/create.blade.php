@@ -1,6 +1,6 @@
-{{-- {{ $colors }} --}}
+{{-- {{ $sizes }} --}}
 @extends('layouts.backendapp')
-@section('title','Color Create')
+@section('title','Size Create')
 @section('backendContent')
     <div class="row mt-3">
         <div class="col-lg-12">
@@ -10,15 +10,15 @@
                         <div class="col-lg-12">
                             <div class="header_card_links d-flex align-items-center">
                                 <div class="links_item pr-5  ">
-                                    <a href="{{ route('dashboard.color.index') }}" class="btn btn-primary">Go Back</a>
+                                    <a href="{{ route('dashboard.size.index') }}" class="btn btn-primary">Go Back</a>
                                 </div>
         
                                 <div class="links_item pr-5 ">
-                                    <a href="{{ route('dashboard.color.archieve') }}" class="btn btn-primary">Archieve</a>
+                                    <a href="{{ route('dashboard.size.archieve') }}" class="btn btn-primary">Archieve</a>
                                 </div>
         
                                 <div class="links_item pr-5  ">
-                                    <a href="{{ route('dashboard.color.create') }}" class="btn btn-primary">Refresh</a>
+                                    <a href="{{ route('dashboard.size.create') }}" class="btn btn-primary">Refresh</a>
                                 </div>
                             </div>
                         </div>
@@ -42,13 +42,13 @@
     </div>
 @endif --}}
                     
-                    <form action="{{ route('dashboard.color.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.size.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                          <div class="form-group">
-                            <label for="name">Color Name</label>
+                            <label for="name">Size Name</label>
                            <input type="text" name="name" class="form-control @error('name')
                                is-invalid
-                           @enderror" placeholder="Enter Color name">
+                           @enderror" placeholder="Enter Size name">
                            @error('name')
                            <div class="text-danger pt-1">
                                <p>{{$message}}</p>
