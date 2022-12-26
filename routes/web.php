@@ -63,6 +63,12 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
          
      });
 
+     Route::middleware(['auth'])->group(function(){
+        Route::prefix('color')->name('color.')->group(function(){
+            require __DIR__."/color/color.php";
+        });
+     });
+
 
 
 

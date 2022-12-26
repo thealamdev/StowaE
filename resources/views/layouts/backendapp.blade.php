@@ -56,7 +56,7 @@
 
          
 
-        <div class="preloader"></div>
+        {{-- <div class="preloader"></div> --}}
 
         <!-- Header Layout -->
         <div class="mdk-header-layout js-mdk-header-layout">
@@ -464,7 +464,7 @@
                                             id="category_menu">
                                             <li class="sidebar-menu-item active">
                                                 <a class="sidebar-menu-button"
-                                                   href="{{ route('dashboard.category.index') }}">
+                                                   href="{{ route('dashboard.color.index') }}">
                                                     <span class="sidebar-menu-text">Color</span>
                                                 </a>
                                             </li>                                         
