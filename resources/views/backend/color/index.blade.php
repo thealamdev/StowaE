@@ -36,28 +36,17 @@
             <table class="table mb-0 thead-border-top-0">
                 <thead>
                     <th>Id</th>
-                    <th>User</th>
                     <th>Name</th>
-                    <th>Description</th>
-                    <th>Image</th>
-                    <th>Modified</th>
-                    <th>Parent Color</th>
+                    <th>Slug</th>
                     <th>Action</th>
                 </thead>
 
                 @forelse ($colors as $color)
                 <tr>
                     <td>{{ $color->id }}</td>
-                    <td>{{ $color->user->name }}</td>
                     <td>{{ $color->name }}</td>
-                    <td>{{ $color->description }}</td>
-                    <td>
-                        <img src="{{ asset('storage/color/'.$color->image) }}" alt="" width="60">
-                        
-                    </td>
-                    {{-- <td>{{  $color->created_at->format('d-M-y') }}</td> --}}
-                    <td>{{ $color->created_at->diffForHumans() }}</td>
-                    <td>{{ $color->parent_id }}</td>
+                    <td>{{ $color->slug }}</td>
+                    
                     <td>
                         @can('edit')
                         <a href="{{ route('dashboard.color.edit', $color->id) }}" class="badge bg-success">Edit</a>

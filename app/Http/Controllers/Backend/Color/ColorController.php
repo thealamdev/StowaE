@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Color;
 
 use App\Models\Color;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +17,7 @@ class ColorController extends Controller
     public function index()
     {
         //
-        $colors = Color::paginate(10);
+        $colors = Color::select('id','name','slug')->orderBy('id','desc')->paginate(10);
         return view('backend.color.index',compact('colors'));
     }
 
@@ -28,6 +29,7 @@ class ColorController extends Controller
     public function create()
     {
         //
+        return view('backend.color.create');
     }
 
     /**
@@ -39,6 +41,12 @@ class ColorController extends Controller
     public function store(Request $request)
     {
         //
+       
+        $colors = new Color();
+        $colors->name = $request->name;
+        $colors->slug = Str::slug($request->name);
+        $colors->save();
+        return redirect(route('dashboard.color.index'))->with('success','Color Add successfully');
     }
 
     /**
@@ -61,6 +69,7 @@ class ColorController extends Controller
     public function edit($id)
     {
         //
+        return view('backend.color.edit');
     }
 
     /**
