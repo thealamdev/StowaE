@@ -101,7 +101,7 @@ class ColorController extends Controller
         // return $colors;
         // exit();
         $valided = $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:colors'
         ],
         [
             'name.required' => 'Please Enter a Color',

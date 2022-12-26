@@ -42,7 +42,7 @@ class SizeController extends Controller
     {
         //
         $valided = $request->validate([
-            'name' => 'required'
+            'name' => 'required|unique:sizes'
         ],
         [
         'name.required' => 'Please enter a size'
