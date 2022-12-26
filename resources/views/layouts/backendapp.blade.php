@@ -437,7 +437,7 @@
                                            data-toggle="collapse"
                                            href="#category_menu">
                                             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
-                                            <span class="sidebar-menu-text">Category</span>
+                                            <span class="sidebar-menu-text">Products</span>
                                             <span class="ml-auto sidebar-menu-toggle-icon"></span>
                                         </a>
                                         <ul class="sidebar-submenu collapse"
@@ -445,7 +445,37 @@
                                             <li class="sidebar-menu-item active">
                                                 <a class="sidebar-menu-button"
                                                    href="{{ route('dashboard.category.index') }}">
-                                                    <span class="sidebar-menu-text">All category</span>
+                                                    <span class="sidebar-menu-text">All Products</span>
+                                                </a>
+                                            </li>                                         
+                                        </ul>
+
+                                        <ul class="sidebar-submenu collapse"
+                                            id="category_menu">
+                                            <li class="sidebar-menu-item active">
+                                                <a class="sidebar-menu-button"
+                                                   href="{{ route('dashboard.category.index') }}">
+                                                    <span class="sidebar-menu-text">Category</span>
+                                                </a>
+                                            </li>                                         
+                                        </ul>
+
+                                        <ul class="sidebar-submenu collapse"
+                                            id="category_menu">
+                                            <li class="sidebar-menu-item active">
+                                                <a class="sidebar-menu-button"
+                                                   href="{{ route('dashboard.category.index') }}">
+                                                    <span class="sidebar-menu-text">Color</span>
+                                                </a>
+                                            </li>                                         
+                                        </ul>
+
+                                        <ul class="sidebar-submenu collapse"
+                                            id="category_menu">
+                                            <li class="sidebar-menu-item active">
+                                                <a class="sidebar-menu-button"
+                                                   href="{{ route('dashboard.category.index') }}">
+                                                    <span class="sidebar-menu-text">Size</span>
                                                 </a>
                                             </li>                                         
                                         </ul>
