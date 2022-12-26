@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,8 @@ class SizeFactory extends Factory
     {
         return [
             //
-        ];
+            'name' => fake()->name(),
+            'slug'=> Str::slug(fake()->name()),
+        ]; 
     }
 }
