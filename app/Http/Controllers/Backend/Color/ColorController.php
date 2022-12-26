@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Backend\Color;
 
-use App\Http\Controllers\Controller;
+use App\Models\Color;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ColorController extends Controller
 {
@@ -15,8 +16,8 @@ class ColorController extends Controller
     public function index()
     {
         //
-        // $colors = Color::all();
-        return view('backend.color.index');
+        $colors = Color::paginate(10);
+        return view('backend.color.index',compact('colors'));
     }
 
     /**
