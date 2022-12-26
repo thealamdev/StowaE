@@ -126,4 +126,16 @@ class SizeController extends Controller
         $sizes = Size::onlyTrashed()->get(['id','name','slug']);
         return view('backend.size.archieve',compact('sizes'));
     }
+
+    public function trash($id){
+        $sizes = Size::onlyTrashed()->find($id);
+        $sizes->forceDelete();
+        return back()->with('success','Size trashed successfully');
+    }
+
+    public function restore($id){
+        $sizes = Size::onlyTrashed()->find($id);
+        $sizes->restore();
+        return back()->with('success','Size restore successfully');
+    }
 }
