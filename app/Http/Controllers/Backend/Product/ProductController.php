@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Backend\Product;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
@@ -17,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::all();
+        $products = Product::orderby('id','desc')->get();
         return view('backend.product.index',compact('products'));
     }
 
@@ -42,6 +43,25 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $products = new Product();
+        $products->user_id = auth()->user()->id;
+        $products->title = $request->title;
+        $products->slug = Str::slug($request->title);
+        $products->description = $request->description;
+        $products->short_description = $request->short_description;
+        $products->additional_info =  $request->additional_info;
+        $products->image = $request->title;
+        $products->price = $request->price;
+        $products->sale_price = $request->sale_price;
+        $products->discount = $request->discount;
+        $products->save();
+
+        $products->categories()->attach($request->category);
+
+        return redirect(route('dashboard.product.index'))->with('success','Product added successfull');
+
+ 
+ 
     }
 
     /**

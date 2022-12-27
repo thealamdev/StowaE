@@ -29,7 +29,7 @@
     </div>
 
     <form action="{{ route('dashboard.product.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
+     @csrf
      <div class="row mt-4">
 
         <div class="col-lg-6">
@@ -40,11 +40,11 @@
                 <div class="card-body">
 
                          <div class="form-group">
-                           <label for="name">Title*</label>
-                           <input type="text" name="name" class="form-control @error('name')
+                           <label for="title">Title*</label>
+                           <input type="text" name="title" class="form-control @error('title')
                                is-invalid
                            @enderror" placeholder="Enter Product name">
-                           @error('name')
+                           @error('title')
                            <div class="text-danger pt-1">
                                <p>{{$message}}</p>
                            </div>
@@ -52,7 +52,7 @@
                          </div>
 
                          <div class="form-group">
-                            <label for="name">Image*</label>
+                            <label for="image">Image*</label>
                            <input type="file" name="image" class="form-control @error('image')
                                is-invalid
                            @enderror">
@@ -64,11 +64,11 @@
                             @enderror
                          </div>
                          <div class="form-group">
-                            <label for="name">Price*</label>
-                            <input type="number" name="name" class="form-control @error('name')
+                            <label for="price">Price*</label>
+                            <input type="number" name="price" class="form-control @error('price')
                                 is-invalid
                             @enderror" placeholder="Enter Product Price">
-                            @error('name')
+                            @error('price')
                             <div class="text-danger pt-1">
                                 <p>{{$message}}</p>
                             </div>
@@ -76,11 +76,11 @@
                           </div>
  
                           <div class="form-group">
-                             <label for="name">Sale Price</label>
-                            <input type="number" placeholder="Enter product sale price" name="image" class="form-control @error('image')
+                             <label for="sale_price">Sale Price</label>
+                            <input type="number" placeholder="Enter product sale price" name="sale_price" class="form-control @error('sale_price')
                                 is-invalid
                             @enderror">
-                            @error('image')
+                            @error('sale_price')
                              <div class="text-danger p-1">
                                  <p>{{ $message }}</p>
                          
@@ -89,11 +89,11 @@
                           </div>
 
                           <div class="form-group">
-                            <label for="name">Discount</label></label>
+                            <label for="discount">Discount</label></label>
                            <input type="number" placeholder="Enter product discount" name="discount" class="form-control @error('discount')
                                is-invalid
                            @enderror">
-                           @error('image')
+                           @error('discount')
                             <div class="text-danger p-1">
                                 <p>{{ $message }}</p>
                         
@@ -103,13 +103,14 @@
 
                            
                         <div class="form-group">
-                            <label for="parent_id">Products Category*</label>
-                            <select name="parent_id" class="form-control">
-                                <option selected disabled>select product</option>
-                                @foreach ($categories as $product)
-                                <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                @endforeach
-                            </select>
+                            <label for="category">Products Category*</label>
+                            <br>
+                            @foreach ($categories as $category)
+                            <input type="checkbox" name="category[]" value="{{ $category->id }}"> 
+                            {{ $category->name }}
+                            @endforeach
+                             
+                             
                         </div>
 
                         <div class="form-group">
@@ -117,9 +118,9 @@
                         </div>
                 </div>
               
-             </div>
         </div>
-
+    </div>
+      
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
@@ -127,7 +128,7 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name">Description</label>
+                        <label for="description">Description</label>
                        <textarea name="description" class="summernote form-control @error('description')
                            is-invalid
                         @enderror" cols="30" rows="6" placeholder="Enter product description"></textarea>
@@ -140,11 +141,11 @@
                      </div>
 
                      <div class="form-group">
-                        <label for="name">Short Des cription</label>
-                       <textarea name="description" class="summernote form-control @error('description')
+                        <label for="short_description">Short Des cription</label>
+                       <textarea name="short_description" class="summernote form-control @error('short_description')
                            is-invalid
                         @enderror" cols="30" rows="6" placeholder="Enter product description"></textarea>
-                        @error('description')
+                        @error('short_description')
                             <div class="text-danger pt-1">
                                 <p>{{ $message }}</p>
                             </div>
@@ -153,11 +154,11 @@
                      </div>
 
                      <div class="form-group">
-                        <label for="name">Additional Information</label>
-                       <textarea name="description" class="summernote form-control @error('description')
+                        <label for="additional_info">Additional Information</label>
+                       <textarea name="additional_info" class="summernote form-control @error('additional_info')
                            is-invalid
                         @enderror" cols="30" rows="6" placeholder="Enter product description"></textarea>
-                        @error('description')
+                        @error('additional_info')
                             <div class="text-danger pt-1">
                                 <p>{{ $message }}</p>
                             </div>
