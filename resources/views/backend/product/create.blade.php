@@ -1,6 +1,6 @@
 {{-- {{ $categories }} --}}
 @extends('layouts.backendapp')
-@section('title','Category Create')
+@section('title','Product Create')
 @section('backendContent')
     <div class="row mt-3">
         <div class="col-lg-12">
@@ -10,15 +10,15 @@
                         <div class="col-lg-12">
                             <div class="header_card_links d-flex align-items-center">
                                 <div class="links_item pr-5  ">
-                                    <a href="{{ route('dashboard.category.index') }}" class="btn btn-primary">Go Back</a>
+                                    <a href="{{ route('dashboard.product.index') }}" class="btn btn-primary">Go Back</a>
                                 </div>
         
                                 <div class="links_item pr-5 ">
-                                    <a href="{{ route('dashboard.category.archieve') }}" class="btn btn-primary">Archieve</a>
+                                    <a href="{{ route('dashboard.product.archieve') }}" class="btn btn-primary">Archieve</a>
                                 </div>
         
                                 <div class="links_item pr-5  ">
-                                    <a href="{{ route('dashboard.category.create') }}" class="btn btn-primary">Refresh</a>
+                                    <a href="{{ route('dashboard.product.create') }}" class="btn btn-primary">Refresh</a>
                                 </div>
                             </div>
                         </div>
@@ -28,19 +28,22 @@
         </div>
     </div>
 
-    <form action="{{ route('dashboard.category.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('dashboard.product.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
      <div class="row mt-4">
 
         <div class="col-lg-6">
             <div class="card">
+                <div class="card-header">
+                    <h3>Product</h3>
+                </div>
                 <div class="card-body">
 
                          <div class="form-group">
-                           <label for="name">Product Title</label>
+                           <label for="name">Title*</label>
                            <input type="text" name="name" class="form-control @error('name')
                                is-invalid
-                           @enderror" placeholder="Enter Category name">
+                           @enderror" placeholder="Enter Product name">
                            @error('name')
                            <div class="text-danger pt-1">
                                <p>{{$message}}</p>
@@ -49,7 +52,7 @@
                          </div>
 
                          <div class="form-group">
-                            <label for="name">Product Image</label>
+                            <label for="name">Image*</label>
                            <input type="file" name="image" class="form-control @error('image')
                                is-invalid
                            @enderror">
@@ -60,97 +63,34 @@
                              </div>
                             @enderror
                          </div>
-                </div>
-             </div>
-        </div>
-
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="parent_id">Post Category</label>
-                       <select name="parent_id" class="form-control">
-                        <option selected disabled>select category</option>
-                        @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                       </select>
-                     </div>
-                </div>
-            </div>
-        </div>
-
-     </div>
-     <div class="row mt-4">
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="name">Product Description</label>
-                       <textarea name="description" class="summernote form-control @error('description')
-                           is-invalid
-                        @enderror" cols="30" rows="6" placeholder="Enter category description"></textarea>
-                        @error('description')
-                            <div class="text-danger pt-1">
-                                <p>{{ $message }}</p>
-                            </div>
-                        @enderror
-                    
-                     </div>
-
-                     <div class="form-group">
-                        <label for="name">Product short Description</label>
-                       <textarea name="description" class="summernote form-control @error('description')
-                           is-invalid
-                        @enderror" cols="30" rows="6" placeholder="Enter category description"></textarea>
-                        @error('description')
-                            <div class="text-danger pt-1">
-                                <p>{{ $message }}</p>
-                            </div>
-                        @enderror
-                    
-                     </div>
-
-                     <div class="form-group">
-                        <label for="name">Product additional Information</label>
-                       <textarea name="description" class="summernote form-control @error('description')
-                           is-invalid
-                        @enderror" cols="30" rows="6" placeholder="Enter category description"></textarea>
-                        @error('description')
-                            <div class="text-danger pt-1">
-                                <p>{{ $message }}</p>
-                            </div>
-                        @enderror
-                    
-                     </div>
-
-                     
-                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-
                          <div class="form-group">
-                           <label for="name">Product Price</label>
-                           <input type="number" name="name" class="form-control @error('name')
-                               is-invalid
-                           @enderror" placeholder="Enter Product Price">
-                           @error('name')
-                           <div class="text-danger pt-1">
-                               <p>{{$message}}</p>
-                           </div>
-                           @enderror
-                         </div>
+                            <label for="name">Price*</label>
+                            <input type="number" name="name" class="form-control @error('name')
+                                is-invalid
+                            @enderror" placeholder="Enter Product Price">
+                            @error('name')
+                            <div class="text-danger pt-1">
+                                <p>{{$message}}</p>
+                            </div>
+                            @enderror
+                          </div>
+ 
+                          <div class="form-group">
+                             <label for="name">Sale Price</label>
+                            <input type="number" placeholder="Enter product sale price" name="image" class="form-control @error('image')
+                                is-invalid
+                            @enderror">
+                            @error('image')
+                             <div class="text-danger p-1">
+                                 <p>{{ $message }}</p>
+                         
+                              </div>
+                             @enderror
+                          </div>
 
-                         <div class="form-group">
-                            <label for="name">Product Sale Price</label>
-                           <input type="number" placeholder="Enter product sale price" name="image" class="form-control @error('image')
+                          <div class="form-group">
+                            <label for="name">Discount</label></label>
+                           <input type="number" placeholder="Enter product discount" name="discount" class="form-control @error('discount')
                                is-invalid
                            @enderror">
                            @error('image')
@@ -160,10 +100,76 @@
                              </div>
                             @enderror
                          </div>
+
+                           
+                        <div class="form-group">
+                            <label for="parent_id">Products Category*</label>
+                            <select name="parent_id" class="form-control">
+                                <option selected disabled>select product</option>
+                                @foreach ($categories as $product)
+                                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
                 </div>
+              
              </div>
         </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Descriptions</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="name">Description</label>
+                       <textarea name="description" class="summernote form-control @error('description')
+                           is-invalid
+                        @enderror" cols="30" rows="6" placeholder="Enter product description"></textarea>
+                        @error('description')
+                            <div class="text-danger pt-1">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @enderror
+                    
+                     </div>
+
+                     <div class="form-group">
+                        <label for="name">Short Des cription</label>
+                       <textarea name="description" class="summernote form-control @error('description')
+                           is-invalid
+                        @enderror" cols="30" rows="6" placeholder="Enter product description"></textarea>
+                        @error('description')
+                            <div class="text-danger pt-1">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @enderror
+                    
+                     </div>
+
+                     <div class="form-group">
+                        <label for="name">Additional Information</label>
+                       <textarea name="description" class="summernote form-control @error('description')
+                           is-invalid
+                        @enderror" cols="30" rows="6" placeholder="Enter product description"></textarea>
+                        @error('description')
+                            <div class="text-danger pt-1">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @enderror
+                    
+                     </div>
+                </div>
+            </div>
+        </div>
+
      </div>
+  
     </form>
 @endsection
 
