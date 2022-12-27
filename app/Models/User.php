@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Product;
+use App\Models\Category;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -49,5 +51,9 @@ class User extends Authenticatable
 
     public function category(){
         return $this->hasMany(Category::class);
+    }
+
+    public function products(){
+        return $this->hasMany(Product::class);
     }
 }

@@ -18,7 +18,12 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::orderby('id','desc')->get();
+        $products = Product::with(['user'=>function($q){
+            $q->select('id','name');
+        }])->get();
+         
+        // return $products;
+        // exit();
         return view('backend.product.index',compact('products'));
     }
 

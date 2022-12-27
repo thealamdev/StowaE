@@ -35,26 +35,30 @@
         <div class="card-body">
             <table class="table mb-0 thead-border-top-0">
                 <thead>
-                    <th>Id</th>
-                    <th>User</th>
-                    <th>Name</th>
-                    <th>Description</th>
                     <th>Image</th>
-                    <th>Short Desc</th>
-                    <th>Parent Product</th>
+                    <th>User</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Sale Price</th>
+                    <th>Discount</th>
                     <th>Action</th>
                 </thead>
 
                 @forelse ($products as $product)
                 <tr>
-                    <td>{{ $product->id }}</td>
-                    <td>{{ $product->id }}</td>
-                    <td>{{ $product->name }}</td>
-                    <td>{{ $product->description }}</td>
-                    <td>
-                        <img src="{{ asset('storage/product/'.$product->image) }}" alt="" width="60">
-                        
-                    </td>
+                    <td>{{ $product->image }}</td>
+                    <td>{{ $product->user->name }}</td>
+                    <td>{{ $product->title }}</td>
+                    <td>{{ Str::limit($product->description, $limit=20, $end = '... see more') }}</td> 
+                    
+                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->sale_price }}</td>
+                    <td>{{ $product->discount }}</td>
+                     
+                    {{-- <td>
+                        <img src="{{ asset('storage/product/'.$product->image) }}" alt="" width="60"> 
+                    </td> --}}
                     {{-- <td>{{  $product->created_at->format('d-M-y') }}</td> --}}
                     <td>{{ $product->created_at->diffForHumans() }}</td>
                     {{-- <td>{{ $product->parent_id }}</td> --}}
