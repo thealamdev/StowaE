@@ -27,6 +27,7 @@
         <!-- Font Awesome FREE Icons -->
         <link type="text/css" href="{{ asset('assets/backend/css/vendor-fontawesome-free.css') }}" rel="stylesheet">
         <link type="text/css" href="{{ asset('assets/backend/css/vendor-fontawesome-free.rtl.css') }}" rel="stylesheet">
+        @yield('header-css')
 
         <!-- Global site tag (gtag.js') }}) - Google Analytics -->
         <script async
@@ -615,6 +616,7 @@
         <!-- Chart Samples -->
         <script src="{{ ('assets/backend/js/page.dashboard.js') }}"></script>
         <script src="assets/js/progress-charts.js') }}"></script>
+        @yield('footer-js')
 
         <!-- Vector Maps -->
         <script src="{{ asset('assets/backend/vendor/jqvmap/jquery.vmap.min.js') }}"></script>
