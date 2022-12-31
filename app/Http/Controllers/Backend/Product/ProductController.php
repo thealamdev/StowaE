@@ -75,7 +75,7 @@ class ProductController extends Controller
 
         if($valided){
             $product_image = $request->file('image');
-            $image_name = Str::slug($request->title) . time(). "." .  strtolower($product_image->getClientOriginalExtension());
+            $image_name = Str::slug($request->title) . time(). "." . strtolower($product_image->getClientOriginalExtension());
 
             if($image_name){
                 $product_image->move(public_path('storage/products/'),$image_name);
@@ -101,11 +101,9 @@ class ProductController extends Controller
         else{
             return "nothing";
         }
-         
-        
+    
 
- 
- 
+        
     }
 
     /**

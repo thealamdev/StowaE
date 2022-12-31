@@ -47,7 +47,9 @@
 
                 @forelse ($products as $product)
                 <tr>
-                    <td>{{ $product->image }}</td>
+                    <td>
+                        <img src="{{ asset('storage/products/'.$product->image) }}" alt="" width="60" style="border-radius: 10px">
+                    </td>
                     <td>{{ $product->user->name }}</td>
                     <td>{{ $product->title }}</td>
                     <td>{{ Str::limit($product->description, $limit=20, $end = '... see more') }}</td> 
