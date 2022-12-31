@@ -31,7 +31,15 @@
     <form action="{{ route('dashboard.product.store') }}" method="POST" enctype="multipart/form-data">
      @csrf
      <div class="row mt-4">
-
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header">
@@ -109,6 +117,11 @@
                             <input type="checkbox" name="category[]" value="{{ $category->id }}"> 
                             {{ $category->name }}
                             @endforeach
+                            @error('category')
+                            <div class="text-danger pt-1">
+                                <p>{{$message}}</p>
+                            </div>
+                            @enderror
                              
                              
                         </div>
@@ -141,7 +154,7 @@
                      </div>
 
                      <div class="form-group">
-                        <label for="short_description">Short Des cription</label>
+                        <label for="short_description">Short Description</label>
                        <textarea name="short_description" class="summernote form-control @error('short_description')
                            is-invalid
                         @enderror" cols="30" rows="6" placeholder="Enter product description"></textarea>

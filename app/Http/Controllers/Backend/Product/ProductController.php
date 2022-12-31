@@ -48,22 +48,61 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        $products = new Product();
-        $products->user_id = auth()->user()->id;
-        $products->title = $request->title;
-        $products->slug = Str::slug($request->title);
-        $products->description = $request->description;
-        $products->short_description = $request->short_description;
-        $products->additional_info =  $request->additional_info;
-        $products->image = $request->title;
-        $products->price = $request->price;
-        $products->sale_price = $request->sale_price;
-        $products->discount = $request->discount;
-        $products->save();
 
-        $products->categories()->attach($request->category);
+        $valided = $request->validate([
+            'title' => 'required|unique:products',
+            'description' => 'required|max:150',
+            'short_description' => 'max:250',
+            'additional_info' => 'max:250',
+            'image' => 'required',
+            'price' => 'required',
+            'sale_price' => 'nullable',
+            'discount' => 'nullable',
+            'category' => 'required',
+        ],
+        [
+            'title.required' => 'Please enter a title',
+            'title.unique'=>'This title is already taken',
+            'description.required' => 'Please enter a description',
+            'description.max' => 'Max charecter is 250',
+            'short_description.max' => 'Max charecter is 250',
+            'image.required' => 'Please enter an image',
+            'price.required' => 'Please enter a price',
+            'category'=> 'Please enter a category',
+            
+        ]
+        );
 
-        return redirect(route('dashboard.product.index'))->with('success','Product added successfull');
+        if($valided){
+            $product_image = $request->file('image');
+            $image_name = Str::slug($request->title) . time(). "." .  strtolower($product_image->getClientOriginalExtension());
+
+            if($image_name){
+                $product_image->move(public_path('storage/products/'),$image_name);
+            }
+
+            $products = new Product();
+            $products->user_id = auth()->user()->id;
+            $products->title = $request->title;
+            $products->slug = Str::slug($request->title);
+            $products->description = $request->description;
+            $products->short_description = $request->short_description;
+            $products->additional_info =  $request->additional_info;
+            $products->image = $image_name;
+            $products->price = $request->price;
+            $products->sale_price = $request->sale_price;
+            $products->discount = $request->discount;
+            $products->save();
+    
+            $products->categories()->attach($request->category);
+    
+            return redirect(route('dashboard.product.index'))->with('success','Product added successfull');
+        }
+        else{
+            return "nothing";
+        }
+         
+        
 
  
  
