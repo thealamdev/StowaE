@@ -71,7 +71,7 @@
                     {{-- <td>{{ $product->created_at->diffForHumans() }}</td> --}}
                     {{-- <td>{{ $product->parent_id }}</td> --}}
                     <td>
-                        <a href="{{ route('dashboard..inventory.create',$product->id) }}" class="badge bg-warning">Inventory</a>
+                        <a href="{{ route('dashboard.inventory.create',$product->id) }}" class="badge bg-warning">Inventory</a>
                         @can('edit')
                         <a href="{{ route('dashboard.product.edit', $product->id) }}" class="badge bg-success">Edit</a>
                         @endcan

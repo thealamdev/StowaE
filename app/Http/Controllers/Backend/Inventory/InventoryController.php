@@ -29,7 +29,7 @@ class InventoryController extends Controller
     public function create($id)
     {
         //
-        $product = Product::where('id',$id)->get(['id','title']);
+        $product = Product::with('inventories:id,product_id,color_id,size_id')->where('id',$id)->get(['id','title']);
         $colors = Color::get(['id','name']);
         $sizes = Size::get(['id','name']);
          

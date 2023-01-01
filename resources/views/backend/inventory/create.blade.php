@@ -39,7 +39,7 @@
 @endif --}}
                     
                     @foreach ($product as $each)
-                        
+                         
                     
                     <form action="{{ route('dashboard.inventory.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -62,7 +62,7 @@
                            <select name="color_id" class="form-control">
                             <option selected disabled>Select a product color</option>
                             @foreach ($colors as $color)
-                            <option value="{{ $color->id }}">{{ $color->name }}</option>
+                            <option value="{{ $color->id }}"> {{ $color->name }}</option>
                             @endforeach
                            </select>
                          </div>
