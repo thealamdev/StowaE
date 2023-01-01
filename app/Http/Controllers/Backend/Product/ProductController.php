@@ -88,6 +88,16 @@ class ProductController extends Controller
                 $product_image->move(public_path('storage/products/'),$image_name);
             }
 
+            // discount in % calculation:
+            // $sale_price = 0 ;
+            // $pecent_discount = $request->discount;
+            // $price = $request->price;
+             
+            // if(!empty($sale_price)){
+            //     $sale_price = $request->sale_price;
+            //     $discount = $sale_price/100;
+            // }
+             
             $products = new Product();
             $products->user_id = auth()->user()->id;
             $products->title = $request->title;

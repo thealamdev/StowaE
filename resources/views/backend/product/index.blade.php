@@ -39,7 +39,6 @@
                     <th>User</th>
                     <th>Title</th>
                     <th>Categories</th>
-                    <th>Description</th>
                     <th>Price</th>
                     <th>Sale Price</th>
                     <th>Discount</th>
@@ -52,7 +51,7 @@
                         <img src="{{ asset('storage/products/'.$product->image) }}" alt="" width="60" style="border-radius: 10px">
                     </td>
                     <td>{{ $product->user->name }}</td>
-                    <td>{{ $product->title }}</td>
+                    <td>{{ Str::limit($product->title, 15, '...') }}</td>
                     <td>
                     @foreach ($product->categories as $category)
                     <a class="badge badge-info">
@@ -60,10 +59,7 @@
                     </a>
                        
                     @endforeach
-                      
                     </td>
-                    <td>{{ Str::limit($product->description, $limit=20, $end = '... see more') }}</td> 
-                    
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->sale_price }}</td>
                     <td>{{ $product->discount }}</td>
@@ -72,13 +68,14 @@
                         <img src="{{ asset('storage/product/'.$product->image) }}" alt="" width="60"> 
                     </td> --}}
                     {{-- <td>{{  $product->created_at->format('d-M-y') }}</td> --}}
-                    <td>{{ $product->created_at->diffForHumans() }}</td>
+                    {{-- <td>{{ $product->created_at->diffForHumans() }}</td> --}}
                     {{-- <td>{{ $product->parent_id }}</td> --}}
                     <td>
+                        <a href="#" class="badge bg-warning">Inventory</a>
                         @can('edit')
                         <a href="{{ route('dashboard.product.edit', $product->id) }}" class="badge bg-success">Edit</a>
                         @endcan
-                       
+
                         @can('edit')
                         <form action="{{ route('dashboard.product.delete', $product->id) }}" method="post" style="display: inline-block;">
                             @csrf
