@@ -19,9 +19,12 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::with(['user'=>function($q){
+        $products = Product::with(['categories:id,name','user'=>function($q){
             $q->select('id','name');
         }])->get();
+
+        // $products = Product::with(['categories:id,name','user:id,name'
+        // ])->get();
          
         // return $products;
         // exit();
@@ -110,7 +113,7 @@ class ProductController extends Controller
             $product_gallaries->product_id = $products->id;
             $product_gallaries->image = $gallary_name;
             $product_gallaries->save();
-            
+
             // ProductGallary::create([
             //     'product_id' => $products->id,
             //     'image' => $gallary_name,

@@ -1,4 +1,4 @@
-{{-- {{ $products }} --}}
+{{-- {{ $product->categories->name }} --}}
 @extends('layouts.backendapp')
 @section('title','Product')
 @section('backendContent')
@@ -38,6 +38,7 @@
                     <th>Image</th>
                     <th>User</th>
                     <th>Title</th>
+                    <th>Categories</th>
                     <th>Description</th>
                     <th>Price</th>
                     <th>Sale Price</th>
@@ -52,6 +53,15 @@
                     </td>
                     <td>{{ $product->user->name }}</td>
                     <td>{{ $product->title }}</td>
+                    <td>
+                    @foreach ($product->categories as $category)
+                    <a class="badge badge-info">
+                        {{ $category->name ?? "" }}
+                    </a>
+                       
+                    @endforeach
+                      
+                    </td>
                     <td>{{ Str::limit($product->description, $limit=20, $end = '... see more') }}</td> 
                     
                     <td>{{ $product->price }}</td>
