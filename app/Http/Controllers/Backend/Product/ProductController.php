@@ -114,21 +114,21 @@ class ProductController extends Controller
             $products->categories()->attach($request->category);
 
             
-        if(!empty($product_gallary))
-        foreach($product_gallary as $gallary){
-            $gallary_name = $request->title . uniqid() . "." . $gallary->getClientOriginalExtension();
-            $gallary->move(public_path('storage/gallary/'),$gallary_name);
+            if(!empty($product_gallary))
+            foreach($product_gallary as $gallary){
+                $gallary_name = $request->title . uniqid() . "." . $gallary->getClientOriginalExtension();
+                $gallary->move(public_path('storage/gallary/'),$gallary_name);
 
-            $product_gallaries = new ProductGallary();
-            $product_gallaries->product_id = $products->id;
-            $product_gallaries->image = $gallary_name;
-            $product_gallaries->save();
+                $product_gallaries = new ProductGallary();
+                $product_gallaries->product_id = $products->id;
+                $product_gallaries->image = $gallary_name;
+                $product_gallaries->save();
 
-            // ProductGallary::create([
-            //     'product_id' => $products->id,
-            //     'image' => $gallary_name,
-            // ]);
-        }
+                // ProductGallary::create([
+                //     'product_id' => $products->id,
+                //     'image' => $gallary_name,
+                // ]);
+            }
 
         
             return redirect(route('dashboard.product.index'))->with('success','Product added successfull');

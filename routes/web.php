@@ -81,6 +81,12 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
         });
      });
 
+     Route::middleware(['auth'])->group(function(){
+        Route::prefix('inventory')->name('.inventory')->group(function(){
+            require __DIR__ ."/inventory/inventory.php";
+        });
+     });
+
 
 
 
