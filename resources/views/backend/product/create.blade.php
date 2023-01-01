@@ -127,6 +127,19 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="category">Products Gallary</label>
+                            <br>
+                             <input type="file" name="gallary[]" multiple>
+                            @error('gallary')
+                            <div class="text-danger pt-1">
+                                <p>{{$message}}</p>
+                            </div>
+                            @enderror
+                             
+                             
+                        </div>
+
+                        <div class="form-group">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                 </div>

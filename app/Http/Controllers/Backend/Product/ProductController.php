@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ProductGallary;
 
 class ProductController extends Controller
 {
@@ -49,12 +50,15 @@ class ProductController extends Controller
     {
         //
 
+        $product_gallary = $request->file('gallary');
+        
         $valided = $request->validate([
             'title' => 'required|unique:products',
             'description' => 'required|max:150',
             'short_description' => 'max:250',
             'additional_info' => 'max:250',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpg,jpeg,png',
+            // 'gallary'=> 'image|mimes:jpg,jpeg,png',
             'price' => 'required',
             'sale_price' => 'nullable',
             'discount' => 'nullable',
@@ -95,7 +99,25 @@ class ProductController extends Controller
             $products->save();
     
             $products->categories()->attach($request->category);
-    
+
+            
+        if(!empty($product_gallary))
+        foreach($product_gallary as $gallary){
+            $gallary_name = $request->title . uniqid() . "." . $gallary->getClientOriginalExtension();
+            $gallary->move(public_path('storage/gallary/'),$gallary_name);
+
+            $product_gallaries = new ProductGallary();
+            $product_gallaries->product_id = $products->id;
+            $product_gallaries->image = $gallary_name;
+            $product_gallaries->save();
+            
+            // ProductGallary::create([
+            //     'product_id' => $products->id,
+            //     'image' => $gallary_name,
+            // ]);
+        }
+
+        
             return redirect(route('dashboard.product.index'))->with('success','Product added successfull');
         }
         else{
