@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Backend\Inventory;
 
-use App\Http\Controllers\Controller;
+use App\Models\Size;
+use App\Models\Color;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Inventory;
 
 class InventoryController extends Controller
 {
@@ -22,9 +26,15 @@ class InventoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
+        $product = Product::where('id',$id)->get(['id','title']);
+        $colors = Color::get(['id','name']);
+        $sizes = Size::get(['id','name']);
+         
+        return view('backend.inventory.create',compact('product','colors','sizes'));
+        
     }
 
     /**
@@ -36,6 +46,15 @@ class InventoryController extends Controller
     public function store(Request $request)
     {
         //
+
+        Inventory::create([
+            'product_id' => $request->product_id,
+            'color_id' => $request->color_id,
+            'size_id' => $request->size_id,
+            'quantity' => $request->quantity,
+            'additional_price' => $request->additional_price,
+        ]);
+        return back()->with('success','Inventory added successfully');
     }
 
     /**
