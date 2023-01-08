@@ -14,11 +14,13 @@
                                 <th>Size id</th>
 
                             </thead>
+                            @foreach ($inventory as $each)
                             <tr>
-                                <td>01</td>
+                                <td>{{ $each->id }}</td>
                                 <td>02</td>
                                 <td>03</td>
                             </tr>
+                            @endforeach
                          </table>
                     </div>
                 </div>
