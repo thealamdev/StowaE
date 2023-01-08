@@ -19,13 +19,7 @@ class InventoryController extends Controller
     public function index()
     {
         //
-        $product = Inventory::with(['product'=>function($q){
-            $q->with('color')
-            ->with('size');
-        }])->get();
-        
-        // return $product;
-        return view('backend.inventory.index',compact('product'));
+      
     }
 
     /**
@@ -39,8 +33,17 @@ class InventoryController extends Controller
         $product = Product::with('inventories:id,product_id,color_id,size_id')->where('id',$id)->get(['id','title']);
         $colors = Color::get(['id','name']);
         $sizes = Size::get(['id','name']);
+
+        $products = Product::with(['inventories'=>function($q){
+            $q->with('size')->
+            with('color')->get('id','title');
+            
+        }])->findOrFail($id);
+        
+        // return $product;
+        // return view('backend.inventory.index',compact('product'));
          
-        return view('backend.inventory.create',compact('product','colors','sizes'));
+        return view('backend.inventory.create',compact('product','colors','sizes','products'));
         
     }
 

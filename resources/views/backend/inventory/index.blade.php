@@ -16,7 +16,7 @@
                                 <th>Additional Price</th>
 
                             </thead>
-                            @foreach ($product as $each)
+                            @foreach ($product->inventories as $each)
                             {{ $each }}
                             <tr>
                                 <td>{{ $each->id }}</td>

@@ -24,8 +24,43 @@
         </div>
     </div>
 
+    
+
      <div class="row mt-4">
-        <div class="col-lg-6 m-auto">
+
+        <div class="col-lg-8">
+ 
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                     <table class="table table-striped mb-0 thead-border-top-0">
+                                        <thead>
+                                            <th>Product id</th>
+                                            <th>Color id</th>
+                                            <th>Size id</th>
+                                            <th>Quantity</th>
+                                            <th>Additional Price</th>
+            
+                                        </thead>
+                                        @foreach ($products->inventories as $each)
+                                      
+                                        <tr>
+                                            <td>{{ $each->id }}</td>
+                                            <td>{{ $each->color->name }}</td>
+                                            <td>{{ $each->size->name }}</td>
+                                            <td>{{ $each->quantity }}</td>
+                                            <td>{{ $each->additional_price }}</td>
+                                        </tr>
+                                        @endforeach
+                                     </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+          
+        </div>
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
                     {{-- @if ($errors->any())
