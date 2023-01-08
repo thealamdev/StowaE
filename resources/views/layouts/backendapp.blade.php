@@ -452,6 +452,16 @@
                                         </ul>
 
                                         <ul class="sidebar-submenu collapse"
+                                        id="category_menu">
+                                        <li class="sidebar-menu-item active">
+                                            <a class="sidebar-menu-button"
+                                               href="{{ route('dashboard.inventory.index') }}">
+                                                <span class="sidebar-menu-text">Inventory</span>
+                                            </a>
+                                        </li>                                         
+                                        </ul>
+
+                                        <ul class="sidebar-submenu collapse"
                                             id="category_menu">
                                             <li class="sidebar-menu-item active">
                                                 <a class="sidebar-menu-button"

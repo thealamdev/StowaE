@@ -12,13 +12,18 @@
                                 <th>Product id</th>
                                 <th>Color id</th>
                                 <th>Size id</th>
+                                <th>Quantity</th>
+                                <th>Additional Price</th>
 
                             </thead>
-                            @foreach ($inventory as $each)
+                            @foreach ($product as $each)
+                            {{ $each }}
                             <tr>
                                 <td>{{ $each->id }}</td>
-                                <td>02</td>
-                                <td>03</td>
+                                <td>{{ $each->color }}</td>
+                                <td>{{ $each->size }}</td>
+                                <td>{{ $each->quantity }}</td>
+                                <td>{{ $each->additional_price }}</td>
                             </tr>
                             @endforeach
                          </table>

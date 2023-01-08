@@ -19,13 +19,13 @@ class InventoryController extends Controller
     public function index()
     {
         //
-        $product = Product::with(['inventories'=>function($q){
+        $product = Inventory::with(['product'=>function($q){
             $q->with('color')
             ->with('size');
         }])->get();
         
-        return $product;
-        return view('backend.inventory.index',compact('inventory'));
+        // return $product;
+        return view('backend.inventory.index',compact('product'));
     }
 
     /**
