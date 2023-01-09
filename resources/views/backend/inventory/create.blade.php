@@ -41,18 +41,27 @@
                                             <th>Size id</th>
                                             <th>Quantity</th>
                                             <th>Additional Price</th>
+                                            <th>Action</th>
             
                                         </thead>
-                                        @foreach ($products->inventories as $each)
-                                      
+                                        @forelse ($products->inventories as $each)
                                         <tr>
                                             <td>{{ $each->id }}</td>
                                             <td>{{ $each->color->name }}</td>
                                             <td>{{ $each->size->name }}</td>
                                             <td>{{ $each->quantity }}</td>
                                             <td>{{ $each->additional_price }}</td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary">Edit</a>
+                                                <a href="#" class="btn btn-danger">Delete</a>
+                                            </td>
                                         </tr>
-                                        @endforeach
+                                        @empty
+                                            {{ "Data not found" }}
+                                        @endforelse
+                                      
+                                     
+                                        
                                      </table>
                                 </div>
                             </div>
@@ -63,15 +72,15 @@
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
-                    {{-- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     
                     @foreach ($product as $each)
                          
@@ -94,7 +103,7 @@
 
                          <div class="form-group">
                             <label for="color_id">Product Color</label>
-                           <select name="color_id" class="form-control">
+                           <select name="color_id" class="form-control" id="selectColor">
                             <option selected disabled>Select a product color</option>
                             @foreach ($colors as $color)
                             <option value="{{ $color->id }}"> {{ $color->name }}</option>
@@ -149,4 +158,26 @@
              </div>
         </div>
      </div>
+@endsection
+
+@section('footer-js')
+<script>
+    $(document).ready(function(){
+        $('#selectColor').on('change',function(){
+            $.ajax({
+                type:'POST',
+                url:"{{ route('dashboard.inventory.colorSelect') }}",
+                dataType:'json',
+                data:{
+                    _token:'{{ csrf_token() }}'
+                },
+                success:function(data){
+                    console.log(data);
+                }
+                
+            })  
+        })
+    })
+</script>
+  
 @endsection

@@ -111,4 +111,9 @@ class InventoryController extends Controller
     {
         //
     }
+
+    // ajax functions here:
+    public function colorSelect(Request $request){
+        return response()->json("ok");
+    }
 }

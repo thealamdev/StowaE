@@ -9,4 +9,6 @@ Route::controller(InventoryController::class)->group(function(){
     Route::get('create/{id}','create')->name('create');
     Route::post('store','store')->name('store');
     Route::get('archieve','archieve')->name('archieve');
+    // ajax routes:
+    Route::post('color-select','colorSelect')->name('colorSelect');
 });
