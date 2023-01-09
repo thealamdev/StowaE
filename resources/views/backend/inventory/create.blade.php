@@ -99,7 +99,7 @@
                            @enderror
                          </div>
 
-                         <input type="hidden" name="product_id" value="{{ $each->id }}">
+                         <input type="hidden" id="product_id" name="product_id" value="{{ $each->id }}">
 
                          <div class="form-group">
                             <label for="color_id">Product Color</label>
@@ -164,11 +164,15 @@
 <script>
     $(document).ready(function(){
         $('#selectColor').on('change',function(){
+            $id = $('#product_id').val();
+            $color_id = $('#selectColor').val();
             $.ajax({
                 type:'POST',
                 url:"{{ route('dashboard.inventory.colorSelect') }}",
                 dataType:'json',
                 data:{
+                     id:$id,
+                     color_id:$color_id,
                     _token:'{{ csrf_token() }}'
                 },
                 success:function(data){

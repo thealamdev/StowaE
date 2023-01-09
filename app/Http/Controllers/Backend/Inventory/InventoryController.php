@@ -114,6 +114,19 @@ class InventoryController extends Controller
 
     // ajax functions here:
     public function colorSelect(Request $request){
-        return response()->json("ok");
+        // return $request;
+        // exit();
+        $product = Product::with('inventories:id,color_id,product_id,size_id')->select(['id'])->findOrFail($request->id);
+        $colors = Color::get('id','name');
+
+        $sizes = [];
+
+        foreach($colors as $color){
+            if($color->id == $request->color_id){
+                $sizes = 10;
+            }
+        }
+
+        return response()->json($sizes);
     }
 }
