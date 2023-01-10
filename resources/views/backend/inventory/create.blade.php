@@ -34,8 +34,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
+                                {{-- @foreach ($products as $pro)
+                                    {{ $pro->id }}
+                                @endforeach --}}
                                 <div class="col-lg-12">
-                                     <table class="table table-striped mb-0 thead-border-top-0">
+                                     <table class="table table-bordered table-striped mb-0 thead-border-top-0">
                                         <thead>
                                             <th>Product id</th>
                                             <th>Color id</th>

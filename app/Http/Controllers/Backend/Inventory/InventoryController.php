@@ -36,9 +36,11 @@ class InventoryController extends Controller
 
         $products = Product::with(['inventories'=>function($q){
             $q->with('size')->
-            with('color')->get('id','title');
+            with('color')->get();
             
         }])->findOrFail($id);
+
+ 
 
         return view('backend.inventory.create',compact('product','colors','sizes','products'));
         
