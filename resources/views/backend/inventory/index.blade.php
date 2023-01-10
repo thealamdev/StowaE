@@ -1,3 +1,7 @@
+@foreach ($productss->inventories as $inv)
+    {{ $inv }}
+@endforeach
+
 @extends('layouts.backendapp')
 @section('title','Inventory')
 @section('backendContent')

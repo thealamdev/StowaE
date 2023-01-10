@@ -39,10 +39,7 @@ class InventoryController extends Controller
             with('color')->get('id','title');
             
         }])->findOrFail($id);
-        
-        // return $product;
-        // return view('backend.inventory.index',compact('product'));
-         
+
         return view('backend.inventory.create',compact('product','colors','sizes','products'));
         
     }
@@ -114,24 +111,23 @@ class InventoryController extends Controller
 
     // ajax functions here:
     public function colorSelect(Request $request){
-        // return $request;
-        // exit();
         $product = Product::with('inventories:id,color_id,product_id,size_id')->select(['id'])->findOrFail($request->id);
-        $colors = Color::get('id','name');
 
+        $exSize = [];
+        foreach($product->inventories as $inventory){
+            if($inventory->color_id == $request->color_id){
+                $exSize[] = $inventory->size_id; 
+            }
+        }
+
+        $sizes = Size::whereNotIn('id',$exSize)->get();
         
 
 
-        $sizes = Size::whereNotIn('id',[1])->get();
-
-         
-
-        // foreach($colors as $color){
-        //     if($color->id == $request->color_id){
-        //         $sizes = 10;
-        //     }
-        // }
-
         return response()->json($sizes);
+        
+       
+
+ 
     }
 }

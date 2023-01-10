@@ -1,4 +1,4 @@
-{{-- {{ $categories }} --}}
+
 @extends('layouts.backendapp')
 @section('title','Inventory Create')
 @section('backendContent')
@@ -24,6 +24,7 @@
         </div>
     </div>
 
+    
     
 
      <div class="row mt-4">
