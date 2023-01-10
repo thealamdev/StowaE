@@ -114,11 +114,11 @@
 
                          <div class="form-group">
                             <label for="size_id">Product size</label>
-                           <select name="size_id" class="form-control">
+                           <select name="size_id" class="form-control" id="select_size">
                             <option selected disabled>Select a product size</option>
-                            @foreach ($sizes as $size)
+                            {{-- @foreach ($sizes as $size)
                             <option value="{{ $size->id }}">{{ $size->name }}</option>
-                            @endforeach
+                            @endforeach --}}
                            </select>
                          </div>
 
@@ -177,7 +177,7 @@
                     _token:'{{ csrf_token() }}'
                 },
                 success:function(data){
-                    console.log(data);
+                    $('#select_size').html(data);
                 }
                 
             })  

@@ -121,10 +121,14 @@ class InventoryController extends Controller
         }
 
         $sizes = Size::whereNotIn('id',$exSize)->get();
-        
+
+        $options = ["<option selected disabled>Select a product size</option>"];
+        foreach($sizes as $size){
+            $options[] = "<option value='$size->id'>" .$size->name. "</option>" ;
+        }
 
 
-        return response()->json($sizes);
+        return response()->json($options);
         
        
 
