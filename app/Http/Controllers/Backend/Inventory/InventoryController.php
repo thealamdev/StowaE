@@ -119,13 +119,18 @@ class InventoryController extends Controller
         $product = Product::with('inventories:id,color_id,product_id,size_id')->select(['id'])->findOrFail($request->id);
         $colors = Color::get('id','name');
 
-        $sizes = [];
+        
 
-        foreach($colors as $color){
-            if($color->id == $request->color_id){
-                $sizes = 10;
-            }
-        }
+
+        $sizes = Size::whereNotIn('id',[1])->get();
+
+         
+
+        // foreach($colors as $color){
+        //     if($color->id == $request->color_id){
+        //         $sizes = 10;
+        //     }
+        // }
 
         return response()->json($sizes);
     }
