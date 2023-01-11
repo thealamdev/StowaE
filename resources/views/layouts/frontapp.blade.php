@@ -193,12 +193,12 @@
                                             </ul>
                                         </li>
                                         <li class="dropdown">
-                                            <a class="nav-link" href="#" id="shop_submenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                                            <ul class="submenu dropdown-menu" aria-labelledby="shop_submenu">
+                                            <a class="nav-link" href="{{ route('frontend.shop.index') }}" >Shop</a>
+                                            {{-- <ul class="submenu dropdown-menu" aria-labelledby="shop_submenu">
                                                 <li><a href="shop_grid.html">Shop Grid</a></li>
                                                 <li><a href="shop_list.html">Shop List</a></li>
                                                 <li><a href="shop_details.html">Shop Details</a></li>
-                                            </ul>
+                                            </ul> --}}
                                         </li>
                                         <li class="dropdown">
                                             <a class="nav-link" href="#" id="blog_submenu" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Blog </a>

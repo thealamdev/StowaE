@@ -26,8 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[frontendController::class, 'index'])->name('frontend.home');
 
 Auth::routes();
-
-
+// ============== Backend Routes =================
 Route::prefix('dashboard')->name('dashboard.')->group(function(){
     //Dashboard index route:
     Route::get('/', [BackendController::class, 'index'])->name('dashboard');
@@ -92,5 +91,13 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
 
 
 });
+
+// ============== Frontend Routes ================
+Route::name('frontend.')->group(function(){
+    Route::prefix('shop')->name('shop.')->group(function(){
+        require __DIR__ ."/frontend/shop/shop.php";
+    });
+});
+
  
  
