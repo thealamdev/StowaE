@@ -6,41 +6,80 @@
         <div class="col col-lg-6">
             <div class="product_details_image">
                 <div class="details_image_carousel slick-initialized slick-slider">
-                    <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 7769px; transform: translate3d(-457px, 0px, 0px);"><div class="slider_item slick-slide slick-cloned" data-slick-index="-1" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                <div class="slick-list draggable">
+                  <div class="slick-track" style="opacity: 1; width: 7769px; transform: translate3d(-457px, 0px, 0px);">
+                    
+                    <div class="slider_item  slick-slide slick-cloned" data-slick-index="-1" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_4.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_1.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide" data-slick-index="1" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_2.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide" data-slick-index="2" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide" data-slick-index="2" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_3.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_4.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide" data-slick-index="4" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide" data-slick-index="4" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_1.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide" data-slick-index="5" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide" data-slick-index="5" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_2.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide" data-slick-index="6" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide" data-slick-index="6" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_3.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide" data-slick-index="7" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide" data-slick-index="7" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_4.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide slick-cloned" data-slick-index="8" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide slick-cloned" data-slick-index="8" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_1.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide slick-cloned" data-slick-index="9" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide slick-cloned" data-slick-index="9" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_2.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide slick-cloned" data-slick-index="10" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide slick-cloned" data-slick-index="10" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_3.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide slick-cloned" data-slick-index="11" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide slick-cloned" data-slick-index="11" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_4.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide slick-cloned" data-slick-index="12" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide slick-cloned" data-slick-index="12" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_1.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide slick-cloned" data-slick-index="13" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide slick-cloned" data-slick-index="13" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_2.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide slick-cloned" data-slick-index="14" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide slick-cloned" data-slick-index="14" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_3.png" alt="image_not_found">
-                    </div><div class="slider_item slick-slide slick-cloned" data-slick-index="15" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
+                    </div>
+                    
+                    <div class="slider_item slick-slide slick-cloned" data-slick-index="15" id="" aria-hidden="true" tabindex="-1" style="width: 457px;">
                         <img src="assets/images/details/product_details_img_4.png" alt="image_not_found">
-                    </div></div></div>
+                    </div>
+                
+                </div>
+            
+            </div>
                     
                     
                     
