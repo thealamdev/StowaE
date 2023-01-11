@@ -50,7 +50,9 @@ class ShopController extends Controller
     public function show($slug)
     {
         //
-        return view('frontend.show');
+        $products = Product::where('slug',$slug)->with('product_gallaries')->first();
+        // return $products;
+        return view('frontend.show',compact('products'));
     }
 
     /**

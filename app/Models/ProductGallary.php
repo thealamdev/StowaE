@@ -13,4 +13,8 @@ class ProductGallary extends Model
         'product_id',
         'image'
     ];
+
+     public function product(){
+        return $this->hasMany(Product::class);
+     }
 }

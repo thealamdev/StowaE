@@ -21,4 +21,8 @@ class Product extends Model
     public function inventories(){
         return $this->hasMany(Inventory::class);
     }
+
+    public function product_gallaries(){
+        return $this->hasMany(ProductGallary::class);
+    }
 }
