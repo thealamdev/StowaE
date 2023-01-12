@@ -67,11 +67,11 @@
                                             
                                             <option data-display="- Please select -">Choose A Option</option>
                                              
-                                            @forelse ($colorSize->inventories as $inventory)
+                                            {{-- @forelse ($colorSize->inventories as $inventory)
                                             <option value="{{ $inventory->id }}">{{ $inventory->size->name }}</option>
                                             @empty
                                                 {{ "No color found" }}
-                                            @endforelse
+                                            @endforelse --}}
 
                                         </select>
                                         <div class="nice-select" tabindex="0"><span class="current">- Please select
@@ -80,11 +80,11 @@
                                                 <li data-value="Choose A Option" data-display="- Please select -"
                                                     class="option selected">Choose A Option</li>
 
-                                                @forelse ($colorSize->inventories as $inventory)
+                                                {{-- @forelse ($colorSize->inventories as $inventory)
                                                 <li data-value="{{ $inventory->id }}" class="option">{{ $inventory->size->name }}</li>
                                                 @empty
                                                 <li class="option">{{ "No Color Available" }}</li>
-                                                @endforelse
+                                                @endforelse --}}
 
                                             </ul>
                                         </div>
