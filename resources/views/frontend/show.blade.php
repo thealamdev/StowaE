@@ -63,7 +63,7 @@
                                      
                                     <div class="select_option clearfix">
                                         <h4 class="input_title">Size *</h4>
-                                        <select style="display: none;" id="SizeSelect">
+                                        <select style="display: none;">
                                             
                                             <option data-display="- Please select -">Choose A Option</option>
                                              
@@ -76,7 +76,7 @@
                                         </select>
                                         <div class="nice-select" tabindex="0"><span class="current">- Please select
                                                 -</span>
-                                            <ul class="list">
+                                            <ul class="list" id="sizeSelect">
                                                 <li data-value="Choose A Option" data-display="- Please select -"
                                                     class="option selected">Choose A Option</li>
 
@@ -419,17 +419,20 @@
         $(document).ready(function(){
             $('#ColorSelect').on('change',function(){
                 $id = {{ $products->id }}
+                $color_id = $('#ColorSelect').val()
                 $.ajax({
                     type:'POST',
                     url:"{{ route('frontend.shop.sizeSelect') }}",
                     dataType:'json',
                     data:{
-                        $id,
+                        id:$id,
+                        color_id:$color_id,
                         _token:'{{ csrf_token() }}',
                     },
                      
                     success:function(data){
                         console.log(data)
+                        $('#sizeSelect').html(data)
                     }
                 })
             })

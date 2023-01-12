@@ -6,6 +6,7 @@ use App\Models\Color;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Inventory;
 
 class ShopController extends Controller
 {
@@ -108,6 +109,23 @@ class ShopController extends Controller
 
 
     public function sizeSelect(Request $request){
-        return response()->json($request);
+        $products = Product::where('id',$request->id)->with(['inventories'=>function($q){
+            $q->with('size');
+        }])->first();
+
+        //  return $products;
+        $options = [];
+        foreach($products->inventories as $inventory){
+            // return $inventory;
+            if($request->color_id == $inventory->color_id){
+                // $inventory_size[] = $inventory->size_id;
+                $options[] = "<li data-value='$inventory->size_id' class='option'>" .$inventory->size->name." </li>";
+                // "<li data-value='$inventory->size_id' class='option'>" .$inventory->size->name." </li>";
+            }
+        }
+
+
+        // return $products;
+        return response()->json($options);
     }
 }

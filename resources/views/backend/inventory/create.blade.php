@@ -180,6 +180,7 @@
                     _token:'{{ csrf_token() }}'
                 },
                 success:function(data){
+                    // console.log(data);
                     $('#select_size').html(data);
                 }
                 
