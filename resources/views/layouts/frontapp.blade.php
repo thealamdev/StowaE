@@ -601,6 +601,7 @@
 
     <!-- custom - main-js -->
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
+    @yield('footer-js')
     
 </body>
 

@@ -63,7 +63,7 @@
                                      
                                     <div class="select_option clearfix">
                                         <h4 class="input_title">Size *</h4>
-                                        <select style="display: none;">
+                                        <select style="display: none;" id="SizeSelect">
                                             
                                             <option data-display="- Please select -">Choose A Option</option>
                                              
@@ -93,7 +93,7 @@
                                 <div class="col col-md-6">
                                     <div class="select_option clearfix">
                                         <h4 class="input_title">Color *</h4>
-                                        <select style="display: none;">
+                                        <select style="display: none;" id="ColorSelect">
                                             <option data-display="- Please select -">Choose A Option</option>
                                             @forelse ($inventory_color as $key => $inv_color)
                                             <option value="{{ $inv_color->id }}">{{ $inv_color->name }}</option>
@@ -412,4 +412,27 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer-js')
+    <script>
+        $(document).ready(function(){
+            $('#ColorSelect').on('change',function(){
+                $id = {{ $products->id }}
+                $.ajax({
+                    type:'POST',
+                    url:"{{ route('frontend.shop.sizeSelect') }}",
+                    dataType:'json',
+                    data:{
+                        $id,
+                        _token:'{{ csrf_token() }}',
+                    },
+                     
+                    success:function(data){
+                        console.log(data)
+                    }
+                })
+            })
+        })
+    </script>
 @endsection

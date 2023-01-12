@@ -105,4 +105,9 @@ class ShopController extends Controller
     {
         //
     }
+
+
+    public function sizeSelect(Request $request){
+        return response()->json($request);
+    }
 }
