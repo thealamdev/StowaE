@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Frontend\Shop;
 
-use App\Http\Controllers\Controller;
+use App\Models\Color;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ShopController extends Controller
 {
@@ -51,8 +52,24 @@ class ShopController extends Controller
     {
         //
         $products = Product::where('slug',$slug)->with('product_gallaries')->first();
-        // return $products;
-        return view('frontend.show',compact('products'));
+        $colorSize = Product::where('slug',$slug)->with(['inventories'=>function($q){
+            $q->with('color')
+            ->with('size');
+        }])->first();
+        // return $colorSize;
+
+        $inventory_color = [];
+        foreach($colorSize->inventories as $inventory){
+                $colors_inv[] = $inventory->color_id;
+                if(!empty($colors_inv)){
+                    $inv_colors = array_map("unserialize", array_unique(array_map("serialize", $colors_inv)));
+                }
+        }
+        if(!empty($inv_colors)){
+            $inventory_color = Color::whereIn('id', $inv_colors)->get();
+        }
+         
+        return view('frontend.show',compact('products','inventory_color','colorSize'));
     }
 
     /**

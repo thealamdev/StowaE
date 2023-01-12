@@ -56,26 +56,36 @@
                     <div class="item_attribute">
                         <h3 class="title_text">Options <span class="underline"></span></h3>
                         <form action="#">
+ 
+                                  
                             <div class="row">
                                 <div class="col col-md-6">
+                                     
                                     <div class="select_option clearfix">
                                         <h4 class="input_title">Size *</h4>
                                         <select style="display: none;">
+                                            
                                             <option data-display="- Please select -">Choose A Option</option>
-                                            <option value="1">Some option</option>
-                                            <option value="2">Another option</option>
-                                            <option value="3" disabled="">A disabled option</option>
-                                            <option value="4">Potato</option>
+                                             
+                                            @forelse ($colorSize->inventories as $inventory)
+                                            <option value="{{ $inventory->id }}">{{ $inventory->size->name }}</option>
+                                            @empty
+                                                {{ "No color found" }}
+                                            @endforelse
+
                                         </select>
                                         <div class="nice-select" tabindex="0"><span class="current">- Please select
                                                 -</span>
                                             <ul class="list">
                                                 <li data-value="Choose A Option" data-display="- Please select -"
                                                     class="option selected">Choose A Option</li>
-                                                <li data-value="1" class="option">Some option</li>
-                                                <li data-value="2" class="option">Another option</li>
-                                                <li data-value="3" class="option disabled">A disabled option</li>
-                                                <li data-value="4" class="option">Potato</li>
+
+                                                @forelse ($colorSize->inventories as $inventory)
+                                                <li data-value="{{ $inventory->id }}" class="option">{{ $inventory->size->name }}</li>
+                                                @empty
+                                                <li class="option">{{ "No Color Available" }}</li>
+                                                @endforelse
+
                                             </ul>
                                         </div>
                                     </div>
@@ -85,25 +95,29 @@
                                         <h4 class="input_title">Color *</h4>
                                         <select style="display: none;">
                                             <option data-display="- Please select -">Choose A Option</option>
-                                            <option value="1">Some option</option>
-                                            <option value="2">Another option</option>
-                                            <option value="3" disabled="">A disabled option</option>
-                                            <option value="4">Potato</option>
+                                            @forelse ($inventory_color as $key => $inv_color)
+                                            <option value="{{ $inv_color->id }}">{{ $inv_color->name }}</option>
+                                            @empty
+                                                {{ "No color found" }}
+                                            @endforelse
                                         </select>
                                         <div class="nice-select" tabindex="0"><span class="current">- Please select
                                                 -</span>
                                             <ul class="list">
                                                 <li data-value="Choose A Option" data-display="- Please select -"
                                                     class="option selected">Choose A Option</li>
-                                                <li data-value="1" class="option">Some option</li>
-                                                <li data-value="2" class="option">Another option</li>
-                                                <li data-value="3" class="option disabled">A disabled option</li>
-                                                <li data-value="4" class="option">Potato</li>
+                                                    @forelse ($inventory_color as $key => $inv_color)
+                                                    <li data-value="{{ $inv_color->id }}" class="option">{{ $inv_color->name }}</li>
+                                                    @empty
+                                                    <li class="option">{{ "No Color Available" }}</li>
+                                                    @endforelse
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                             
+
                             <span class="repuired_text">Repuired Fiields *</span>
                         </form>
                     </div>
