@@ -9,5 +9,6 @@ Route::controller(ShopController::class)->group(function(){
 
 
     // ajax routes:
-    Route::post('/','sizeSelect')->name('sizeSelect');
+    Route::post('size-select','sizeSelect')->name('sizeSelect');
+    Route::post('additional-price','additionalPrice')->name('additionalPrice');
 });

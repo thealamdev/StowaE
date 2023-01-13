@@ -18,8 +18,8 @@ class ShopController extends Controller
     public function index()
     {
         //
-        $products = Product::select('id','title','short_description','image','price','sale_price','slug')->orderBy('id','desc')->paginate(9);
-        return view('frontend.shop',compact('products'));
+        $products = Product::select('id', 'title', 'short_description', 'image', 'price', 'sale_price', 'slug')->orderBy('id', 'desc')->paginate(9);
+        return view('frontend.shop', compact('products'));
     }
 
     /**
@@ -52,25 +52,25 @@ class ShopController extends Controller
     public function show($slug)
     {
         //
-        $products = Product::where('slug',$slug)->with('product_gallaries')->first();
-        $colorSize = Product::where('slug',$slug)->with(['inventories'=>function($q){
+        $products = Product::where('slug', $slug)->with('product_gallaries')->first();
+        $colorSize = Product::where('slug', $slug)->with(['inventories' => function ($q) {
             $q->with('color')
-            ->with('size');
+                ->with('size');
         }])->first();
         // return $colorSize;
 
         $inventory_color = [];
-        foreach($colorSize->inventories as $inventory){
-                $colors_inv[] = $inventory->color_id;
-                if(!empty($colors_inv)){
-                    $inv_colors = array_map("unserialize", array_unique(array_map("serialize", $colors_inv)));
-                }
+        foreach ($colorSize->inventories as $inventory) {
+            $colors_inv[] = $inventory->color_id;
+            if (!empty($colors_inv)) {
+                $inv_colors = array_map("unserialize", array_unique(array_map("serialize", $colors_inv)));
+            }
         }
-        if(!empty($inv_colors)){
+        if (!empty($inv_colors)) {
             $inventory_color = Color::whereIn('id', $inv_colors)->get();
         }
-         
-        return view('frontend.show',compact('products','inventory_color','colorSize'));
+
+        return view('frontend.show', compact('products', 'inventory_color', 'colorSize'));
     }
 
     /**
@@ -108,18 +108,19 @@ class ShopController extends Controller
     }
 
 
-    public function sizeSelect(Request $request){
-        $products = Product::where('id',$request->id)->with(['inventories'=>function($q){
+    public function sizeSelect(Request $request)
+    {
+        $products = Product::where('id', $request->id)->with(['inventories' => function ($q) {
             $q->with('size');
         }])->first();
 
         //  return $products;
         $options = [];
-        foreach($products->inventories as $inventory){
+        foreach ($products->inventories as $inventory) {
             // return $inventory;
-            if($request->color_id == $inventory->color_id){
+            if ($request->color_id == $inventory->color_id) {
                 // $inventory_size[] = $inventory->size_id;
-                $options[] = "<li data-value='$inventory->size_id' class='option'>" .$inventory->size->name." </li>";
+                $options[] = "<li data-value='$inventory->size_id' class='option'>" . $inventory->size->name . " </li>";
                 // "<li data-value='$inventory->size_id' class='option'>" .$inventory->size->name." </li>";
             }
         }
@@ -128,4 +129,16 @@ class ShopController extends Controller
         // return $products;
         return response()->json($options);
     }
+
+        /* Ajax functions:
+        additionalPrice function:
+       */
+
+    public function additionalPrice(){
+        return response()->json("fine");
+    }
+
+
 }
+
+ 

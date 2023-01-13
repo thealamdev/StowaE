@@ -479,7 +479,7 @@
             $('#shopForm').on('change',function(){
                  $.ajax({
                     type:'POST',
-                    url:'{{  }}',
+                    url:'{{ route('frontend.shop.additionalPrice') }}',
                     dataType:'json',
                     data:{
                         _token:"{{ csrf_token() }}"
