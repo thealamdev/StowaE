@@ -128,7 +128,8 @@
                                 <button type="button" class="input_number_decrement">
                                     <i class="fal fa-minus"></i>
                                 </button>
-                                <input class="input_number" type="text" value="1">
+                                {{-- <input class="input_number" type="text" value="1"> --}}
+                                <input type="text" class="input_number" id="quantity" value="1">
                                 <button type="button" class="input_number_increment">
                                     <i class="fal fa-plus"></i>
                                 </button>
@@ -438,17 +439,18 @@
             })
 
                // quantity js:
-               $input_filed = $('.input_number').val();
-               $input = Number($input_filed);
-               alert($input+)
+
+               $quantity = $('#quantity').val();
+               $input = Number($quantity);
+               // alert($input+)
                 
                $('.input_number_increment').on('click',function(){
-                    alert($input++);
+                    console.log($input = $input +1)
                 })
 
                $('.input_number_decrement').on('click',function(){
-                    if($input>=1){
-                        alert($input--);
+                    if($input>1){
+                        console.log($input = $input -1)
                     }
                   
                 })
