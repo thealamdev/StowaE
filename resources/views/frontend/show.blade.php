@@ -137,7 +137,7 @@
                             </div>
                         </form>
 
-                        <div class="total_price"> $ <span id="totalPrice">
+                        <div class="total_price">Total Price : $ <span id="totalPrice">
                             {{ $products->discount ? $products->sale_price : $products->price }}
                             {{-- {{ $products }} --}}
                         </span></div>
