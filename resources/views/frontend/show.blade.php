@@ -137,7 +137,10 @@
                             </div>
                         </form>
 
-                        <div class="total_price">Total: $620,99</div>
+                        <div class="total_price"> $ <span id="totalPrice">
+                            {{ $products->discount ? $products->sale_price : $products->price }}
+                            {{ $products }}
+                        </span></div>
                     </div>
 
                     <ul class="default_btns_group ul_li">
@@ -449,18 +452,25 @@
 
         incriment.addEventListener('click',function(){
             quantity.value = parseInt(quantity.value) + 1;
+            $sale_price = {{ $products->sale_price }};
+            $totalPrice = $('#totalPrice');
+            $totalPrice.html($sale_price * quantity.value);
             console.log(quantity.value)
         })
 
         decriment.addEventListener('click',function(){
             if(quantity.value > 1){
                 quantity.value = parseInt(quantity.value) -1;
+                $sale_price = {{ $products->sale_price }};
+                $totalPrice = $('#totalPrice');
+                $totalPrice.html($sale_price * quantity.value);
                 console.log(quantity.value)
             }
         })
 
     // total Price section:
-    
+ 
+
           
     })
     </script>
