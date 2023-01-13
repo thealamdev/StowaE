@@ -436,6 +436,26 @@
                     }
                 })
             })
+
+               // quantity js:
+               $input_filed = $('.input_number').val();
+               $input = Number($input_filed);
+               alert($input+)
+                
+               $('.input_number_increment').on('click',function(){
+                    alert($input++);
+                })
+
+               $('.input_number_decrement').on('click',function(){
+                    if($input>=1){
+                        alert($input--);
+                    }
+                  
+                })
+
+                
+
+                // $('.input_number');
         })
     </script>
 @endsection

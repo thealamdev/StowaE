@@ -803,7 +803,10 @@
 
                 function decrement() {
                     var value = el[0].value;
-                    value--;
+                    if(value>=1){
+                        value--;
+                    }
+                     
                     if (!min || value >= min) {
                         el[0].value = value;
                     }
