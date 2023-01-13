@@ -125,12 +125,13 @@
                     <div class="quantity_wrap">
                         <form action="#">
                             <div class="quantity_input">
-                                <button type="button" class="input_number_decrement">
+                                <button type="button" id="input_number_decrement">
                                     <i class="fal fa-minus"></i>
                                 </button>
-                                {{-- <input class="input_number" type="text" value="1"> --}}
+            
                                 <input type="text" class="input_number" id="quantity" value="1">
-                                <button type="button" class="input_number_increment">
+
+                                <button type="button" id="input_number_increment">
                                     <i class="fal fa-plus"></i>
                                 </button>
                             </div>
@@ -417,6 +418,7 @@
 
 @section('footer-js')
     <script>
+
         $(document).ready(function(){
             $('#ColorSelect').on('change',function(){
                 $id = {{ $products->id }}
@@ -438,26 +440,28 @@
                 })
             })
 
-               // quantity js:
 
-               $quantity = $('#quantity').val();
-               $input = Number($quantity);
-               // alert($input+)
-                
-               $('.input_number_increment').on('click',function(){
-                    console.log($input = $input +1)
-                })
+        // quantity js:
 
-               $('.input_number_decrement').on('click',function(){
-                    if($input>1){
-                        console.log($input = $input -1)
-                    }
-                  
-                })
+        let incriment = document.querySelector('#input_number_increment');
+        let decriment = document.querySelector('#input_number_decrement')
+        let quantity = document.querySelector('#quantity');
 
-                
-
-                // $('.input_number');
+        incriment.addEventListener('click',function(){
+            quantity.value = parseInt(quantity.value) + 1;
+            console.log(quantity.value)
         })
+
+        decriment.addEventListener('click',function(){
+            if(quantity.value > 1){
+                quantity.value = parseInt(quantity.value) -1;
+                console.log(quantity.value)
+            }
+        })
+
+    // total Price section:
+    
+          
+    })
     </script>
 @endsection
