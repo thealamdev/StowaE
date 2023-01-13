@@ -128,10 +128,19 @@
                                                  <ins>
                                                      <span class="woocommerce-Price-amount amount">
                                                          <bdi> <span
-                                                                 class="woocommerce-Price-currencySymbol">$</span>{{ $product->price }}</bdi>
+                                                                 class="woocommerce-Price-currencySymbol">$</span>{{ $product->sale_price ?? $product->price }}</bdi>
                                                      </span>
                                                  </ins>
                                              </span>
+
+                                             <span class="price">
+                                                <del>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        <bdi> <span
+                                                                class="woocommerce-Price-currencySymbol">$</span>{{ $product->discount ? $product->sale_price :$product->price }}</bdi>
+                                                    </span>
+                                                </del>
+                                            </span>
                                              <div class="add-cart-area">
                                                  <a href="{{ route('frontend.shop.show', $product->slug) }}"><button
                                                          class="add-to-cart">Add to cart</button></a>

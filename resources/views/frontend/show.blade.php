@@ -139,7 +139,7 @@
 
                         <div class="total_price"> $ <span id="totalPrice">
                             {{ $products->discount ? $products->sale_price : $products->price }}
-                            {{ $products }}
+                            {{-- {{ $products }} --}}
                         </span></div>
                     </div>
 
