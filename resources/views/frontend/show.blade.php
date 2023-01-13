@@ -6,28 +6,28 @@
             <div class="col col-lg-6">
                 <div class="product_details_image">
                     <div class="details_image_carousel">
-                        
+
                         @foreach ($products->product_gallaries as $gallary)
-                        <div class="slider_item">
-                            <img src="{{ asset('storage/gallary/' .$gallary->image) }}" alt="image_not_found">
-                        </div>
+                            <div class="slider_item">
+                                <img src="{{ asset('storage/gallary/' . $gallary->image) }}" alt="image_not_found">
+                            </div>
                         @endforeach
-                    
-                         
+
+
                     </div>
 
                     <div class="details_image_carousel_nav">
                         @foreach ($products->product_gallaries as $gallary)
-                        <div class="slider_item">
-                            <img src="{{ asset('storage/gallary/' .$gallary->image) }}" alt="image_not_found">
-                        </div>
+                            <div class="slider_item">
+                                <img src="{{ asset('storage/gallary/' . $gallary->image) }}" alt="image_not_found">
+                            </div>
                         @endforeach
-                         
+
                     </div>
                 </div>
             </div>
 
-          
+
             <div class="col-lg-6">
                 <div class="product_details_content">
                     <h2 class="item_title">{{ $products->title }}</h2>
@@ -53,20 +53,21 @@
                     </div>
                     <hr>
 
-                    <div class="item_attribute">
-                        <h3 class="title_text">Options <span class="underline"></span></h3>
-                        <form action="#">
- 
-                                  
+                    <form action="#" id="shopForm">
+                        <div class="item_attribute">
+                            <h3 class="title_text">Options <span class="underline"></span></h3>
+
+
+
                             <div class="row">
                                 <div class="col col-md-6">
-                                     
+
                                     <div class="select_option clearfix">
                                         <h4 class="input_title">Size *</h4>
                                         <select style="display: none;">
-                                            
+
                                             <option data-display="- Please select -">Choose A Option</option>
-                                             
+
                                             {{-- @forelse ($colorSize->inventories as $inventory)
                                             <option value="{{ $inventory->id }}">{{ $inventory->size->name }}</option>
                                             @empty
@@ -96,9 +97,9 @@
                                         <select style="display: none;" id="ColorSelect">
                                             <option data-display="- Please select -">Choose A Option</option>
                                             @forelse ($inventory_color as $key => $inv_color)
-                                            <option value="{{ $inv_color->id }}">{{ $inv_color->name }}</option>
+                                                <option value="{{ $inv_color->id }}">{{ $inv_color->name }}</option>
                                             @empty
-                                                {{ "No color found" }}
+                                                {{ 'No color found' }}
                                             @endforelse
                                         </select>
                                         <div class="nice-select" tabindex="0"><span class="current">- Please select
@@ -106,74 +107,79 @@
                                             <ul class="list">
                                                 <li data-value="Choose A Option" data-display="- Please select -"
                                                     class="option selected">Choose A Option</li>
-                                                    @forelse ($inventory_color as $key => $inv_color)
-                                                    <li data-value="{{ $inv_color->id }}" class="option">{{ $inv_color->name }}</li>
-                                                    @empty
-                                                    <li class="option">{{ "No Color Available" }}</li>
-                                                    @endforelse
+                                                @forelse ($inventory_color as $key => $inv_color)
+                                                    <li data-value="{{ $inv_color->id }}" class="option">
+                                                        {{ $inv_color->name }}</li>
+                                                @empty
+                                                    <li class="option">{{ 'No Color Available' }}</li>
+                                                @endforelse
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                             
+
 
                             <span class="repuired_text">Repuired Fiields *</span>
-                        </form>
-                    </div>
 
-                    <div class="quantity_wrap">
-                        <form action="#">
+                        </div>
+
+
+                        <div class="quantity_wrap">
+
                             <div class="quantity_input">
                                 <button type="button" id="input_number_decrement">
                                     <i class="fal fa-minus"></i>
                                 </button>
-            
+
                                 <input type="text" class="input_number" id="quantity" value="1">
 
                                 <button type="button" id="input_number_increment">
                                     <i class="fal fa-plus"></i>
                                 </button>
                             </div>
-                        </form>
 
-                        <div class="total_price">Total Price : $ <span id="totalPrice">
-                            {{ $products->discount ? $products->sale_price : $products->price }}
-                            {{-- {{ $products }} --}}
-                        </span></div>
-                    </div>
 
-                    <ul class="default_btns_group ul_li">
-                        <li><a class="btn btn_primary addtocart_btn" href="#!">Add To Cart</a></li>
-                        <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
-                        <li><a href="#!"><i class="fas fa-heart"></i></a></li>
-                    </ul>
+                            <div class="total_price">
+                                Total Price : $
+                                <span id="totalPrice">
+                                    {{ $products->discount ? $products->sale_price : $products->price }}
+                                </span>
+                            </div>
+                        </div>
 
-                    <ul class="default_share_links ul_li">
-                        <li>
-                            <a class="facebook" href="#!">
-                                <span><i class="fab fa-facebook-square"></i> Like</span>
-                                <small>10K</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="twitter" href="#!">
-                                <span><i class="fab fa-twitter-square"></i> Tweet</span>
-                                <small>15K</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="google" href="#!">
-                                <span><i class="fab fa-google-plus-square"></i> Google+</span>
-                                <small>20K</small>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="share" href="#!">
-                                <span><i class="fas fa-plus-square"></i> Share</span>
-                            </a>
-                        </li>
-                    </ul>
+                        <ul class="default_btns_group ul_li">
+                            <li><a class="btn btn_primary addtocart_btn" href="#!">Add To Cart</a></li>
+                            <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
+                            <li><a href="#!"><i class="fas fa-heart"></i></a></li>
+                        </ul>
+
+                        <ul class="default_share_links ul_li">
+                            <li>
+                                <a class="facebook" href="#!">
+                                    <span><i class="fab fa-facebook-square"></i> Like</span>
+                                    <small>10K</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="twitter" href="#!">
+                                    <span><i class="fab fa-twitter-square"></i> Tweet</span>
+                                    <small>15K</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="google" href="#!">
+                                    <span><i class="fab fa-google-plus-square"></i> Google+</span>
+                                    <small>20K</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="share" href="#!">
+                                    <span><i class="fas fa-plus-square"></i> Share</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </form>
                 </div>
             </div>
         </div>
@@ -421,22 +427,22 @@
 
 @section('footer-js')
     <script>
-
-        $(document).ready(function(){
-            $('#ColorSelect').on('change',function(){
+        // ajax shop size select:
+        $(document).ready(function() {
+            $('#ColorSelect').on('change', function() {
                 $id = {{ $products->id }}
                 $color_id = $('#ColorSelect').val()
                 $.ajax({
-                    type:'POST',
-                    url:"{{ route('frontend.shop.sizeSelect') }}",
-                    dataType:'json',
-                    data:{
-                        id:$id,
-                        color_id:$color_id,
-                        _token:'{{ csrf_token() }}',
+                    type: 'POST',
+                    url: "{{ route('frontend.shop.sizeSelect') }}",
+                    dataType: 'json',
+                    data: {
+                        id: $id,
+                        color_id: $color_id,
+                        _token: '{{ csrf_token() }}',
                     },
-                     
-                    success:function(data){
+
+                    success: function(data) {
                         console.log(data)
                         $('#sizeSelect').html(data)
                     }
@@ -444,34 +450,49 @@
             })
 
 
-        // quantity js:
+            // quantity measure js:
 
-        let incriment = document.querySelector('#input_number_increment');
-        let decriment = document.querySelector('#input_number_decrement')
-        let quantity = document.querySelector('#quantity');
+            let incriment = document.querySelector('#input_number_increment');
+            let decriment = document.querySelector('#input_number_decrement')
+            let quantity = document.querySelector('#quantity');
 
-        incriment.addEventListener('click',function(){
-            quantity.value = parseInt(quantity.value) + 1;
-            $sale_price = {{ $products->sale_price }};
-            $totalPrice = $('#totalPrice');
-            $totalPrice.html($sale_price * quantity.value);
-            console.log(quantity.value)
-        })
-
-        decriment.addEventListener('click',function(){
-            if(quantity.value > 1){
-                quantity.value = parseInt(quantity.value) -1;
+            incriment.addEventListener('click', function() {
+                quantity.value = parseInt(quantity.value) + 1;
                 $sale_price = {{ $products->sale_price }};
                 $totalPrice = $('#totalPrice');
                 $totalPrice.html($sale_price * quantity.value);
                 console.log(quantity.value)
-            }
+            })
+
+            decriment.addEventListener('click', function() {
+                if (quantity.value > 1) {
+                    quantity.value = parseInt(quantity.value) - 1;
+                    $sale_price = {{ $products->sale_price }};
+                    $totalPrice = $('#totalPrice');
+                    $totalPrice.html($sale_price * quantity.value);
+                    console.log(quantity.value)
+                }
+            })
+
+            // total Price section:
+             
+            $('#shopForm').on('change',function(){
+                 $.ajax({
+                    type:'POST',
+                    url:'{{  }}',
+                    dataType:'json',
+                    data:{
+                        _token:"{{ csrf_token() }}"
+                    },
+                    success:function(data){
+                        console.log(data)
+                    }
+                 })
+            })
+
+
+
+
         })
-
-    // total Price section:
- 
-
-          
-    })
     </script>
 @endsection
