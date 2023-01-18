@@ -85,7 +85,7 @@
                                         </select>
                                     </div>
                                 </div>
-   
+
                             </div>
 
 
@@ -114,6 +114,9 @@
                                 <span id="totalPrice">
                                     {{ $products->discount ? $products->sale_price : $products->price }}
                                 </span>
+                                <div class="additional_price_box">
+                                    <p></p>
+                                </div>
                             </div>
                         </div>
 
@@ -162,8 +165,8 @@
                     </button>
                 </li>
                 <li>
-                    <button data-bs-toggle="tab" data-bs-target="#additional_information_tab" type="button"
-                        role="tab" aria-controls="additional_information_tab" aria-selected="false">
+                    <button data-bs-toggle="tab" data-bs-target="#additional_information_tab" type="button" role="tab"
+                        aria-controls="additional_information_tab" aria-selected="false">
                         Additional information
                     </button>
                 </li>
@@ -413,18 +416,17 @@
                 })
             })
 
-
             // quantity measure js:
-
             let incriment = document.querySelector('#input_number_increment');
             let decriment = document.querySelector('#input_number_decrement')
             let quantity = document.querySelector('#quantity');
+      
 
             incriment.addEventListener('click', function() {
                 quantity.value = parseInt(quantity.value) + 1;
                 $sale_price = {{ $products->sale_price }};
                 $totalPrice = $('#totalPrice');
-                $totalPrice.html($sale_price * quantity.value);
+                $totalPrice.html(($sale_price * quantity.value));
                 console.log(quantity.value)
             })
 
@@ -433,26 +435,38 @@
                     quantity.value = parseInt(quantity.value) - 1;
                     $sale_price = {{ $products->sale_price }};
                     $totalPrice = $('#totalPrice');
-                    $totalPrice.html($sale_price * quantity.value);
+                    $totalPrice.html(($sale_price * quantity.value));
                     console.log(quantity.value)
                 }
             })
 
+
+
             // total Price section:
-             
-            $('#shopForm').on('change',function(){
-                 $.ajax({
-                    type:'POST',
-                    url:'{{ route('frontend.shop.additionalPrice') }}',
-                    dataType:'json',
-                    data:{
-                        _token:"{{ csrf_token() }}"
+            $('#sizeSelect').on('change', function() {
+                $size_id = $('#sizeSelect').val()
+                $product_id = {{ $products->id }}
+                $color_id = $('#ColorSelect').val()
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('frontend.shop.additionalPrice') }}',
+                    dataType: 'json',
+                    data: {
+                        product_id: $product_id,
+                        color_id: $color_id,
+                        size_id: $size_id,
+                        _token: "{{ csrf_token() }}"
                     },
-                    success:function(data){
+                    success: function(data) {
+                        $('.additional_price_box p').html(data)
+
                         console.log(data)
                     }
-                 })
+                })
             })
+
+
+
 
 
 

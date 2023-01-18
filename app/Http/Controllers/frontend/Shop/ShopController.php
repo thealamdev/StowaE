@@ -121,7 +121,7 @@ class ShopController extends Controller
                 $options[] = "<option value='$inventory->size_id'>" .$inventory->size->name ."</option>";
             }
         }
-        
+
         return response()->json($options);
     }
 
@@ -129,8 +129,20 @@ class ShopController extends Controller
         additionalPrice function:
        */
 
-    public function additionalPrice(){
-        return response()->json("fine");
+    public function additionalPrice(Request $request){
+        $product = Product::where('id',$request->product_id)->with(['inventories'=>function($q) use($request) {
+            
+            $q->where('color_id',$request->color_id)->where('size_id',$request->size_id)->first();
+        }])->first(['id']);
+
+        // $product = Inventory::with('product')->where('id',$request->product_id)->where('color_id',$request->color_id)->where('size_id',$request->size_id)->get();
+
+        $additional_price = 0;
+        foreach($product->inventories as $inventory){
+            $additional_price = $inventory->additional_price;
+        }
+
+        return response()->json($additional_price);
     }
 
 
