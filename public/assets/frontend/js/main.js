@@ -76,7 +76,7 @@
 
     // select option - start
     // --------------------------------------------------
-    $('select').niceSelect();
+    $('.nice_select').niceSelect();
     // select option - end
     // --------------------------------------------------
 

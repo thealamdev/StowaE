@@ -60,41 +60,11 @@
 
 
                             <div class="row">
-                                <div class="col col-md-6">
 
-                                    <div class="select_option clearfix">
-                                        <h4 class="input_title">Size *</h4>
-                                        <select style="display: none;">
-
-                                            <option data-display="- Please select -">Choose A Option</option>
-
-                                            {{-- @forelse ($colorSize->inventories as $inventory)
-                                            <option value="{{ $inventory->id }}">{{ $inventory->size->name }}</option>
-                                            @empty
-                                                {{ "No color found" }}
-                                            @endforelse --}}
-
-                                        </select>
-                                        <div class="nice-select" tabindex="0"><span class="current">- Please select
-                                                -</span>
-                                            <ul class="list" id="sizeSelect">
-                                                <li data-value="Choose A Option" data-display="- Please select -"
-                                                    class="option selected">Choose A Option</li>
-
-                                                {{-- @forelse ($colorSize->inventories as $inventory)
-                                                <li data-value="{{ $inventory->id }}" class="option">{{ $inventory->size->name }}</li>
-                                                @empty
-                                                <li class="option">{{ "No Color Available" }}</li>
-                                                @endforelse --}}
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col col-md-6">
                                     <div class="select_option clearfix">
                                         <h4 class="input_title">Color *</h4>
-                                        <select style="display: none;" id="ColorSelect">
+                                        <select id="ColorSelect" class="form-control">
                                             <option data-display="- Please select -">Choose A Option</option>
                                             @forelse ($inventory_color as $key => $inv_color)
                                                 <option value="{{ $inv_color->id }}">{{ $inv_color->name }}</option>
@@ -102,21 +72,20 @@
                                                 {{ 'No color found' }}
                                             @endforelse
                                         </select>
-                                        <div class="nice-select" tabindex="0"><span class="current">- Please select
-                                                -</span>
-                                            <ul class="list">
-                                                <li data-value="Choose A Option" data-display="- Please select -"
-                                                    class="option selected">Choose A Option</li>
-                                                @forelse ($inventory_color as $key => $inv_color)
-                                                    <li data-value="{{ $inv_color->id }}" class="option">
-                                                        {{ $inv_color->name }}</li>
-                                                @empty
-                                                    <li class="option">{{ 'No Color Available' }}</li>
-                                                @endforelse
-                                            </ul>
-                                        </div>
+
                                     </div>
                                 </div>
+
+                                <div class="col col-md-6">
+
+                                    <div class="select_option clearfix">
+                                        <h4 class="input_title">Size *</h4>
+                                        <select class="form-control" id="sizeSelect">
+                                            <option selected disabled>Select a Product size</option>
+                                        </select>
+                                    </div>
+                                </div>
+   
                             </div>
 
 
@@ -208,9 +177,7 @@
 
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="description_tab" role="tabpanel">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique
-                        auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper.
-                        Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p>
+                    <p>{{ $products->description }}</p>
                     <p class="mb-0">
                         Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros
                         eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis
@@ -223,10 +190,7 @@
 
                 <div class="tab-pane fade" id="additional_information_tab" role="tabpanel">
                     <p>
-                        Return into stiff sections the bedding was hardly able to cover it and seemed ready to slide off any
-                        moment. His many legs, pitifully thin compared with the size of the rest of him, waved about
-                        helplessly as he looked what's happened to me he thought It wasn't a dream. His room, a proper human
-                        room although a little too small
+                        {{ $products->additional_info }}
                     </p>
 
                     <div class="additional_info_list">
