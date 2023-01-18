@@ -91,25 +91,25 @@
 
 
                                 <span class="repuired_text">Stock Quantity: <span class="quantity_limit"></span>
-                            </span>
+                                </span>
                                 {{-- <form id="quantity_form">
                                     @csrf
                                     <input type="number" value="1" id="quantity_limit">
                                 </form> --}}
-                                 
+
                             </div>
 
 
                             <div class="quantity_wrap">
 
                                 <div class="quantity_input">
-                                    <button type="button" id="input_number_decrement">
+                                    <button type="button" class="input_number_decrement">
                                         <i class="fal fa-minus"></i>
                                     </button>
 
-                                    <input type="text" class="input_number" id="quantity" value="1">
+                                    <input type="text" class="quantity" value="1">
 
-                                    <button type="button" id="input_number_increment">
+                                    <button type="button" class="input_number_increment">
                                         <i class="fal fa-plus"></i>
                                     </button>
                                 </div>
@@ -404,8 +404,14 @@
     <script>
         // ajax shop size select:
         $(document).ready(function() {
+            // all variable:
+            $totalPrice = $('#totalPrice');
+            $incriment = $('.input_number_increment')
+            $decriment = $('.input_number_decrement')
+            $quantity = $('.quantity')
             $product_price = $('.product_price')
             $quantity_limit = $('.quantity_limit')
+            $update_value = $quantity.val()
 
 
             $('#ColorSelect').on('change', function() {
@@ -435,31 +441,21 @@
 
 
             // quantity measure js:
-            let incriment = document.querySelector('#input_number_increment');
-            let decriment = document.querySelector('#input_number_decrement')
-            let quantity = document.querySelector('#quantity');
-
-
-
-
-            incriment.addEventListener('click', function() {
-                if (quantity.value <= $quantity_limit.html()) {
-                    quantity.value = parseInt(quantity.value) + 1;
+            $incriment.on('click', function() {
+                if ($update_value < $quantity_limit.html()) {
+                    $update_value++;
+                    $quantity.val($update_value)
                     $sale_price = {{ $products->sale_price }};
-                    $totalPrice = $('#totalPrice');
-                    $totalPrice.html(($sale_price * quantity.value));
-                    console.log(quantity.value)
+                    $totalPrice.html(($product_price.html() * $update_value));
                 }
-
             })
 
-            decriment.addEventListener('click', function() {
-                if (quantity.value > 1) {
-                    quantity.value = parseInt(quantity.value) - 1;
+            $decriment.on('click', function() {
+                if ($update_value > 1) {
+                    $update_value--;
+                    $quantity.val($update_value)
                     $sale_price = {{ $products->sale_price }};
-                    $totalPrice = $('#totalPrice');
-                    $totalPrice.html(($sale_price * quantity.value));
-                    console.log(quantity.value)
+                    $totalPrice.html(($product_price.html() * $update_value));
                 }
             })
 
@@ -481,12 +477,15 @@
                     },
                     success: function(data) {
 
-                        $('.product_price').html(data.price)
+                        $('.product_price').html(parseFloat(data.price).toFixed(2))
                         $('.quantity_limit').html(data.quantity);
+                        $('.additional_price_box').html(data.additional_price)
 
                         console.log(data)
                     }
                 })
+
+
             })
 
 
