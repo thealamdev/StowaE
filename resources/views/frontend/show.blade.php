@@ -54,7 +54,8 @@
                     <hr>
 
                     <div id="form_all">
-                        <form action="#" id="shopForm">
+                        <form action="{{ route('frontend.cart.store') }}" id="shopForm" method="POST">
+                            @csrf
                             <div class="item_attribute">
                                 <h3 class="title_text">Options <span class="underline"></span></h3>
 
@@ -65,8 +66,8 @@
                                     <div class="col col-md-6">
                                         <div class="select_option clearfix">
                                             <h4 class="input_title">Color *</h4>
-                                            <select id="ColorSelect" class="form-control">
-                                                <option data-display="- Please select -">Choose A Option</option>
+                                            <select id="ColorSelect" class="form-control" name="color_id">
+                                                <option disabled selected>Choose A Option</option>
                                                 @forelse ($inventory_color as $key => $inv_color)
                                                     <option value="{{ $inv_color->id }}">{{ $inv_color->name }}</option>
                                                 @empty
@@ -81,7 +82,7 @@
 
                                         <div class="select_option clearfix">
                                             <h4 class="input_title">Size *</h4>
-                                            <select class="form-control" id="sizeSelect">
+                                            <select class="form-control" id="sizeSelect" name="size_id">
                                                 <option selected disabled>Select a Product size</option>
                                             </select>
                                         </div>
@@ -91,11 +92,7 @@
 
 
                                 <span class="repuired_text">Stock Quantity: <span class="quantity_limit"></span>
-                                </span>
-                                {{-- <form id="quantity_form">
-                                    @csrf
-                                    <input type="number" value="1" id="quantity_limit">
-                                </form> --}}
+
 
                             </div>
 
@@ -107,7 +104,7 @@
                                         <i class="fal fa-minus"></i>
                                     </button>
 
-                                    <input type="text" class="quantity" value="1">
+                                    <input type="text" class="quantity" name="quantity" value="1">
 
                                     <button type="button" class="input_number_increment">
                                         <i class="fal fa-plus"></i>
@@ -127,7 +124,8 @@
                             </div>
 
                             <ul class="default_btns_group ul_li">
-                                <li><a class="btn btn_primary addtocart_btn" href="#!">Add To Cart</a></li>
+                                <li><button type="submit" class="btn btn_primary addtocart_btn">Add To Cart</button></li>
+
                                 <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
                                 <li><a href="#!"><i class="fas fa-heart"></i></a></li>
                             </ul>
@@ -434,29 +432,10 @@
 
                     }
                 })
-                // $("#form_all").find("quantity_form").eq(1).reset();
+
+                $quantity.val(1)
 
 
-            })
-
-
-            // quantity measure js:
-            $incriment.on('click', function() {
-                if ($update_value < $quantity_limit.html()) {
-                    $update_value++;
-                    $quantity.val($update_value)
-                    $sale_price = {{ $products->sale_price }};
-                    $totalPrice.html(($product_price.html() * $update_value));
-                }
-            })
-
-            $decriment.on('click', function() {
-                if ($update_value > 1) {
-                    $update_value--;
-                    $quantity.val($update_value)
-                    $sale_price = {{ $products->sale_price }};
-                    $totalPrice.html(($product_price.html() * $update_value));
-                }
             })
 
 
@@ -484,9 +463,33 @@
                         console.log(data)
                     }
                 })
+                $quantity.val(1)
 
 
             })
+
+
+            // quantity measure js:
+            $incriment.on('click', function() {
+                if ($update_value < $quantity_limit.html()) {
+                    $update_value++;
+                    $quantity.val($update_value)
+                    $sale_price = {{ $products->sale_price }};
+                    $totalPrice.html(($product_price.html() * $update_value));
+                }
+            })
+
+            $decriment.on('click', function() {
+                if ($update_value > 1) {
+                    $update_value--;
+                    $quantity.val($update_value)
+                    $sale_price = {{ $products->sale_price }};
+                    $totalPrice.html(($product_price.html() * $update_value));
+                }
+            })
+
+
+
 
 
 

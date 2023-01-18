@@ -99,5 +99,11 @@ Route::name('frontend.')->group(function(){
     });
 });
 
+Route::name('frontend.')->group(function(){
+    Route::prefix('cart')->name('cart.')->group(function(){
+        require __DIR__ ."/frontend/cart/cart.php";
+    });
+});
+
  
  
