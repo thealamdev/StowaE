@@ -2808,7 +2808,7 @@ hr {
       -ms-flex-pack: center;
           justify-content: center;
 }
-.deals_product_layout2 .item_price span {
+.deals_product_layout2 .item_price p {
   font-size: 18px;
   font-weight: 600;
   margin-right: 10px;

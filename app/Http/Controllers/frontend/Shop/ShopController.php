@@ -133,16 +133,32 @@ class ShopController extends Controller
         $product = Product::where('id',$request->product_id)->with(['inventories'=>function($q) use($request) {
             
             $q->where('color_id',$request->color_id)->where('size_id',$request->size_id)->first();
-        }])->first(['id']);
+        }])->first();
 
-        // $product = Inventory::with('product')->where('id',$request->product_id)->where('color_id',$request->color_id)->where('size_id',$request->size_id)->get();
-
-        $additional_price = 0;
-        foreach($product->inventories as $inventory){
-            $additional_price = $inventory->additional_price;
+        // return $product;
+        
+        if($product->sale_price){
+            foreach($product->inventories as $inventory){
+                $price = $product->sale_price + $inventory->additional_price;
+            }
+             
+        }
+        else{
+            foreach($product->inventories as $inventory){
+                $price = $product->price + $inventory->additional_price;
+            }
+            
         }
 
-        return response()->json($additional_price);
+        $data = [];
+        foreach($product->inventories as $inventory){
+            $data['price'] = $price;
+            $data['additional_price'] = $inventory->additional_price;
+            $data['quantity'] = $inventory->quantity;
+            
+        }
+
+        return response()->json($data);
     }
 
 
