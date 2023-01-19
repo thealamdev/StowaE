@@ -152,6 +152,7 @@ class ShopController extends Controller
 
         $data = [];
         foreach($product->inventories as $inventory){
+            $data['inventory_id'] = $inventory->id;
             $data['price'] = $price;
             $data['additional_price'] = $inventory->additional_price;
             $data['quantity'] = $inventory->quantity;

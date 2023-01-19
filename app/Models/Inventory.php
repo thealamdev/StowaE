@@ -23,4 +23,8 @@ class Inventory extends Model
     public function size(){
         return $this->belongsTo(Size::class);
     }
+
+    public function cart(){
+        return $this->hasOne(Cart::class);
+    }
 }

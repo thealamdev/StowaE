@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend\Cart;
 
-use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CartController extends Controller
 {
@@ -14,7 +16,15 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $carts = Cart::with(['inventory'=>function($q){
+            $q->select('id','additional_price','product_id');
+            $q->with(['product'=>function($query){
+                $query->select(['id','title','image','price','sale_price']);
+            }]);
+        }])->get(['id','inventory_id','quantity']);
+         
+        
+        return view('frontend.cart',compact('carts'));
     }
 
     /**
@@ -35,9 +45,14 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return $request;
-        return view('frontend.cart');
+        $carts = new Cart();
+        $carts->user_id = auth()->user()->id;
+        $carts->inventory_id = $request->inventory_id;
+        $carts->quantity = $request->quantity;
+
+        $carts->save();
+    
+        return redirect(route('frontend.cart.index'))->with('success','Add to cart done');
     }
 
     /**

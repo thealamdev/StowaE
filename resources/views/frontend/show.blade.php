@@ -54,8 +54,7 @@
                     <hr>
 
                     <div id="form_all">
-                        <form action="{{ route('frontend.cart.store') }}" id="shopForm" method="POST">
-                            @csrf
+                         
                             <div class="item_attribute">
                                 <h3 class="title_text">Options <span class="underline"></span></h3>
 
@@ -96,6 +95,9 @@
 
                             </div>
 
+                        <form action="{{ route('frontend.cart.store') }}" id="shopForm" method="POST">
+                            @csrf
+                            <input type="hidden" name="inventory_id" id="inventory_id">
 
                             <div class="quantity_wrap">
 
@@ -129,6 +131,7 @@
                                 <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
                                 <li><a href="#!"><i class="fas fa-heart"></i></a></li>
                             </ul>
+                        </form>
 
                             <ul class="default_share_links ul_li">
                                 <li>
@@ -155,7 +158,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </form>
+                         
                     </div>
 
                 </div>
@@ -455,7 +458,7 @@
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(data) {
-
+                        $('#inventory_id').val(data.inventory_id)
                         $('.product_price').html(parseFloat(data.price).toFixed(2))
                         $('.quantity_limit').html(data.quantity);
                         $('.additional_price_box').html(data.additional_price)
@@ -487,13 +490,6 @@
                     $totalPrice.html(($product_price.html() * $update_value));
                 }
             })
-
-
-
-
-
-
-
 
         })
     </script>
