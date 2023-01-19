@@ -23,7 +23,23 @@ class CartController extends Controller
             }]);
         }])->get(['id','inventory_id','quantity']);
          
-        
+        // foreach($carts as $cart){
+        //     $additional_price = $cart->inventory->additional_price;
+        //     $price = $cart->inventory->product->price;
+        //     $sale_price = $cart->inventory->product->sale_price;
+        //     $quantity = $cart->quantity;
+
+        //     if($sale_price){
+        //         $product_price = $sale_price + $additional_price;
+        //         $total_price = ( $sale_price * $quantity ) + $additional_price;
+        //     }
+        //     else{
+        //         $product_price = $price + $additional_price;
+        //         $total_price = ( $sale_price * $quantity ) + $additional_price;
+        //     }
+             
+        // }
+        // return $carts;
         return view('frontend.cart',compact('carts'));
     }
 

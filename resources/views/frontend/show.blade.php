@@ -120,7 +120,7 @@
                                         {{ $products->discount ? $products->sale_price : $products->price }}
                                     </span>
                                     <div class="additional_price_box">
-                                        <p></p>
+                                        <p style="color:#333;font-size:14px;">Additional Price: <span> </span> </p> 
                                     </div>
                                 </div>
                             </div>
@@ -461,12 +461,14 @@
                         $('#inventory_id').val(data.inventory_id)
                         $('.product_price').html(parseFloat(data.price).toFixed(2))
                         $('.quantity_limit').html(data.quantity);
-                        $('.additional_price_box').html(data.additional_price)
+                        $('.additional_price_box span').html(data.additional_price)
+                        $('#totalPrice').html(parseFloat(data.price).toFixed(2))
 
                         console.log(data)
                     }
                 })
                 $quantity.val(1)
+                 
 
 
             })
