@@ -97,8 +97,9 @@
                             </td>
 
                             <td class="text-center">
-                                <form action="" method="POST">
+                                <form action="{{ route('frontend.cart.delete',$cart->id) }}" method="POST">
                                     @csrf
+                                    @method('DELETE')
                                     <button type="submit" class="remove_btn"><i class="fal fa-trash-alt"></i>
                                     </button>
                                 </form>
