@@ -92,10 +92,10 @@
                                  <td>{{ $cart->inventory->quantity }}</td>
 
                                  <td class="text-center">
-                                     <form action="{{ route('frontend.cart.delete', $cart->id) }}" method="POST">
+                                     <form action="{{ route('frontend.cart.delete', $cart->id) }}" method="POST" class="delete_form">
                                          @csrf
                                          @method('DELETE')
-                                         <button type="submit" class="remove_btn"><i class="fal fa-trash-alt"></i>
+                                         <button type="button" class="remove_btn"><i class="fal fa-trash-alt"></i>
                                          </button>
                                      </form>
 
@@ -201,12 +201,6 @@
              $increment = $('.increment_button')
              $decriment = $('.decrement_button')
 
-             //  var quantity = document.querySelectorAll('.quantity_val')
-             //  var quantity_val = quantity.value;
-             //  $product_price = $('.product_price').html()
-             //  $totalPrice = $('.price_text')
-
-
              $increment.on('click', function() {
                  $input = $(this).parent('.quantity_input').children('.input_number');
                  $quantity_limit = $(this).parent('.quantity_input').children('.quantity_limit')
@@ -228,6 +222,18 @@
                  }
 
              })
+
+
+            //  delete btn:
+            $delete_btn = $('.delete_form .remove_btn')
+            $delete_btn.on('click',function(){
+                if(confirm("Are you sure ???")==true){
+                    
+                    $('.delete_form').submit()
+                    console.log($delete_btn.type)
+                }
+            })
+            
 
          })
      </script>
