@@ -1,5 +1,8 @@
 @extends('layouts.frontapp')
-@section('title', 'Product-show')
+@section('title')
+{{ $products->title }}
+@endsection
+{{-- @section('title', 'Product-show') --}}
 @section('frontPageContent')
     <div class="container">
         <div class="row mt-4">

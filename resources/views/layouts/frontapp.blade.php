@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>@yield('title')</title>
+    <title>{{ config('app.name') }} - @yield('title')</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/images/logo/favourite_icon_1.png') }}">
 
     <!-- fraimwork - css include -->

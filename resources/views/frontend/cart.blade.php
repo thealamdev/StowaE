@@ -1,8 +1,8 @@
  @extends('layouts.frontapp')
- @section('title', 'Cart')
+ @section('title', 'Product-cart')
  @section('frontPageContent')
      <!-- breadcrumb_section - start
-                                ================================================== -->
+                                            ================================================== -->
      <div class="breadcrumb_section">
          <div class="container">
              <ul class="breadcrumb_nav ul_li">
@@ -15,10 +15,10 @@
          </div>
      </div>
      <!-- breadcrumb_section - end
-                                ================================================== -->
+                                            ================================================== -->
 
      <!-- cart_section - start
-                            ================================================== -->
+                                        ================================================== -->
      <section class="cart_section section_space">
          <div class="container">
              <div class="cart_update_wrap">
@@ -31,6 +31,7 @@
                          <tr>
                              <th>Product</th>
                              <th class="text-center">Price</th>
+                             <th class="text-center">Size && Color</th>
                              <th class="text-center">Quantity</th>
                              <th class="text-center">Total</th>
                              <th class="text-center">Remove</th>
@@ -49,6 +50,10 @@
                                      </div>
                                  </td>
 
+                                 <td>
+                                    {{ $cart->inventory->size->name }} -- {{ $cart->inventory->color->name }}
+                                 </td>
+
 
                                  <td class="text-center">$
                                      <span class="product_price">
@@ -65,7 +70,7 @@
                                              <button type="button" class="decrement_button">
                                                  <i class="fal fa-minus"></i>
                                              </button>
-                                             <input class="quantity_val" type="text" value="{{ $cart->quantity }}" />
+                                             <input class="input_number" type="text" value="{{ $cart->quantity }}" />
                                              <button type="button" class="increment_button">
                                                  <i class="fal fa-plus"></i>
                                              </button>
@@ -180,51 +185,39 @@
          </div>
      </section>
      <!-- cart_section - end
-                            ================================================== -->
+                                        ================================================== -->
  @endsection
 
 
  @section('footer-js')
      <script>
          $(document).ready(function() {
-             var increment = document.querySelectorAll('.increment_button')
-             //  $increment = $('.increment_button')
+
+             $increment = $('.increment_button')
              $decriment = $('.decrement_button')
-             var quantity = document.querySelectorAll('.quantity_val')
-            //  $quantity_val = $quantity.val()
-             $product_price = $('.product_price').html()
-             $totalPrice = $('.price_text')
 
-             increment.forEach(function(value) {
-                value.addEventListener('click', function() {
-                    quantity.forEach(function(q){
-                        if (q.quantity.value < 5) {
-                            q.quantity.value++
-                            q.quantity.value = q.quantity.value
-                        //  $totalPrice.html($product_price * $quantity_val)
-                         console.log(q.quantity.value)
-                     }
-                    })
-
-                 })
-             });
-             //  for(var i = 0; i< increment.length; i++){
-             //     increment[i].on('click', function() {
-
-             //  })
-             //  }
+             //  var quantity = document.querySelectorAll('.quantity_val')
+             //  var quantity_val = quantity.value;
+             //  $product_price = $('.product_price').html()
+             //  $totalPrice = $('.price_text')
 
 
-             $decriment.on('click', function() {
-                 if ($quantity_val > 1) {
-                     $quantity_val--
-                     $quantity.val($quantity_val)
-                     $totalPrice.html($product_price * $quantity_val)
-                     console.log($quantity_val)
-                 }
+             $increment.on('click', function() {
+                 $input = $(this).parent('.quantity_input').children('.input_number');
+                 $inc = $input.val();
+                 $inc++;
+                 $input.val($inc)
              })
 
+             $decriment.on('click', function() {
+                 $decriment_box = $(this).parent('.quantity_input').children('.input_number');
+                 $dec = $decriment_box.val()
+                 if ($dec > 1) {
+                     $dec--;
+                     $decriment_box.val($dec)
+                 }
 
+             })
 
          })
      </script>
