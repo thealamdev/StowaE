@@ -198,7 +198,7 @@
  @section('footer-js')
      @if (Session::has('success'))
          <script>
-             Command: toastr["success"]("Cart delete successfull.", "success")
+            Command: toastr["success"]("{!! Session::get('success') !!}", "success")
              toastr.options = {
                  "closeButton": true,
                  "debug": false,
