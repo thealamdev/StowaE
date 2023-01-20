@@ -44,14 +44,20 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $carts = new Cart();
-        $carts->user_id = auth()->user()->id;
-        $carts->inventory_id = $request->inventory_id;
-        $carts->quantity = $request->quantity;
-
-        $carts->save();
+        if(empty(auth()->user()->id)){
+            return 'Please login';
+        }
+        else{
+            $carts = new Cart();
+            $carts->user_id = auth()->user()->id;
+            $carts->inventory_id = $request->inventory_id;
+            $carts->quantity = $request->quantity;
     
-        return redirect(route('frontend.cart.index'))->with('success','Add to cart done');
+            $carts->save();
+        
+            return redirect(route('frontend.cart.index'))->with('success','Add to cart done');
+        }
+         
     }
 
     /**

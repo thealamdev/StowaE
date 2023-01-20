@@ -2,7 +2,7 @@
  @section('title', 'Cart')
  @section('frontPageContent')
      <!-- breadcrumb_section - start
-                        ================================================== -->
+                                ================================================== -->
      <div class="breadcrumb_section">
          <div class="container">
              <ul class="breadcrumb_nav ul_li">
@@ -15,10 +15,10 @@
          </div>
      </div>
      <!-- breadcrumb_section - end
-                        ================================================== -->
+                                ================================================== -->
 
      <!-- cart_section - start
-                    ================================================== -->
+                            ================================================== -->
      <section class="cart_section section_space">
          <div class="container">
              <div class="cart_update_wrap">
@@ -36,79 +36,64 @@
                              <th class="text-center">Remove</th>
                          </tr>
                      </thead>
-                    <tbody>
-                        {{-- @php
-                             foreach ($carts as $cart) {
-                                 $additional_price = $cart->inventory->additional_price;
-                                 $price = $cart->inventory->product->price;
-                                 $sale_price = $cart->inventory->product->sale_price;
-                                 $quantity = $cart->quantity;
-                             
-                                 if ($sale_price) {
-                                     $product_price = $sale_price + $additional_price;
-                                     $total_price = $sale_price * $quantity + $additional_price;
-                                 } else {
-                                     $product_price = $price + $additional_price;
-                                     $total_price = $sale_price * $quantity + $additional_price;
-                                 }
-                             }
-                        @endphp --}}
+                     <tbody>
+
 
                          @foreach ($carts as $cart)
-                         <tr>
-                            <td>
-                                <div class="cart_product">
-                                    <img src="{{ asset('storage/products/' . $cart->inventory->product->image) }}"
-                                        alt="image_not_found">
-                                    <h3><a href="shop_details.html">{{ $cart->inventory->product->title }}</a></h3>
-                                </div>
-                            </td>
+                             <tr>
+                                 <td>
+                                     <div class="cart_product">
+                                         <img src="{{ asset('storage/products/' . $cart->inventory->product->image) }}"
+                                             alt="image_not_found">
+                                         <h3><a href="shop_details.html">{{ $cart->inventory->product->title }}</a></h3>
+                                     </div>
+                                 </td>
 
 
-                            <td class="text-center">$
-                                <span class="price_text">
-                                    @if ($cart->inventory->product->sale_price)
-                                        {{$cart->inventory->product->sale_price + $cart->inventory->additional_price }}
-                                    @endif
-                                </span>
-                            </td>
+                                 <td class="text-center">$
+                                     <span class="product_price">
+                                         @if ($cart->inventory->product->sale_price)
+                                             {{ $cart->inventory->product->sale_price + $cart->inventory->additional_price }}
+                                         @endif
+                                     </span>
+                                 </td>
 
 
-                            <td class="text-center">
-                                <form action="#">
-                                    <div class="quantity_input">
-                                        <button type="button" class="input_number_decrement">
-                                            <i class="fal fa-minus"></i>
-                                        </button>
-                                        <input class="input_number" type="text" value="{{ $cart->quantity }}" />
-                                        <button type="button" class="input_number_increment">
-                                            <i class="fal fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            </td>
+                                 <td class="text-center">
+                                     <form action="#">
+                                         <div class="quantity_input">
+                                             <button type="button" class="decrement_button">
+                                                 <i class="fal fa-minus"></i>
+                                             </button>
+                                             <input class="quantity_val" type="text" value="{{ $cart->quantity }}" />
+                                             <button type="button" class="increment_button">
+                                                 <i class="fal fa-plus"></i>
+                                             </button>
+                                         </div>
+                                     </form>
+                                 </td>
 
-                            <td class="text-center">
-                                <span class="price_text">
-                                @if ($cart->inventory->product->sale_price)
-                                    {{ ($cart->inventory->product->sale_price + $cart->inventory->additional_price) * $cart->quantity }}
-                                @endif
-                                </span>
-                            </td>
+                                 <td class="text-center">
+                                     <span class="price_text">
+                                         @if ($cart->inventory->product->sale_price)
+                                             {{ ($cart->inventory->product->sale_price + $cart->inventory->additional_price) * $cart->quantity }}
+                                         @endif
+                                     </span>
+                                 </td>
 
-                            <td class="text-center">
-                                <form action="{{ route('frontend.cart.delete',$cart->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="remove_btn"><i class="fal fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                                
-                            </td>
-                        </tr>  
-                        @endforeach
-                      
-                         
+                                 <td class="text-center">
+                                     <form action="{{ route('frontend.cart.delete', $cart->id) }}" method="POST">
+                                         @csrf
+                                         @method('DELETE')
+                                         <button type="submit" class="remove_btn"><i class="fal fa-trash-alt"></i>
+                                         </button>
+                                     </form>
+
+                                 </td>
+                             </tr>
+                         @endforeach
+
+
 
 
                      </tbody>
@@ -195,5 +180,52 @@
          </div>
      </section>
      <!-- cart_section - end
-                    ================================================== -->
+                            ================================================== -->
+ @endsection
+
+
+ @section('footer-js')
+     <script>
+         $(document).ready(function() {
+             var increment = document.querySelectorAll('.increment_button')
+             //  $increment = $('.increment_button')
+             $decriment = $('.decrement_button')
+             var quantity = document.querySelectorAll('.quantity_val')
+            //  $quantity_val = $quantity.val()
+             $product_price = $('.product_price').html()
+             $totalPrice = $('.price_text')
+
+             increment.forEach(function(value) {
+                value.addEventListener('click', function() {
+                    quantity.forEach(function(q){
+                        if (q.quantity.value < 5) {
+                            q.quantity.value++
+                            q.quantity.value = q.quantity.value
+                        //  $totalPrice.html($product_price * $quantity_val)
+                         console.log(q.quantity.value)
+                     }
+                    })
+
+                 })
+             });
+             //  for(var i = 0; i< increment.length; i++){
+             //     increment[i].on('click', function() {
+
+             //  })
+             //  }
+
+
+             $decriment.on('click', function() {
+                 if ($quantity_val > 1) {
+                     $quantity_val--
+                     $quantity.val($quantity_val)
+                     $totalPrice.html($product_price * $quantity_val)
+                     console.log($quantity_val)
+                 }
+             })
+
+
+
+         })
+     </script>
  @endsection
