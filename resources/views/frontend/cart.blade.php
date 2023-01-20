@@ -2,7 +2,7 @@
  @section('title', 'Product-cart')
  @section('frontPageContent')
      <!-- breadcrumb_section - start
-                                            ================================================== -->
+                                                ================================================== -->
      <div class="breadcrumb_section">
          <div class="container">
              <ul class="breadcrumb_nav ul_li">
@@ -15,10 +15,10 @@
          </div>
      </div>
      <!-- breadcrumb_section - end
-                                            ================================================== -->
+                                                ================================================== -->
 
      <!-- cart_section - start
-                                        ================================================== -->
+                                            ================================================== -->
      <section class="cart_section section_space">
          <div class="container">
              <div class="cart_update_wrap">
@@ -34,6 +34,7 @@
                              <th class="text-center">Size && Color</th>
                              <th class="text-center">Quantity</th>
                              <th class="text-center">Total</th>
+                             <th class="text-center">Stock</th>
                              <th class="text-center">Remove</th>
                          </tr>
                      </thead>
@@ -51,7 +52,7 @@
                                  </td>
 
                                  <td>
-                                    {{ $cart->inventory->size->name }} -- {{ $cart->inventory->color->name }}
+                                     {{ $cart->inventory->size->name }} -- {{ $cart->inventory->color->name }}
                                  </td>
 
 
@@ -67,6 +68,8 @@
                                  <td class="text-center">
                                      <form action="#">
                                          <div class="quantity_input">
+                                             <input type="hidden" class="quantity_limit"
+                                                 value="{{ $cart->inventory->quantity }}">
                                              <button type="button" class="decrement_button">
                                                  <i class="fal fa-minus"></i>
                                              </button>
@@ -85,6 +88,8 @@
                                          @endif
                                      </span>
                                  </td>
+
+                                 <td>{{ $cart->inventory->quantity }}</td>
 
                                  <td class="text-center">
                                      <form action="{{ route('frontend.cart.delete', $cart->id) }}" method="POST">
@@ -185,7 +190,7 @@
          </div>
      </section>
      <!-- cart_section - end
-                                        ================================================== -->
+                                            ================================================== -->
  @endsection
 
 
@@ -204,9 +209,14 @@
 
              $increment.on('click', function() {
                  $input = $(this).parent('.quantity_input').children('.input_number');
+                 $quantity_limit = $(this).parent('.quantity_input').children('.quantity_limit')
+                 $quantity_limit_value = $quantity_limit.val()
                  $inc = $input.val();
-                 $inc++;
-                 $input.val($inc)
+                 if (parseInt($quantity_limit_value) > $inc) {
+                     $inc++;
+                     $input.val($inc)
+                 }
+
              })
 
              $decriment.on('click', function() {
