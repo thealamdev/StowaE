@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/woocommerce.css') }}">
     <!-- custom - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/toastr.min.css') }}">
 
 </head>
 
@@ -601,6 +602,7 @@
 
     <!-- custom - main-js -->
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/toastr.min.js') }}"></script>
     @yield('footer-js')
     
 </body>

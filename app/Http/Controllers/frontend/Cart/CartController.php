@@ -104,6 +104,7 @@ class CartController extends Controller
     {
         $cart = Cart::find($id);
         $cart->delete();
+        
         return back()->with('success','Cart delete successfull');
     }
 }

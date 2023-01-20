@@ -2,7 +2,7 @@
  @section('title', 'Product-cart')
  @section('frontPageContent')
      <!-- breadcrumb_section - start
-                                                ================================================== -->
+                                                    ================================================== -->
      <div class="breadcrumb_section">
          <div class="container">
              <ul class="breadcrumb_nav ul_li">
@@ -15,10 +15,10 @@
          </div>
      </div>
      <!-- breadcrumb_section - end
-                                                ================================================== -->
+                                                    ================================================== -->
 
      <!-- cart_section - start
-                                            ================================================== -->
+                                                ================================================== -->
      <section class="cart_section section_space">
          <div class="container">
              <div class="cart_update_wrap">
@@ -92,7 +92,8 @@
                                  <td>{{ $cart->inventory->quantity }}</td>
 
                                  <td class="text-center">
-                                     <form action="{{ route('frontend.cart.delete', $cart->id) }}" method="POST" class="delete_form">
+                                     <form action="{{ route('frontend.cart.delete', $cart->id) }}" method="POST"
+                                         class="delete_form">
                                          @csrf
                                          @method('DELETE')
                                          <button type="button" class="remove_btn"><i class="fal fa-trash-alt"></i>
@@ -190,11 +191,34 @@
          </div>
      </section>
      <!-- cart_section - end
-                                            ================================================== -->
+                                                ================================================== -->
  @endsection
 
 
  @section('footer-js')
+     @if (Session::has('success'))
+         <script>
+             Command: toastr["success"]("Cart delete successfull.", "success")
+             toastr.options = {
+                 "closeButton": true,
+                 "debug": false,
+                 "newestOnTop": false,
+                 "progressBar": true,
+                 "positionClass": "toast-top-right",
+                 "preventDuplicates": false,
+                 "onclick": null,
+                 "showDuration": "300",
+                 "hideDuration": "1000",
+                 "timeOut": "5000",
+                 "extendedTimeOut": "1000",
+                 "showEasing": "swing",
+                 "hideEasing": "linear",
+                 "showMethod": "fadeIn",
+                 "hideMethod": "fadeOut"
+             }
+         </script>
+     @endif
+
      <script>
          $(document).ready(function() {
 
@@ -224,16 +248,15 @@
              })
 
 
-            //  delete btn:
-            $delete_btn = $('.delete_form .remove_btn')
-            $delete_btn.on('click',function(){
-                if(confirm("Are you sure ???")==true){
-                    
-                    $('.delete_form').submit()
-                    console.log($delete_btn.type)
-                }
-            })
-            
+             //  delete btn:
+             $delete_btn = $('.delete_form .remove_btn')
+             $delete_btn.on('click', function() {
+                 if (confirm("Are you sure ???") == true) {
+                     $('.delete_form').submit()
+                     console.log($delete_btn.type)
+                 }
+             })
+
 
          })
      </script>
