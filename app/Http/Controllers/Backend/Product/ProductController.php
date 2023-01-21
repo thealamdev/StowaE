@@ -160,10 +160,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::where('id',$id)->get();
+        $product = Product::where('id',$id)->with('categories')-> first();
+        // return $product->categories->pluck('id') ;
         // return $product;
         $categories = Category::all();
-        return view('backend.product.edit',compact('categories'));
+        return view('backend.product.edit',compact('categories','product'));
     }
 
     /**
