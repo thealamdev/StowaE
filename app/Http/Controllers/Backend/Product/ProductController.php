@@ -160,7 +160,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = [];
+        return view('backend.product.edit',compact('categories'));
     }
 
     /**
