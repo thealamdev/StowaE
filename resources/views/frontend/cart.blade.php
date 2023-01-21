@@ -2,7 +2,7 @@
  @section('title', 'Product-cart')
  @section('frontPageContent')
      <!-- breadcrumb_section - start
-                                                    ================================================== -->
+                                                        ================================================== -->
      <div class="breadcrumb_section">
          <div class="container">
              <ul class="breadcrumb_nav ul_li">
@@ -15,10 +15,10 @@
          </div>
      </div>
      <!-- breadcrumb_section - end
-                                                    ================================================== -->
+                                                        ================================================== -->
 
      <!-- cart_section - start
-                                                ================================================== -->
+                                                    ================================================== -->
      <section class="cart_section section_space">
          <div class="container">
              <div class="cart_update_wrap">
@@ -191,14 +191,14 @@
          </div>
      </section>
      <!-- cart_section - end
-                                                ================================================== -->
+  ================================================== -->
  @endsection
 
 
  @section('footer-js')
      @if (Session::has('success'))
          <script>
-            Command: toastr["success"]("{!! Session::get('success') !!}", "success")
+             Command: toastr["success"]("{!! Session::get('success') !!}", "success")
              toastr.options = {
                  "closeButton": true,
                  "debug": false,
