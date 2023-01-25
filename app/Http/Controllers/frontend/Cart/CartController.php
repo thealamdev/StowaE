@@ -16,13 +16,13 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::where('user_id',auth()->user()->id)->with(['inventory'=>function($q){
+        $carts = Cart::where('user_id', auth()->user()->id)->with(['inventory'=>function($q){
             // $q->select('id','additional_price','product_id');
             // $q->with(['product'=>function($query){
             //     $query->select(['id','title','image','price','sale_price']);
             // }]);
         }])->get(['id','inventory_id','quantity']);
-        //  return $carts;
+         return $carts;
         return view('frontend.cart',compact('carts'));
     }
 

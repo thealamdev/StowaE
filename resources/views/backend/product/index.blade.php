@@ -97,7 +97,7 @@
                  
                 
             </table>
-            {{-- {{ $products->links() }} --}}
+            {{ $products->links('vendor.custome') }}
         </div>
     </div>
 @endsection

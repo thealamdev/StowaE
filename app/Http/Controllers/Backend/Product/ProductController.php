@@ -21,7 +21,7 @@ class ProductController extends Controller
         //
         $products = Product::with(['categories:id,name','user'=>function($q){
             $q->select('id','name');
-        }])->get();
+        }])->paginate(5);
 
         // $products = Product::with(['categories:id,name','user:id,name'
         // ])->get();
