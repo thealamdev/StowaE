@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::controller(CartController::class)->group(function(){
-    Route::get('/','index')->name('index');
+    Route::get('/','index')->middleware('auth')->name('index');
     Route::post('store','store')->name('store');
     Route::get('show/{slug}','show')->name('show');
     Route::delete('delete/{id}','destroy')->name('delete');
