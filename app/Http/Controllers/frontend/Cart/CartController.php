@@ -22,7 +22,11 @@ class CartController extends Controller
             //     $query->select(['id','title','image','price','sale_price']);
             // }]);
         }])->get(['id','inventory_id','quantity']);
-         return $carts;
+        //  return $carts;
+
+        // foreach($carts as $cart){
+        //     return $cart->inventory;
+        // }
         return view('frontend.cart',compact('carts'));
     }
 

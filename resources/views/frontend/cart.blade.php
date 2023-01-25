@@ -45,9 +45,11 @@
                              <tr>
                                  <td>
                                      <div class="cart_product">
+                                        @if(!empty($cart->inventory->product))
                                          <img src="{{ asset('storage/products/' . $cart->inventory->product->image) }}"
                                              alt="image_not_found">
                                          <h3><a href="shop_details.html">{{ $cart->inventory->product->title }}</a></h3>
+                                         @endif
                                      </div>
                                  </td>
 
@@ -58,9 +60,11 @@
 
                                  <td class="text-center">$
                                      <span class="product_price">
+                                        @if(!empty($cart->inventory->product))
                                          @if ($cart->inventory->product->sale_price)
                                              {{ $cart->inventory->product->sale_price + $cart->inventory->additional_price }}
                                          @endif
+                                        @endif
                                      </span>
                                  </td>
 
@@ -83,9 +87,11 @@
 
                                  <td class="text-center">
                                      <span class="price_text">
+                                        @if(!empty($cart->inventory->product))
                                          @if ($cart->inventory->product->sale_price)
                                              {{ ($cart->inventory->product->sale_price + $cart->inventory->additional_price) * $cart->quantity }}
                                          @endif
+                                        @endif
                                      </span>
                                  </td>
 
