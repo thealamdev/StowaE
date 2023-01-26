@@ -29,7 +29,7 @@
                  <table class="table">
                      <thead>
                          <tr>
-                             <th>Product</th>
+                             <th>Products</th>
                              <th class="text-center">Price</th>
                              <th class="text-center">Size && Color</th>
                              <th class="text-center">Quantity</th>
@@ -67,6 +67,7 @@
                                         @endif
                                      </span>
                                  </td>
+  
 
 
                                  <td class="text-center">
