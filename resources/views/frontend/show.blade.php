@@ -415,6 +415,7 @@
             $quantity = $('.quantity')
             $product_price = $('.product_price')
             $quantity_limit = $('.quantity_limit')
+            $additional_price = $('.additional_price_box span').val();
             $update_value = $quantity.val()
 
 
