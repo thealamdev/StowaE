@@ -30,8 +30,8 @@
                      <thead>
                          <tr>
                              <th>Products</th>
-                             <th class="text-center">Price</th>
                              <th class="text-center">Size && Color</th>
+                             <th class="text-center">Price</th>                 
                              <th class="text-center">Quantity</th>
                              <th class="text-center">Total</th>
                              <th class="text-center">Stock</th>
@@ -42,7 +42,7 @@
 
 
                          @foreach ($carts as $cart)
-                             <tr>
+                             <tr class="card_main">
                                  <td>
                                      <div class="cart_product">
                                         @if(!empty($cart->inventory->product))
@@ -75,6 +75,7 @@
                                          <div class="quantity_input">
                                              <input type="hidden" class="quantity_limit"
                                                  value="{{ $cart->inventory->quantity }}">
+                                            <input type="hidden" value="{{ $cart->id }}" class="card_id">
                                              <button type="button" class="decrement_button">
                                                  <i class="fal fa-minus"></i>
                                              </button>
@@ -86,11 +87,11 @@
                                      </form>
                                  </td>
 
-                                 <td class="text-center">
+                                 <td class="text-center">$
                                      <span class="price_text">
                                         @if(!empty($cart->inventory->product))
                                          @if ($cart->inventory->product->sale_price)
-                                             {{ ($cart->inventory->product->sale_price + $cart->inventory->additional_price) * $cart->quantity }}
+                                             {{ number_format(($cart->inventory->product->sale_price + $cart->inventory->additional_price) * $cart->quantity,2) }}
                                          @endif
                                         @endif
                                      </span>
@@ -233,6 +234,9 @@
              $decriment = $('.decrement_button')
 
              $increment.on('click', function() {
+                 $price = $(this).parents('.card_main').find('.product_price').html();
+                 $total_price = $(this).parents('.card_main').find('.price_text');
+                 $cart_id = $input = $(this).parent('.quantity_input').children('.card_id').val();
                  $input = $(this).parent('.quantity_input').children('.input_number');
                  $quantity_limit = $(this).parent('.quantity_input').children('.quantity_limit')
                  $quantity_limit_value = $quantity_limit.val()
@@ -241,6 +245,23 @@
                      $inc++;
                      $input.val($inc)
                  }
+                 $total_price.html(parseFloat($inc*$price).toFixed(2));
+
+                
+                 $.ajax({
+                    type:'POST',
+                    url:'{{ route('frontend.cart.update') }}',
+                    dataType:'json',
+                    data:{
+                        cart_id : $cart_id,
+                        quantity : $inc,
+                        _token:"{{ csrf_token() }}",
+                    },
+                    success: function(data){
+                        console.log(data)
+                    }
+                 })
+
 
              })
 

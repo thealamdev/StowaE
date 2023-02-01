@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
+    protected $fillable = [
+      'quantity',
+    ];
 
     public function inventory(){
       return $this->belongsTo(Inventory::class);
