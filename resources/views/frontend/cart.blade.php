@@ -267,11 +267,31 @@
 
              $decriment.on('click', function() {
                  $decriment_box = $(this).parent('.quantity_input').children('.input_number');
+                 $price = $(this).parents('.card_main').find('.product_price').html();
+                 $total_price = $(this).parents('.card_main').find('.price_text');
+                 $cart_id = $input = $(this).parent('.quantity_input').children('.card_id').val();
                  $dec = $decriment_box.val()
                  if ($dec > 1) {
                      $dec--;
                      $decriment_box.val($dec)
                  }
+
+                 $total_price.html(parseFloat($dec*$price).toFixed(2));
+
+                
+                 $.ajax({
+                    type:'POST',
+                    url:'{{ route('frontend.cart.update') }}',
+                    dataType:'json',
+                    data:{
+                        cart_id : $cart_id,
+                        quantity : $dec,
+                        _token:"{{ csrf_token() }}",
+                    },
+                    success: function(data){
+                        console.log(data)
+                    }
+                 })
 
              })
 
