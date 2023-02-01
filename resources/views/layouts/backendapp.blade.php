@@ -336,25 +336,7 @@
                                 <div class="sidebar-heading">Menu</div>
 
                                 <ul class="sidebar-menu">
-                                    <!-- <li class="sidebar-menu-item active open">
-                                        <a class="sidebar-menu-button"
-                                           data-toggle="collapse"
-                                           href="#dashboards_menu">
-                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
-                                            <span class="sidebar-menu-text">Dashboards</span>
-                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                                        </a>
-                                        <ul class="sidebar-submenu collapse show"
-                                            id="dashboards_menu">
-                                            <li class="sidebar-menu-item active">
-                                                <a class="sidebar-menu-button"
-                                                   href="index.html">
-                                                    <span class="sidebar-menu-text">Default</span>
-                                                </a>
-                                            </li>                                         
-                                        </ul>
-                                    </li>   -->
-
+                                     
                                     <li class="sidebar-menu-item active">
                                         <a class="sidebar-menu-button"
                                            data-toggle="collapse"
@@ -492,6 +474,25 @@
                                         </ul>
                                         
                                     </li>  
+
+                                    <li class="sidebar-menu-item active">
+                                        <a class="sidebar-menu-button"
+                                           data-toggle="collapse"
+                                           href="#setting_menu">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
+                                            <span class="sidebar-menu-text">Settings</span>
+                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                        </a>
+                                        <ul class="sidebar-submenu collapse"
+                                            id="setting_menu">
+                                            <li class="sidebar-menu-item active">
+                                                <a class="sidebar-menu-button"
+                                                   href="{{ route('dashboard.coupon.index') }}">
+                                                    <span class="sidebar-menu-text">Coupons</span>
+                                                </a>
+                                            </li>                                         
+                                        </ul>
+                                    </li> 
                                    
                                    
                                 </ul>

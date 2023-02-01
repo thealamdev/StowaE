@@ -1,9 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\Color\Coupon;
+use App\Http\Controllers\Backend\Coupon\CouponController;
 
-Route::controller(Coupon::class)->group(function(){
+use Illuminate\Support\Facades\Route;
+
+
+Route::controller(CouponController::class)->group(function(){
     Route::get('/','index')->name('index');
     Route::get('create','create')->name('create');
     Route::post('store','store')->name('store');
