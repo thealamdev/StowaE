@@ -86,6 +86,12 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
         });
      });
 
+     Route::middleware(['auth'])->group(function(){
+        Route::prefix('coupon')->name('coupon.')->group(function(){
+            require __DIR__ ."/coupon/coupon.php";
+        });
+     });
+
 
 
 
