@@ -166,7 +166,7 @@ class ProductController extends Controller
             'description' => 'required|max:150',
             'short_description' => 'max:250',
             'additional_info' => 'max:250',
-            'image' => 'image|mimes:jpg,jpeg,png',
+            'image' => 'mimes:jpg,jpeg,png',
             // 'gallary'=> 'image|mimes:jpg,jpeg,png',
             'price' => 'required',
             'sale_price' => 'nullable',
@@ -189,6 +189,17 @@ class ProductController extends Controller
         $product = Product::find($id);
         
         if($valided){
+            $image = $request->file('image');
+            $product = Product::find($id);
+            $image_name = $product->image;
+            if($image){
+                $file_name = public_path('storage/products/'.$image_name);
+                if(file_exists($file_name)){
+                    unlink($file_name);
+                }
+            }
+            
+
             if(!empty($request->file('image'))){
                 $image = $request->file('image');
                 $image_name = $request->title . time() .'.'. $image->getClientOriginalExtension();
