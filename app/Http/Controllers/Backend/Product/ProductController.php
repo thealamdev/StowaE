@@ -88,16 +88,7 @@ class ProductController extends Controller
                 $product_image->move(public_path('storage/products/'),$image_name);
             }
 
-            // discount in % calculation:
-            // $sale_price = 0 ;
-            // $pecent_discount = $request->discount;
-            // $price = $request->price;
-             
-            // if(!empty($sale_price)){
-            //     $sale_price = $request->sale_price;
-            //     $discount = $sale_price/100;
-            // }
-             
+     
             $products = new Product();
             $products->user_id = auth()->user()->id;
             $products->title = $request->title;
@@ -123,11 +114,6 @@ class ProductController extends Controller
                 $product_gallaries->product_id = $products->id;
                 $product_gallaries->image = $gallary_name;
                 $product_gallaries->save();
-
-                // ProductGallary::create([
-                //     'product_id' => $products->id,
-                //     'image' => $gallary_name,
-                // ]);
             }
 
         
@@ -161,8 +147,6 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::where('id',$id)->with('categories')-> first();
-        // return $product->categories->pluck('id') ;
-        // return $product;
         $categories = Category::all();
         return view('backend.product.edit',compact('categories','product'));
     }
@@ -176,7 +160,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        // $product->update([
+        //     'title'=>$request->title,
+        // ]);
+        
     }
 
     /**

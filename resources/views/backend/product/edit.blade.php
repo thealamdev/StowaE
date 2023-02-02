@@ -28,7 +28,8 @@
         </div>
     </div>
 
-    <form action="{{ route('dashboard.product.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('dashboard.product.update',$product->id) }}" method="POST" enctype="multipart/form-data">
+        @method('PUT')
      @csrf
      <div class="row mt-4">
         @if ($errors->any())

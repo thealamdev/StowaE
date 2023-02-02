@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
+    protected $guarded = [
+        'id'
+    ];
     use HasFactory,SoftDeletes;
     public function user(){
         return $this->belongsTo(User::class);
