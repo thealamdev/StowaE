@@ -161,57 +161,62 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         
-        // $valided = $request->validate([
-        //     'title' => 'required|unique:products',
-        //     'description' => 'required|max:150',
-        //     'short_description' => 'max:250',
-        //     'additional_info' => 'max:250',
-        //     'image' => 'required|image|mimes:jpg,jpeg,png',
-        //     // 'gallary'=> 'image|mimes:jpg,jpeg,png',
-        //     'price' => 'required',
-        //     'sale_price' => 'nullable',
-        //     'discount' => 'nullable',
-        //     'category' => 'required',
-        // ],
-        // [
-        //     'title.required' => 'Please enter a title',
-        //     'title.unique'=>'This title is already taken',
-        //     'description.required' => 'Please enter a description',
-        //     'description.max' => 'Max charecter is 250',
-        //     'short_description.max' => 'Max charecter is 250',
-        //     'image.required' => 'Please enter an image',
-        //     'price.required' => 'Please enter a price',
-        //     'category'=> 'Please enter a category',
+        $valided = $request->validate([
+            'title' => 'required',
+            'description' => 'required|max:150',
+            'short_description' => 'max:250',
+            'additional_info' => 'max:250',
+            'image' => 'image|mimes:jpg,jpeg,png',
+            // 'gallary'=> 'image|mimes:jpg,jpeg,png',
+            'price' => 'required',
+            'sale_price' => 'nullable',
+            'discount' => 'nullable',
+            'category' => 'required',
+        ],
+        [
+            'title.required' => 'Please enter a title',
+            'title.unique'=>'This title is already taken',
+            'description.required' => 'Please enter a description',
+            'description.max' => 'Max charecter is 250',
+            'short_description.max' => 'Max charecter is 250',
+            'image.required' => 'Please enter an image',
+            'price.required' => 'Please enter a price',
+            'category'=> 'Please enter a category',
             
-        // ]
-        // );
+        ]
+        );
 
         $product = Product::find($id);
-        // $product->update([
-        //     'title'=> $request->title,
-        //     'image' => $request->image,
-        //     'price' => $request->price,
-        //     'sale_price' => $request->sale_price,
-        //     'discount' => $request->discount,
-        //     'description' => $request->description,
-        //     'short_description' => $request->short_description,
-        //     'additional_info'=> $request->additional_info
-        // ]);
-
-        $product->title = $request->title;
-        $product->image = $request->image;
-        $product->price = $request->price;
-        $product->sale_price = $request->sale_price;
-        $product->discount = $request->discount;
-        $product->description = $request->description;
-        $product->short_description = $request->short_description;
-        $product->additional_info = $request->additional_info;
         
+        if($valided){
+            if(!empty($request->file('image'))){
+                $image = $request->file('image');
+                $image_name = $request->title . time() .'.'. $image->getClientOriginalExtension();
+                
+                if($image_name){
+                    $image->move(public_path('storage/products/'),$image_name);
+                }
+            }
+            $product->title = $request->title;
+            $product->image = $image_name;
+            $product->price = $request->price;
+            $product->sale_price = $request->sale_price;
+            $product->discount = $request->discount;
+            $product->description = $request->description;
+            $product->short_description = $request->short_description;
+            $product->additional_info = $request->additional_info;
+
+            $product->categories()->sync($request->category);
+
+           
+            $product->save();
+            return back();
+            
+        }
+       
 
 
-        $product->categories()->sync($request->category);
-        $product->save();
-        return back();
+        
     }
 
     /**

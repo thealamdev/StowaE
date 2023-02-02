@@ -104,7 +104,7 @@
                                          class="delete_form">
                                          @csrf
                                          @method('DELETE')
-                                         <button type="button" class="remove_btn"><i class="fal fa-trash-alt"></i>
+                                         <button type="submit" class="remove_btn"><i class="fal fa-trash-alt"></i>
                                          </button>
                                      </form>
 
@@ -171,7 +171,7 @@
                                      </div>
                                  </div>
                              </div>
-                             <button type="submit" class="btn btn_primary rounded-pill">Update Total</button>
+                             <button type="button" class="btn btn_primary rounded-pill">Update Total</button>
                          </form>
                      </div>
                  </div>
@@ -297,8 +297,9 @@
 
 
              //  delete btn:
-             $delete_btn = $('.delete_form .remove_btn')
-             $delete_btn.on('click', function() {
+            //  $delete_btn = $(this).parent('form').children('.remove_btn');
+            //  $delete_btn = $('.delete_form .remove_btn')
+             $('.delete_form .remove_btn').on('click', function() {
                  if (confirm("Are you sure ???") == true) {
                      $('.delete_form').submit()
                      console.log($delete_btn.type)
