@@ -52,7 +52,7 @@
                            <label for="title">Title*</label>
                            <input type="text" name="title" value="{{ $product->title }}" class="form-control @error('title')
                                is-invalid
-                           @enderror" placeholder="Enter Product name">
+                           @enderror" placeholder="Enter Product Title">
                            @error('title')
                            <div class="text-danger pt-1">
                                <p>{{$message}}</p>
