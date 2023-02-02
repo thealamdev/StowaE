@@ -164,7 +164,9 @@ class ProductController extends Controller
         // $product->update([
         //     'title'=>$request->title,
         // ]);
-        
+        $product->categories()->sync($request->category);
+        $product->save();
+        return back();
     }
 
     /**
