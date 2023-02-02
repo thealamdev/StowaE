@@ -1,6 +1,6 @@
 {{-- {{ $categories }} --}}
 @extends('layouts.backendapp')
-@section('title','Coupon')
+@section('title', 'Coupon')
 @section('backendContent')
 
     <div class="page_header mt-3">
@@ -45,29 +45,29 @@
                             <th>End Date</th>
                             <th>Actions</th>
                         </thead>
-                        
+
                         <tbody>
                             @foreach ($coupons as $coupon)
-                            <tr>
-                                <td>{{ $coupon->id }}</td>
-                                <td>{{ $coupon->name }}</td>
-                                <td>{{ $coupon->amount }}</td>
-                                <td>{{ $coupon->applicable_amount }}</td>
-                                <td>{{ $coupon->start_date->format('d M, y') }}</td>
-                                <td>{{ $coupon->end_date->format('d M, y') }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary">Edit</a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $coupon->id }}</td>
+                                    <td>{{ $coupon->name }}</td>
+                                    <td>{{ $coupon->amount }}</td>
+                                    <td>{{ $coupon->applicable_amount }}</td>
+                                    <td>{{ $coupon->start_date->format('d M, y') }}</td>
+                                    <td>{{ $coupon->end_date->format('d M, y') }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary">Edit</a>
+                                    </td>
+                                </tr>
                             @endforeach
-                            
+
                         </tbody>
-                         
-                     
-                         
-                        
+
+
+
+
                     </table>
-                     
+
                 </div>
             </div>
         </div>
@@ -77,80 +77,109 @@
                 <div class="card-body">
                     <form action="{{ route('dashboard.coupon.store') }}" method="POST">
                         @csrf
-                         <div class="form-group">
+                        <div class="form-group1">
                             <label for="name">Coupon Name</label>
-                           <input type="text" name="name" class="form-control @error('name')
+                            <input type="text" name="name"
+                                class="form-control formInput @error('name')
                                is-invalid
-                           @enderror" placeholder="Enter Coupon name">
-                           @error('name')
-                           <div class="text-danger pt-1">
-                               <p>{{$message}}</p>
-                           </div>
-                           @enderror
-                         </div>
+                           @enderror"
+                                placeholder="Enter Coupon name">
+                            @error('name')
+                                <div class="text-danger pt-1">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @enderror
+                        </div>
 
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="amount">Coupon Amount</label>
-                           <input type="number" name="amount" class="form-control @error('amount')
+                            <input type="number" name="amount"
+                                class="form-control formInput @error('amount')
                                is-invalid
-                           @enderror" placeholder="Enter Coupon Amount">
-                           @error('amount')
-                           <div class="text-danger pt-1">
-                               <p>{{$message}}</p>
-                           </div>
-                           @enderror
-                         </div>
-                         <div class="form-group">
+                           @enderror"
+                                placeholder="Enter Coupon Amount">
+                            @error('amount')
+                                <div class="text-danger pt-1">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="name">Coupon Applicable Amount</label>
-                           <input type="number" name="applicable_amount" class="form-control @error('applicable_amount')
+                            <input type="number" name="applicable_amount"
+                                class="form-control formInput @error('applicable_amount')
                                is-invalid
-                           @enderror" placeholder="Enter Coupon Applicable Amount">
-                           @error('applicable_amount')
-                           <div class="text-danger pt-1">
-                               <p>{{$message}}</p>
-                           </div>
-                           @enderror
-                         </div>
-                         <div class="form-group">
+                           @enderror"
+                                placeholder="Enter Coupon Applicable Amount">
+                            @error('applicable_amount')
+                                <div class="text-danger pt-1">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="start_date">Coupon Start date</label>
-                           <input type="date" name="start_date" class="form-control @error('start_date')
+                            <input type="date" name="start_date"
+                                class="form-control formInput @error('start_date')
                                is-invalid
-                           @enderror" placeholder="Enter Coupon start date">
-                           @error('start_date')
-                           <div class="text-danger pt-1">
-                               <p>{{$message}}</p>
-                           </div>
-                           @enderror
-                         </div>
-                         <div class="form-group">
+                           @enderror"
+                                placeholder="Enter Coupon start date">
+                            @error('start_date')
+                                <div class="text-danger pt-1">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="end_date">Coupon End Date</label>
-                           <input type="date" name="end_date" class="form-control @error('end_date')
+                            <input type="date" name="end_date"
+                                class="form-control formInput @error('end_date')
                                is-invalid
-                           @enderror" placeholder="Enter Coupon End date">
-                           @error('end_date')
-                           <div class="text-danger pt-1">
-                               <p>{{$message}}</p>
-                           </div>
-                           @enderror
-                         </div>
-                         
-                         <div class="form-group">
-                             <button type="submit" class="btn btn-primary">Submit</button>
-                         </div>
+                           @enderror"
+                                placeholder="Enter Coupon End date">
+                            @error('end_date')
+                                <div class="text-danger pt-1">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary formInput submit">Submit</button>
+                        </div>
 
 
                     </form>
                 </div>
+
+                 
             </div>
         </div>
     </div>
-    
+
 
 @endsection
 
 @section('sweet-js')
     <script>
-        $('.delete_btn').on('click',function(){
+         
+            var inputs = document.querySelectorAll('.formInput')
+            var submit  = document.querySelector('.submit')
+
+            inputs.forEach((element,index) => {
+                element.addEventListener('keyup',function(){
+                    if(event.key === "Enter"){
+                        inputs[index + 1].focus();
+                    }
+                })
+            })
+            
+            submit.addEventListener('focus',function(){
+                this.type = "submit"
+            })
+             
+
+        $('.delete_btn').on('click', function() {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -159,14 +188,11 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
-                     $(this).parent('form').submit();
+                    $(this).parent('form').submit();
                 }
-                })
+            })
         })
     </script>
 @endsection
-
-
- 

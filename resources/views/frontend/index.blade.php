@@ -1,5 +1,5 @@
 @extends('layouts.frontapp')
-@section('title','Stowaa - home')
+@section('title','Home')
 @section('frontPageContent')
     @include('frontend.main')
 @endsection

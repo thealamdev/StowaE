@@ -98,9 +98,9 @@
                             </a>
 
                             <form class="search-form d-none d-sm-flex flex"
-                                  action="index.html">
+                                   >
                                 <button class="btn"
-                                        type="submit"><i class="material-icons">search</i></button>
+                                        type="button"><i class="material-icons">search</i></button>
                                 <input type="text"
                                        class="form-control"
                                        placeholder="Search">
@@ -552,10 +552,10 @@
                                     </div>
                                 </div>
 
-                                <div class="sidebar-p-a">
+                                {{-- <div class="sidebar-p-a">
                                     <a href="https://themeforest.net/item/stack-admin-bootstrap-4-dashboard-template/22959011"
                                        class="btn btn-primary btn-block">Purchase &dollar;35</a>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>
