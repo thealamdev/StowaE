@@ -238,6 +238,15 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+         
+        $product = Product::find($id);
+        $image_name = $product->image;
+        if($image_name){
+            $file_name = public_path('storage/products/'.$image_name);
+            if(file_exists($file_name)){
+                unlink($file_name);
+            }
+        }
         $product = Product::find($id)->delete();
         return back()->with('success','Product delete successfull');
     }
