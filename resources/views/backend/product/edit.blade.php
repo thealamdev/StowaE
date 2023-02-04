@@ -191,7 +191,7 @@
                         <label for="additional_info">Additional Information</label>
                        <textarea name="additional_info" class="summernote form-control @error('additional_info')
                            is-invalid
-                        @enderror" cols="30" rows="6" placeholder="Enter Additional Information">{[{{ $product->additional_info }}]}</textarea>
+                        @enderror" cols="30" rows="6" placeholder="Enter Additional Information">{{ $product->additional_info }}</textarea>
                         @error('additional_info')
                             <div class="text-danger pt-1">
                                 <p>{{ $message }}</p>

@@ -208,6 +208,29 @@ class ProductController extends Controller
                     $image->move(public_path('storage/products/'),$image_name);
                 }
             }
+
+            // delete the previous gallary image:
+            $product_gallaries = Product::with('product_gallaries')->where('id',$id)->first();
+            foreach($product_gallaries->product_gallaries as $gallary_images){
+                $gallary_image = $gallary_images->image;
+                if($gallary_image){
+                    $file_name = public_path('storage/gallary/'.$gallary_image);
+                    if(file_exists($file_name)){
+                        unlink($file_name);
+                    }
+                }
+            }
+
+            // return $product_gallaries;
+
+            $gallaries = $request->file('gallary');
+            if(!empty($gallaries)){
+                foreach($gallaries as $gallary){
+                    $gallary_name = $request->title . uniqid() . "." . $gallary->getClientOriginalExtension();
+                    $gallary->move(public_path('storage/gallary/'),$gallary_name);
+                    // $product->product_gallaries()->sync($gallary_name);
+                }
+            }
             $product->title = $request->title;
             $product->image = $image_name;
             $product->price = $request->price;
@@ -218,6 +241,7 @@ class ProductController extends Controller
             $product->additional_info = $request->additional_info;
 
             $product->categories()->sync($request->category);
+            
 
            
             $product->save();
