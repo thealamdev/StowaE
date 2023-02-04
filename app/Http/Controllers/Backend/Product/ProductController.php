@@ -19,16 +19,16 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::with(['categories:id,name','user'=>function($q){
-            $q->select('id','name');
+        $products = Product::with(['categories:id,name', 'user' => function ($q) {
+            $q->select('id', 'name');
         }])->paginate(5);
 
         // $products = Product::with(['categories:id,name','user:id,name'
         // ])->get();
-         
+
         // return $products;
         // exit();
-        return view('backend.product.index',compact('products'));
+        return view('backend.product.index', compact('products'));
     }
 
     /**
@@ -39,8 +39,8 @@ class ProductController extends Controller
     public function create()
     {
         //
-        $categories = Category::get(['id','name']);
-        return view('backend.product.create',compact('categories'));
+        $categories = Category::get(['id', 'name']);
+        return view('backend.product.create', compact('categories'));
     }
 
     /**
@@ -54,41 +54,42 @@ class ProductController extends Controller
         //
 
         $product_gallary = $request->file('gallary');
-        
-        $valided = $request->validate([
-            'title' => 'required|unique:products',
-            'description' => 'required|max:150',
-            'short_description' => 'max:250',
-            'additional_info' => 'max:250',
-            'image' => 'required|image|mimes:jpg,jpeg,png',
-            // 'gallary'=> 'image|mimes:jpg,jpeg,png',
-            'price' => 'required',
-            'sale_price' => 'nullable',
-            'discount' => 'nullable',
-            'category' => 'required',
-        ],
-        [
-            'title.required' => 'Please enter a title',
-            'title.unique'=>'This title is already taken',
-            'description.required' => 'Please enter a description',
-            'description.max' => 'Max charecter is 250',
-            'short_description.max' => 'Max charecter is 250',
-            'image.required' => 'Please enter an image',
-            'price.required' => 'Please enter a price',
-            'category'=> 'Please enter a category',
-            
-        ]
+
+        $valided = $request->validate(
+            [
+                'title' => 'required|unique:products',
+                'description' => 'required|max:150',
+                'short_description' => 'max:250',
+                'additional_info' => 'max:250',
+                'image' => 'required|image|mimes:jpg,jpeg,png',
+                // 'gallary'=> 'image|mimes:jpg,jpeg,png',
+                'price' => 'required',
+                'sale_price' => 'nullable',
+                'discount' => 'nullable',
+                'category' => 'required',
+            ],
+            [
+                'title.required' => 'Please enter a title',
+                'title.unique' => 'This title is already taken',
+                'description.required' => 'Please enter a description',
+                'description.max' => 'Max charecter is 250',
+                'short_description.max' => 'Max charecter is 250',
+                'image.required' => 'Please enter an image',
+                'price.required' => 'Please enter a price',
+                'category' => 'Please enter a category',
+
+            ]
         );
 
-        if($valided){
+        if ($valided) {
             $product_image = $request->file('image');
-            $image_name = Str::slug($request->title) . time(). "." . strtolower($product_image->getClientOriginalExtension());
+            $image_name = Str::slug($request->title) . time() . "." . strtolower($product_image->getClientOriginalExtension());
 
-            if($image_name){
-                $product_image->move(public_path('storage/products/'),$image_name);
+            if ($image_name) {
+                $product_image->move(public_path('storage/products/'), $image_name);
             }
 
-     
+
             $products = new Product();
             $products->user_id = auth()->user()->id;
             $products->title = $request->title;
@@ -101,30 +102,26 @@ class ProductController extends Controller
             $products->sale_price = $request->sale_price;
             $products->discount = $request->discount;
             $products->save();
-    
+
             $products->categories()->attach($request->category);
 
-            
-            if(!empty($product_gallary))
-            foreach($product_gallary as $gallary){
-                $gallary_name = $request->title . uniqid() . "." . $gallary->getClientOriginalExtension();
-                $gallary->move(public_path('storage/gallary/'),$gallary_name);
 
-                $product_gallaries = new ProductGallary();
-                $product_gallaries->product_id = $products->id;
-                $product_gallaries->image = $gallary_name;
-                $product_gallaries->save();
-            }
+            if (!empty($product_gallary))
+                foreach ($product_gallary as $gallary) {
+                    $gallary_name = $request->title . uniqid() . "." . $gallary->getClientOriginalExtension();
+                    $gallary->move(public_path('storage/gallary/'), $gallary_name);
 
-        
-            return redirect(route('dashboard.product.index'))->with('success','Product added successfull');
-        }
-        else{
+                    $product_gallaries = new ProductGallary();
+                    $product_gallaries->product_id = $products->id;
+                    $product_gallaries->image = $gallary_name;
+                    $product_gallaries->save();
+                }
+
+
+            return redirect(route('dashboard.product.index'))->with('success', 'Product added successfull');
+        } else {
             return "nothing";
         }
-    
-
-        
     }
 
     /**
@@ -146,9 +143,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::where('id',$id)->with('categories')-> first();
+        $product = Product::where('id', $id)->with('categories')->first();
         $categories = Category::all();
-        return view('backend.product.edit',compact('categories','product'));
+        return view('backend.product.edit', compact('categories', 'product'));
     }
 
     /**
@@ -160,62 +157,63 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $valided = $request->validate([
-            'title' => 'required',
-            'description' => 'required|max:150',
-            'short_description' => 'max:250',
-            'additional_info' => 'max:250',
-            'image' => 'mimes:jpg,jpeg,png',
-            // 'gallary'=> 'image|mimes:jpg,jpeg,png',
-            'price' => 'required',
-            'sale_price' => 'nullable',
-            'discount' => 'nullable',
-            'category' => 'required',
-        ],
-        [
-            'title.required' => 'Please enter a title',
-            'title.unique'=>'This title is already taken',
-            'description.required' => 'Please enter a description',
-            'description.max' => 'Max charecter is 250',
-            'short_description.max' => 'Max charecter is 250',
-            'image.required' => 'Please enter an image',
-            'price.required' => 'Please enter a price',
-            'category'=> 'Please enter a category',
-            
-        ]
+        // return $id;
+        $valided = $request->validate(
+            [
+                'title' => 'required',
+                'description' => 'required|max:150',
+                'short_description' => 'max:250',
+                'additional_info' => 'max:250',
+                'image' => 'mimes:jpg,jpeg,png',
+                // 'gallary'=> 'image|mimes:jpg,jpeg,png',
+                'price' => 'required',
+                'sale_price' => 'nullable',
+                'discount' => 'nullable',
+                'category' => 'required',
+            ],
+            [
+                'title.required' => 'Please enter a title',
+                'title.unique' => 'This title is already taken',
+                'description.required' => 'Please enter a description',
+                'description.max' => 'Max charecter is 250',
+                'short_description.max' => 'Max charecter is 250',
+                'image.required' => 'Please enter an image',
+                'price.required' => 'Please enter a price',
+                'category' => 'Please enter a category',
+
+            ]
         );
 
         $product = Product::find($id);
-        
-        if($valided){
+
+        if ($valided) {
             $image = $request->file('image');
             $product = Product::find($id);
             $image_name = $product->image;
-            if($image){
-                $file_name = public_path('storage/products/'.$image_name);
-                if(file_exists($file_name)){
+            if ($image) {
+                $file_name = public_path('storage/products/' . $image_name);
+                if (file_exists($file_name)) {
                     unlink($file_name);
                 }
             }
-            
 
-            if(!empty($request->file('image'))){
+
+            if (!empty($request->file('image'))) {
                 $image = $request->file('image');
-                $image_name = $request->title . time() .'.'. $image->getClientOriginalExtension();
-                
-                if($image_name){
-                    $image->move(public_path('storage/products/'),$image_name);
+                $image_name = $request->title . time() . '.' . $image->getClientOriginalExtension();
+
+                if ($image_name) {
+                    $image->move(public_path('storage/products/'), $image_name);
                 }
             }
 
             // delete the previous gallary image:
-            $product_gallaries = Product::with('product_gallaries')->where('id',$id)->first();
-            foreach($product_gallaries->product_gallaries as $gallary_images){
+            $product_gallaries = Product::with('product_gallaries')->where('id', $id)->first();
+            foreach ($product_gallaries->product_gallaries as $gallary_images) {
                 $gallary_image = $gallary_images->image;
-                if($gallary_image){
-                    $file_name = public_path('storage/gallary/'.$gallary_image);
-                    if(file_exists($file_name)){
+                if ($gallary_image) {
+                    $file_name = public_path('storage/gallary/' . $gallary_image);
+                    if (file_exists($file_name)) {
                         unlink($file_name);
                     }
                 }
@@ -224,11 +222,30 @@ class ProductController extends Controller
             // return $product_gallaries;
 
             $gallaries = $request->file('gallary');
-            if(!empty($gallaries)){
-                foreach($gallaries as $gallary){
+            $prodcut_gall = ProductGallary::where('product_id', $id)->get(['product_id', 'image']);
+            // return $prodcut_gall->pluck('image');
+            if (!empty($gallaries)) {
+                foreach ($gallaries as $gallary) {
                     $gallary_name = $request->title . uniqid() . "." . $gallary->getClientOriginalExtension();
-                    $gallary->move(public_path('storage/gallary/'),$gallary_name);
-                    // $product->product_gallaries()->sync($gallary_name);
+                    $gallary->move(public_path('storage/gallary/'), $gallary_name);
+                    $prodcut_gall->product_id = $id+1;
+                    // $prodcut_gall_img = $prodcut_gall->pluck('image');
+                    // $prodcut_gall_img = $gallary_name;
+                    $prodcut_gall->save();
+
+                    // foreach ($prodcut_gall as $gall) {
+                    //     // return $prodcut_gall;
+                        
+                    
+
+                    //     // $prodcut_gall->image = $gallary_name;
+                    //     $gall->image = $gallary_name;
+                    //     $gall->save();
+                    // }
+                    // $gall->image = $gallary_name;
+                    // $gall->save();
+                    // return $prodcut_gall;
+
                 }
             }
             $product->title = $request->title;
@@ -241,17 +258,10 @@ class ProductController extends Controller
             $product->additional_info = $request->additional_info;
 
             $product->categories()->sync($request->category);
-            
 
-           
             $product->save();
             return back();
-            
         }
-       
-
-
-        
     }
 
     /**
@@ -262,16 +272,16 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-         
+
         $product = Product::find($id);
         $image_name = $product->image;
-        if($image_name){
-            $file_name = public_path('storage/products/'.$image_name);
-            if(file_exists($file_name)){
+        if ($image_name) {
+            $file_name = public_path('storage/products/' . $image_name);
+            if (file_exists($file_name)) {
                 unlink($file_name);
             }
         }
         $product = Product::find($id)->delete();
-        return back()->with('success','Product delete successfull');
+        return back()->with('success', 'Product delete successfull');
     }
 }
