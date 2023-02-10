@@ -127,12 +127,14 @@
                          <form action="{{ route('frontend.couponApply.store') }}" method="POST">
                             @csrf
                              <div class="coupon_form form_item mb-0">
-                                 <input type="text" name="coupon" placeholder="Coupon Code...">
+                                 <input type="text" name="coupon" placeholder="Coupon Code..." value="@if (Session::has('coupon'))
+                                     {{ Session::get('coupon')['name'] }}
+                                 @endif">
                                  <button type="submit" class="btn btn_dark">Apply Coupon</button>
-                                 {{-- <div class="info_icon">
+                                 <div class="info_icon">
                                      <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
                                          title="Your Info Here"></i>
-                                 </div> --}}
+                                 </div>
                              </div>
                          </form>
                      </div>
