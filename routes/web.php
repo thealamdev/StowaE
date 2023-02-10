@@ -122,6 +122,6 @@ Route::name('frontend.')->group(function(){
         require __DIR__ ."/frontend/couponApply/couponApply.php";
     });
 });
-
+ 
  
  

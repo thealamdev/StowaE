@@ -23,4 +23,19 @@ class ShippingController extends Controller
         return back()->with('success','Shipping address added');
     }
 
+    // frontend shipping ajax:
+    public function shippingApply(Request $request){
+        $shipping_details = Shipping::where('id',$request->shipping_id)->first();
+        if($shipping_details->amount > 0){
+            $order_total = $shipping_details->amount + $request->total_price;
+        }else{
+            $order_total = $shipping_details->amount + $request->total_price;
+        }
+        $data =[
+            'order_total' => $order_total,
+            'shipping_amount' => $shipping_details->amount,
+        ];
+        return response()->json($data);
+    }
+
 }

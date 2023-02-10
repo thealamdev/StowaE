@@ -2,7 +2,7 @@
  @section('title', 'Product-cart')
  @section('frontPageContent')
      <!-- breadcrumb_section - start
-                                                        ================================================== -->
+                                                            ================================================== -->
      <div class="breadcrumb_section">
          <div class="container">
              <ul class="breadcrumb_nav ul_li">
@@ -15,10 +15,10 @@
          </div>
      </div>
      <!-- breadcrumb_section - end
-                                                        ================================================== -->
+                                                            ================================================== -->
 
      <!-- cart_section - start
-                                                    ================================================== -->
+                                                        ================================================== -->
      <section class="cart_section section_space">
          <div class="container">
              <div class="cart_update_wrap">
@@ -31,7 +31,7 @@
                          <tr>
                              <th>Products</th>
                              <th class="text-center">Size && Color</th>
-                             <th class="text-center">Price</th>                 
+                             <th class="text-center">Price</th>
                              <th class="text-center">Quantity</th>
                              <th class="text-center">Total</th>
                              <th class="text-center">Stock</th>
@@ -45,10 +45,10 @@
                              <tr class="card_main">
                                  <td>
                                      <div class="cart_product">
-                                        @if(!empty($cart->inventory->product))
-                                         <img src="{{ asset('storage/products/' . $cart->inventory->product->image) }}"
-                                             alt="image_not_found">
-                                         <h3><a href="shop_details.html">{{ $cart->inventory->product->title }}</a></h3>
+                                         @if (!empty($cart->inventory->product))
+                                             <img src="{{ asset('storage/products/' . $cart->inventory->product->image) }}"
+                                                 alt="image_not_found">
+                                             <h3><a href="shop_details.html">{{ $cart->inventory->product->title }}</a></h3>
                                          @endif
                                      </div>
                                  </td>
@@ -60,14 +60,14 @@
 
                                  <td class="text-center">$
                                      <span class="product_price">
-                                        @if(!empty($cart->inventory->product))
-                                         @if ($cart->inventory->product->sale_price)
-                                             {{ $cart->inventory->product->sale_price + $cart->inventory->additional_price }}
+                                         @if (!empty($cart->inventory->product))
+                                             @if ($cart->inventory->product->sale_price)
+                                                 {{ $cart->inventory->product->sale_price + $cart->inventory->additional_price }}
+                                             @endif
                                          @endif
-                                        @endif
                                      </span>
                                  </td>
-  
+
 
 
                                  <td class="text-center">
@@ -75,8 +75,8 @@
                                          <div class="quantity_input">
                                              <input type="hidden" class="quantity_limit"
                                                  value="{{ $cart->inventory->quantity }}">
-                                              
-                                            <input type="hidden" value="{{ $cart->id }}" class="card_id">
+
+                                             <input type="hidden" value="{{ $cart->id }}" class="card_id">
                                              <button type="button" class="decrement_button">
                                                  <i class="fal fa-minus"></i>
                                              </button>
@@ -87,11 +87,11 @@
                                          </div>
                                      </form>
                                  </td>
-                                  
+
                                  <td class="text-center">$
                                      <span class="price_text">
-                                        {{ $cart->total_price }}
-                                        {{-- @if(!empty($cart->inventory->product))
+                                         {{ $cart->total_price }}
+                                         {{-- @if (!empty($cart->inventory->product))
                                          @if ($cart->inventory->product->sale_price)
                                              {{ number_format(($cart->inventory->product->sale_price + $cart->inventory->additional_price) * $cart->quantity,2) }}
                                          @endif
@@ -125,11 +125,10 @@
                  <div class="row">
                      <div class="col col-lg-6">
                          <form action="{{ route('frontend.couponApply.store') }}" method="POST">
-                            @csrf
+                             @csrf
                              <div class="coupon_form form_item mb-0">
-                                 <input type="text" name="coupon" placeholder="Coupon Code..." value="@if (Session::has('coupon'))
-                                     {{ Session::get('coupon')['name'] }}
-                                 @endif">
+                                 <input type="text" name="coupon" placeholder="Coupon Code..."
+                                     value="@if (Session::has('coupon')) {{ Session::get('coupon')['name'] }} @endif">
                                  <button type="submit" class="btn btn_dark">Apply Coupon</button>
                                  <div class="info_icon">
                                      <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -154,13 +153,13 @@
                                      class="far fa-arrow-up"></i></span></h3>
                          <form action="#">
                              <div class="select_option clearfix">
-                                 <select class="nice_select">
-                                    <option selected disabled>Select Your Option</option>
-                                    @foreach ($shippings as $shipping)
-                                    <option value="{{ $shipping->id }}">{{ $shipping->location }}</option>
-                                    @endforeach
-                                     
-                                      
+                                 <select class="nice_select shipping_select">
+                                     <option selected disabled>Select Your Option</option>
+                                     @foreach ($shippings as $shipping)
+                                         <option value="{{ $shipping->id }}">{{ $shipping->location }}</option>
+                                     @endforeach
+
+
                                  </select>
                              </div>
                              <div class="row">
@@ -190,21 +189,23 @@
                              </li>
                              <li>
                                  <span>Shipping and Handling</span>
-                                 <span>Free Shipping</span>
+                                 <span class="shipping_fee">Free Shipping</span>
                              </li>
 
                              <li>
                                  @if (Session::has('coupon'))
-                                 <span>Coupon ({{ Session::get('coupon')['name'] }})</span>
-                                 <span>
-                                    {{ Session::get('coupon')['amount'] }}
-                                 </span>
+                                     <span>Coupon ({{ Session::get('coupon')['name'] }})</span>
+                                     <span>
+                                         {{ Session::get('coupon')['amount'] }}
+                                     </span>
                                  @endif
-                                
-                            </li>
+
+                             </li>
                              <li>
                                  <span>Order Total</span>
-                                 <span class="total_price">$ <strong>{{ $carts->sum('total_price') - Session::get('coupon')['amount'] }}</strong> </span>
+                                 <span>$
+                                     <strong class="order_total">{{ $carts->sum('total_price') - Session::get('coupon')['amount'] }}</strong>
+                                 </span>
                              </li>
                          </ul>
                      </div>
@@ -213,12 +214,12 @@
          </div>
      </section>
      <!-- cart_section - end
-  ================================================== -->
+      ================================================== -->
  @endsection
 
 
  @section('footer-js')
-        @include('frontend.message')
+     @include('frontend.message')
 
      <script>
          $(document).ready(function() {
@@ -238,22 +239,22 @@
                      $inc++;
                      $input.val($inc)
                  }
-                 $total_price.html(parseFloat($inc*$price).toFixed(2));
+                 $total_price.html(parseFloat($inc * $price).toFixed(2));
 
-                
+
                  $.ajax({
-                    type:'POST',
-                    url:'{{ route('frontend.cart.update') }}',
-                    dataType:'json',
-                    data:{
-                        cart_id : $cart_id,
-                        total:parseFloat($price)*$inc,
-                        quantity : $inc,
-                        _token:"{{ csrf_token() }}",
-                    },
-                    success: function(data){
-                        $('#totalSum').html(data)
-                    }
+                     type: 'POST',
+                     url: '{{ route('frontend.cart.update') }}',
+                     dataType: 'json',
+                     data: {
+                         cart_id: $cart_id,
+                         total: parseFloat($price) * $inc,
+                         quantity: $inc,
+                         _token: "{{ csrf_token() }}",
+                     },
+                     success: function(data) {
+                         $('#totalSum').html(data)
+                     }
                  })
 
 
@@ -270,30 +271,30 @@
                      $decriment_box.val($dec)
                  }
 
-                 $total_price.html(parseFloat($dec*$price).toFixed(2));
+                 $total_price.html(parseFloat($dec * $price).toFixed(2));
 
-                
+
                  $.ajax({
-                    type:'POST',
-                    url:'{{ route('frontend.cart.update') }}',
-                    dataType:'json',
-                    data:{
-                        cart_id : $cart_id,
-                        total:parseFloat($price)*$dec,
-                        quantity : $dec,
-                        _token:"{{ csrf_token() }}",
-                    },
-                    success: function(data){
-                        $('#totalSum').html(data)
-                    }
+                     type: 'POST',
+                     url: '{{ route('frontend.cart.update') }}',
+                     dataType: 'json',
+                     data: {
+                         cart_id: $cart_id,
+                         total: parseFloat($price) * $dec,
+                         quantity: $dec,
+                         _token: "{{ csrf_token() }}",
+                     },
+                     success: function(data) {
+                         $('#totalSum').html(data)
+                     }
                  })
 
              })
 
 
              //  delete btn:
-            //  $delete_btn = $(this).parent('form').children('.remove_btn');
-            //  $delete_btn = $('.delete_form .remove_btn')
+             //  $delete_btn = $(this).parent('form').children('.remove_btn');
+             //  $delete_btn = $('.delete_form .remove_btn')
              $('.delete_form .remove_btn').on('click', function() {
                  if (confirm("Are you sure ???") == true) {
                      $('.delete_form').submit()
@@ -301,6 +302,27 @@
                  }
              })
 
+             // shipping select ajax:
+
+             $('.shipping_select').on('change', function() {
+                 $shipping_id = $('.shipping_select').val();
+                 $total_price = $('.order_total').html();
+                 $.ajax({
+                     type: 'POST',
+                     url: '{{ route('dashboard.shipping.shippingApply') }}',
+                     dataType: 'json',
+                     data: {
+                         total_price : $total_price,
+                         shipping_id: $shipping_id,
+                         _token: "{{ csrf_token() }}",
+                     },
+                     success: function(data) {
+                        $('.shipping_fee').html("+" + parseFloat(data.shipping_amount));
+                        $('.order_total').html(data.order_total);
+                         console.log(data)
+                     }
+                 })
+             })
 
          })
      </script>

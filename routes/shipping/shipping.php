@@ -15,4 +15,7 @@ Route::controller(ShippingController::class)->group(function(){
     Route::get('archieve','archieve')->name('archieve');
     Route::delete('trash/{id}','trash')->name('trash');
     Route::get('restore/{id}','restore')->name('restore');
+
+    // ajax routes:
+    Route::post('shipping-apply','shippingApply')->name('shippingApply');
 });
