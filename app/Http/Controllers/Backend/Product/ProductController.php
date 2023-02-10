@@ -207,7 +207,7 @@ class ProductController extends Controller
                 }
             }
 
-            // delete the previous gallary image:
+           // delete the previous gallary image:
             $product_gallaries = Product::with('product_gallaries')->where('id', $id)->first();
             foreach ($product_gallaries->product_gallaries as $gallary_images) {
                 $gallary_image = $gallary_images->image;
@@ -221,17 +221,17 @@ class ProductController extends Controller
 
             // return $product_gallaries;
 
-            $gallaries = $request->file('gallary');
-            $prodcut_gall = ProductGallary::where('product_id', $id)->get(['product_id', 'image']);
+            // $gallaries = $request->file('gallary');
+            // $prodcut_gall = ProductGallary::where('product_id', $id)->get(['product_id', 'image']);
             // return $prodcut_gall->pluck('image');
-            if (!empty($gallaries)) {
-                foreach ($gallaries as $gallary) {
-                    $gallary_name = $request->title . uniqid() . "." . $gallary->getClientOriginalExtension();
-                    $gallary->move(public_path('storage/gallary/'), $gallary_name);
-                    $prodcut_gall->product_id = $id+1;
-                    // $prodcut_gall_img = $prodcut_gall->pluck('image');
-                    // $prodcut_gall_img = $gallary_name;
-                    $prodcut_gall->save();
+            // if (!empty($gallaries)) {
+            //     foreach ($gallaries as $gallary) {
+            //         $gallary_name = $request->title . uniqid() . "." . $gallary->getClientOriginalExtension();
+            //         $gallary->move(public_path('storage/gallary/'), $gallary_name);
+            //         $prodcut_gall->product_id = $id+1;
+            //         // $prodcut_gall_img = $prodcut_gall->pluck('image');
+            //         // $prodcut_gall_img = $gallary_name;
+            //         $prodcut_gall->save();
 
                     // foreach ($prodcut_gall as $gall) {
                     //     // return $prodcut_gall;
@@ -246,8 +246,10 @@ class ProductController extends Controller
                     // $gall->save();
                     // return $prodcut_gall;
 
-                }
-            }
+            //     }
+            // }
+
+             
             $product->title = $request->title;
             $product->image = $image_name;
             $product->price = $request->price;
