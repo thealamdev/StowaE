@@ -117,5 +117,11 @@ Route::name('frontend.')->group(function(){
     });
 });
 
+Route::name('frontend.')->group(function(){
+    Route::prefix('couponApply')->name('couponApply.')->group(function(){
+        require __DIR__ ."/frontend/couponApply/couponApply.php";
+    });
+});
+
  
  

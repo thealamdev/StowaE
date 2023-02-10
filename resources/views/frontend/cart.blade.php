@@ -124,21 +124,21 @@
              <div class="cart_btns_wrap">
                  <div class="row">
                      <div class="col col-lg-6">
-                         <form action="#">
+                         <form action="{{ route('frontend.couponApply.store') }}" method="POST">
+                            @csrf
                              <div class="coupon_form form_item mb-0">
                                  <input type="text" name="coupon" placeholder="Coupon Code...">
                                  <button type="submit" class="btn btn_dark">Apply Coupon</button>
-                                 <div class="info_icon">
+                                 {{-- <div class="info_icon">
                                      <i class="fas fa-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"
                                          title="Your Info Here"></i>
-                                 </div>
+                                 </div> --}}
                              </div>
                          </form>
                      </div>
 
                      <div class="col col-lg-6">
                          <ul class="btns_group ul_li_right">
-                             <li><a class="btn border_black" href="#!">Update Cart</a></li>
                              <li><a class="btn btn_dark" href="#!">Prceed To Checkout</a></li>
                          </ul>
                      </div>
@@ -190,6 +190,16 @@
                                  <span>Shipping and Handling</span>
                                  <span>Free Shipping</span>
                              </li>
+
+                             <li>
+                                <span>Coupon amount</span>
+                                <span>
+                                    @php
+                                    if (Session::has('coupon')){
+                                        {{ Session::get('coupon'); }}
+                                    }
+                                @endphp</span>
+                            </li>
                              <li>
                                  <span>Order Total</span>
                                  <span class="total_price">$52.50</span>
