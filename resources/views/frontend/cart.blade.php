@@ -152,13 +152,13 @@
                                      class="far fa-arrow-up"></i></span></h3>
                          <form action="#">
                              <div class="select_option clearfix">
-                                 <select>
-                                     <option data-display="Select Your Currency">Select Your Option</option>
-                                     <option value="1" selected>United Kingdom (UK)</option>
-                                     <option value="2">United Kingdom (UK)</option>
-                                     <option value="3">United Kingdom (UK)</option>
-                                     <option value="4">United Kingdom (UK)</option>
-                                     <option value="5">United Kingdom (UK)</option>
+                                 <select class="nice_select">
+                                    <option selected disabled>Select Your Option</option>
+                                    @foreach ($shippings as $shipping)
+                                    <option value="{{ $shipping->id }}">{{ $shipping->location }}</option>
+                                    @endforeach
+                                     
+                                      
                                  </select>
                              </div>
                              <div class="row">

@@ -233,18 +233,18 @@ class ProductController extends Controller
             //         // $prodcut_gall_img = $gallary_name;
             //         $prodcut_gall->save();
 
-                    // foreach ($prodcut_gall as $gall) {
-                    //     // return $prodcut_gall;
+            //         foreach ($prodcut_gall as $gall) {
+            //             return $prodcut_gall;
                         
                     
 
-                    //     // $prodcut_gall->image = $gallary_name;
-                    //     $gall->image = $gallary_name;
-                    //     $gall->save();
-                    // }
-                    // $gall->image = $gallary_name;
-                    // $gall->save();
-                    // return $prodcut_gall;
+            //             // $prodcut_gall->image = $gallary_name;
+            //             $gall->image = $gallary_name;
+            //             $gall->save();
+            //         }
+            //         $gall->image = $gallary_name;
+            //         $gall->save();
+            //         // return $prodcut_gall;
 
             //     }
             // }

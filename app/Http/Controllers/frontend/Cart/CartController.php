@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Shipping;
 
 class CartController extends Controller
 {
@@ -16,6 +17,7 @@ class CartController extends Controller
      */
     public function index()
     {
+        $shippings = Shipping::all();
         $carts = Cart::where('user_id', auth()->user()->id)->with(['inventory'=>function($q){
             // $q->select('id','additional_price','product_id');
             // $q->with(['product'=>function($query){
@@ -27,7 +29,7 @@ class CartController extends Controller
         // foreach($carts as $cart){
         //     return $cart->inventory;
         // }
-        return view('frontend.cart',compact('carts'));
+        return view('frontend.cart',compact('carts','shippings'));
     }
 
     /**
