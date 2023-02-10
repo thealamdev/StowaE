@@ -192,17 +192,17 @@
                              </li>
 
                              <li>
-                                <span>Coupon amount</span>
-                                <span>
-                                    @php
-                                    if (Session::has('coupon')){
-                                        {{ Session::get('coupon'); }}
-                                    }
-                                @endphp</span>
+                                 @if (Session::has('coupon'))
+                                 <span>Coupon ({{ Session::get('coupon')['name'] }})</span>
+                                 <span>
+                                    {{ Session::get('coupon')['amount'] }}
+                                 </span>
+                                 @endif
+                                
                             </li>
                              <li>
                                  <span>Order Total</span>
-                                 <span class="total_price">$52.50</span>
+                                 <span class="total_price">$ <strong>{{ $carts->sum('total_price') - Session::get('coupon')['amount'] }}</strong> </span>
                              </li>
                          </ul>
                      </div>
@@ -216,28 +216,7 @@
 
 
  @section('footer-js')
-     @if (Session::has('success'))
-         <script>
-             Command: toastr["success"]("{!! Session::get('success') !!}", "success")
-             toastr.options = {
-                 "closeButton": true,
-                 "debug": false,
-                 "newestOnTop": false,
-                 "progressBar": true,
-                 "positionClass": "toast-top-right",
-                 "preventDuplicates": false,
-                 "onclick": null,
-                 "showDuration": "300",
-                 "hideDuration": "1000",
-                 "timeOut": "5000",
-                 "extendedTimeOut": "1000",
-                 "showEasing": "swing",
-                 "hideEasing": "linear",
-                 "showMethod": "fadeIn",
-                 "hideMethod": "fadeOut"
-             }
-         </script>
-     @endif
+        @include('frontend.message')
 
      <script>
          $(document).ready(function() {
