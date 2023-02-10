@@ -87,14 +87,15 @@
                                          </div>
                                      </form>
                                  </td>
-
+                                  
                                  <td class="text-center">$
                                      <span class="price_text">
-                                        @if(!empty($cart->inventory->product))
+                                        {{ $cart->total_price }}
+                                        {{-- @if(!empty($cart->inventory->product))
                                          @if ($cart->inventory->product->sale_price)
                                              {{ number_format(($cart->inventory->product->sale_price + $cart->inventory->additional_price) * $cart->quantity,2) }}
                                          @endif
-                                        @endif
+                                        @endif --}}
                                      </span>
                                  </td>
 
@@ -183,7 +184,7 @@
                          <ul class="ul_li_block">
                              <li>
                                  <span>Cart Subtotal</span>
-                                 <span>$52.50</span>
+                                 <span>$ <strong id="totalSum">{{ $carts->sum('total_price') }}</strong> </span>
                              </li>
                              <li>
                                  <span>Shipping and Handling</span>
@@ -260,7 +261,7 @@
                         _token:"{{ csrf_token() }}",
                     },
                     success: function(data){
-                        console.log(data)
+                        $('#totalSum').html(data)
                     }
                  })
 
@@ -292,7 +293,7 @@
                         _token:"{{ csrf_token() }}",
                     },
                     success: function(data){
-                        console.log(data)
+                        $('#totalSum').html(data)
                     }
                  })
 

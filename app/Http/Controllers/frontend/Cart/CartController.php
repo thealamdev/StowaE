@@ -21,7 +21,7 @@ class CartController extends Controller
             // $q->with(['product'=>function($query){
             //     $query->select(['id','title','image','price','sale_price']);
             // }]);
-        }])->get(['id','inventory_id','quantity']);
+        }])->get(['id','inventory_id','quantity','total_price']);
         //  return $carts;
 
         // foreach($carts as $cart){
@@ -102,7 +102,9 @@ class CartController extends Controller
         'quantity'=> $request->quantity,
          'total_price' => $request->total,
     ]);
-    return response()->json($request->quantity);
+    $total = $cart->sum('total_price');
+    
+    return response()->json($total);
 
     }
 
