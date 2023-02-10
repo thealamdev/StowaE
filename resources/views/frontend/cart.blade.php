@@ -75,6 +75,7 @@
                                          <div class="quantity_input">
                                              <input type="hidden" class="quantity_limit"
                                                  value="{{ $cart->inventory->quantity }}">
+                                              
                                             <input type="hidden" value="{{ $cart->id }}" class="card_id">
                                              <button type="button" class="decrement_button">
                                                  <i class="fal fa-minus"></i>
@@ -254,6 +255,7 @@
                     dataType:'json',
                     data:{
                         cart_id : $cart_id,
+                        total:parseFloat($price)*$inc,
                         quantity : $inc,
                         _token:"{{ csrf_token() }}",
                     },
@@ -285,6 +287,7 @@
                     dataType:'json',
                     data:{
                         cart_id : $cart_id,
+                        total:parseFloat($price)*$dec,
                         quantity : $dec,
                         _token:"{{ csrf_token() }}",
                     },

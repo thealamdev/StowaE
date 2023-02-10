@@ -10,6 +10,7 @@ class Cart extends Model
     use HasFactory;
     protected $fillable = [
       'quantity',
+      'total_price'
     ];
 
     public function inventory(){

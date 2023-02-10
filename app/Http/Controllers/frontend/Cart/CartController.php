@@ -56,6 +56,7 @@ class CartController extends Controller
             $carts->user_id = auth()->user()->id;
             $carts->inventory_id = $request->inventory_id;
             $carts->quantity = $request->quantity;
+            $carts->total_price = $request->total_price;
     
             $carts->save();
         
@@ -95,9 +96,11 @@ class CartController extends Controller
      */
     public function update(Request $request)
     {
+        // return $request;
     $cart = Cart::where('id',$request->cart_id)->first();
     $cart->update([
         'quantity'=> $request->quantity,
+         'total_price' => $request->total,
     ]);
     return response()->json($request->quantity);
 

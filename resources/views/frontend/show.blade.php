@@ -101,6 +101,7 @@
                         <form action="{{ route('frontend.cart.store') }}" id="shopForm" method="POST">
                             @csrf
                             <input type="hidden" name="inventory_id" id="inventory_id">
+                            <input type="hidden" name="total_price" id="total_amount">
 
                             <div class="quantity_wrap">
 
@@ -467,7 +468,7 @@
                         $('.quantity_limit').html(data.quantity);
                         $('.additional_price_box span').html(data.additional_price)
                         $('#totalPrice').html(parseFloat(data.price).toFixed(2))
-
+                        $('#total_amount').val($totalPrice.html())
                         console.log(data)
                     }
                 })
@@ -485,6 +486,7 @@
                     $quantity.val($update_value)
                     $sale_price = {{ $products->sale_price }};
                     $totalPrice.html(($product_price.html() * $update_value));
+                    $('#total_amount').val(($product_price.html() * $update_value))
                 }
             })
 
