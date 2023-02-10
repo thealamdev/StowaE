@@ -92,6 +92,12 @@ Route::prefix('dashboard')->name('dashboard.')->group(function(){
         });
      });
 
+     Route::middleware(['auth'])->group(function(){
+        Route::prefix('shipping')->name('shipping.')->group(function(){
+            require __DIR__ ."/shipping/shipping.php";
+        });
+     });
+
 
 
 

@@ -492,6 +492,15 @@
                                                 </a>
                                             </li>                                         
                                         </ul>
+                                        <ul class="sidebar-submenu collapse"
+                                            id="setting_menu">
+                                            <li class="sidebar-menu-item active">
+                                                <a class="sidebar-menu-button"
+                                                   href="{{ route('dashboard.shipping.index') }}">
+                                                    <span class="sidebar-menu-text">Shipping</span>
+                                                </a>
+                                            </li>                                         
+                                        </ul>
                                     </li> 
                                    
                                    
