@@ -321,9 +321,10 @@
                  $total_price = $('.order_total').html();
                  $.ajax({
                      type: 'POST',
-                     url: '{{ route('dashboard.shipping.shippingApply') }}',
+                     url: '{{ route('dashboard.shipping.shippingApply') }}', // ShippingController 
                      dataType: 'json',
                      data: {
+                          
                          total_price : $total_price,
                          shipping_id: $shipping_id,
                          _token: "{{ csrf_token() }}",

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Backend\Shipping;
 
+use App\Models\Cart;
 use App\Models\Shipping;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Faker\Core\Number;
+use Illuminate\Support\Facades\Session;
 
 class ShippingController extends Controller
 {
@@ -26,10 +29,17 @@ class ShippingController extends Controller
     // frontend shipping ajax:
     public function shippingApply(Request $request){
         $shipping_details = Shipping::where('id',$request->shipping_id)->first();
+        $cart = Cart::where('user_id', auth()->user()->id)->get();
+        $total = $cart->sum('total_price');
+
+        $grand_total = $total - (Session::get('coupon')['amount'] ?? 0);
+
+        // $sub_total = $total - $grand_total;
+
         if($shipping_details->amount > 0){
-            $order_total = $shipping_details->amount + $request->total_price;
+            $order_total = $total - (Session::get('coupon')['amount'] ?? 0) + $shipping_details->amount;
         }else{
-            $order_total = $shipping_details->amount + $request->total_price;
+            $order_total = $total - (Session::get('coupon')['amount'] ?? 0) + $shipping_details->amount;
         }
         $data =[
             'order_total' => $order_total,
@@ -37,5 +47,7 @@ class ShippingController extends Controller
         ];
         return response()->json($data);
     }
+
+
 
 }

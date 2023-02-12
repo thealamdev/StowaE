@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
+ 
 class CartController extends Controller
 {
+ 
     /**
      * Display a listing of the resource.
      *
@@ -19,18 +21,18 @@ class CartController extends Controller
     public function index()
     {
         $shippings = Shipping::all();
-        $carts = Cart::where('user_id', auth()->user()->id)->with(['inventory'=>function($q){
+        $carts = Cart::where('user_id', auth()->user()->id)->with(['inventory' => function ($q) {
             // $q->select('id','additional_price','product_id');
             // $q->with(['product'=>function($query){
             //     $query->select(['id','title','image','price','sale_price']);
             // }]);
-        }])->get(['id','inventory_id','quantity','total_price']);
+        }])->get(['id', 'inventory_id', 'quantity', 'total_price']);
         //  return $carts;
 
         // foreach($carts as $cart){
         //     return $cart->inventory;
         // }
-        return view('frontend.cart',compact('carts','shippings'));
+        return view('frontend.cart', compact('carts', 'shippings'));
     }
 
     /**
@@ -51,21 +53,19 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        if(empty(auth()->user()->id)){
+        if (empty(auth()->user()->id)) {
             return view('auth.login');
-        }
-        else{
+        } else {
             $carts = new Cart();
             $carts->user_id = auth()->user()->id;
             $carts->inventory_id = $request->inventory_id;
             $carts->quantity = $request->quantity;
             $carts->total_price = $request->total_price;
-    
+
             $carts->save();
-        
-            return redirect(route('frontend.cart.index'))->with('success','Add to cart done');
+
+            return redirect(route('frontend.cart.index'))->with('success', 'Add to cart done');
         }
-         
     }
 
     /**
@@ -100,21 +100,22 @@ class CartController extends Controller
     public function update(Request $request)
     {
         // return $request;
-    $cart = Cart::where('id',$request->cart_id)->first();
-    $cart->update([
-        'quantity'=> $request->quantity,
-         'total_price' => $request->total,
-    ]);
-    $total = $cart->sum('total_price');
-    $grand_total = $total - (Session::get('coupon')['amount'] ?? 0);
-    $cart_data = [
-        'total' => $total,
-        'grand_total' => $grand_total,
-    ];
-    return response()->json($cart_data);
-
+        $cart = Cart::where('id', $request->cart_id)->first();
+        $cart->update([
+            'quantity' => $request->quantity,
+            'total_price' => $request->total,
+        ]);
+        $total = $cart->sum('total_price');
+        $grand_total = $total - (Session::get('coupon')['amount'] ?? 0);
+        $cart_data = [
+            'total' => $total,
+            'grand_total' => $grand_total,
+        ];
+        return response()->json($cart_data);
     }
 
+
+  
     /**
      * Remove the specified resource from storage.
      *
@@ -126,7 +127,7 @@ class CartController extends Controller
         // return $id;
         $cart = Cart::find($id);
         $cart->delete();
-        
-        return back()->with('success','Cart delete successfull');
+
+        return back()->with('success', 'Cart delete successfull');
     }
 }
