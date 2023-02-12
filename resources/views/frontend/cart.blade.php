@@ -247,7 +247,7 @@
                      $input.val($inc)
                  }
                  $total_price.html(parseFloat($inc * $price).toFixed(2));
-                 $coupon_amount = $('#coupon_amount')
+                //  $coupon_amount = $('#coupon_amount')
 
                  $.ajax({
                      type: 'POST',
@@ -260,13 +260,8 @@
                          _token: "{{ csrf_token() }}",
                      },
                      success: function(data) {
-                        
-                        $('#totalSum').html(data)
-                         if(($('.coupon_price'))){
-                            $('.order_total').html(parseFloat(data) - parseFloat($coupon_amount.html())) 
-                         }else{
-                            $('.order_total').html(data) 
-                         }
+                        $('#totalSum').html(data.total)
+                        $('.order_total').html(data.grand_total)                          
 
                      }
                  })
@@ -286,7 +281,7 @@
                  }
 
                  $total_price.html(parseFloat($dec * $price).toFixed(2));
-                 $coupon_amount = $('#coupon_amount')
+                //  $coupon_amount = $('#coupon_amount')
 
                  $.ajax({
                      type: 'POST',
@@ -299,12 +294,9 @@
                          _token: "{{ csrf_token() }}",
                      },
                      success: function(data) {
-                         $('#totalSum').html(data)
-                         if($('#coupon_amount')==false){
-                            $('.order_total').html(data) 
-                         }else{
-                            $('.order_total').html(parseFloat(data) - parseFloat($coupon_amount.html())) 
-                         }
+                        $('#totalSum').html(data.total)
+                        $('.order_total').html(data.grand_total)         
+                          
                           
                      }
                  })

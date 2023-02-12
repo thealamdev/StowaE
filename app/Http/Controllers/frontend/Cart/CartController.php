@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Frontend\Cart;
 
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Shipping;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Shipping;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -105,8 +106,12 @@ class CartController extends Controller
          'total_price' => $request->total,
     ]);
     $total = $cart->sum('total_price');
-    
-    return response()->json($total);
+    $grand_total = $total - (Session::get('coupon')['amount'] ?? 0);
+    $cart_data = [
+        'total' => $total,
+        'grand_total' => $grand_total,
+    ];
+    return response()->json($cart_data);
 
     }
 
