@@ -195,7 +195,7 @@
                              <li>
                                  @if (Session::has('coupon'))
                                      <span>Coupon ({{ Session::get('coupon')['name'] }})</span>
-                                     <span>
+                                     <span id="coupon_amount" class="coupon_price">
                                          {{ Session::get('coupon')['amount'] }}
                                      </span>
                                  @endif
@@ -204,7 +204,14 @@
                              <li>
                                  <span>Order Total</span>
                                  <span>$
-                                     <strong class="order_total">{{ $carts->sum('total_price') - Session::get('coupon')['amount'] }}</strong>
+                                     <strong class="order_total"> 
+                                        @if (!(Session::has('coupon')))
+                                        {{ $carts->sum('total_price') }}
+                                        @endif
+                                         @if (Session::has('coupon'))
+                                             {{ $carts->sum('total_price') - Session::get('coupon')['amount'] }}
+                                         @endif
+                                    </strong>
                                  </span>
                              </li>
                          </ul>
@@ -240,7 +247,7 @@
                      $input.val($inc)
                  }
                  $total_price.html(parseFloat($inc * $price).toFixed(2));
-
+                 $coupon_amount = $('#coupon_amount')
 
                  $.ajax({
                      type: 'POST',
@@ -253,7 +260,14 @@
                          _token: "{{ csrf_token() }}",
                      },
                      success: function(data) {
-                         $('#totalSum').html(data)
+                        
+                        $('#totalSum').html(data)
+                         if(($('.coupon_price'))){
+                            $('.order_total').html(parseFloat(data) - parseFloat($coupon_amount.html())) 
+                         }else{
+                            $('.order_total').html(data) 
+                         }
+
                      }
                  })
 
@@ -272,7 +286,7 @@
                  }
 
                  $total_price.html(parseFloat($dec * $price).toFixed(2));
-
+                 $coupon_amount = $('#coupon_amount')
 
                  $.ajax({
                      type: 'POST',
@@ -286,6 +300,12 @@
                      },
                      success: function(data) {
                          $('#totalSum').html(data)
+                         if($('#coupon_amount')==false){
+                            $('.order_total').html(data) 
+                         }else{
+                            $('.order_total').html(parseFloat(data) - parseFloat($coupon_amount.html())) 
+                         }
+                          
                      }
                  })
 

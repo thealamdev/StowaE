@@ -43,28 +43,32 @@ class CouponApplyController extends Controller
         $total_price = Cart::where('user_id', auth()->user()->id)->sum('total_price');
         $coupon = Coupon::where('name', $request->coupon)->first();
 
-         if(!empty($coupon->name)){
-            if($coupon->start_date < now()){
+        if (!empty($coupon->name)) {
+            if ($coupon->start_date < now()) {
                 if ($total_price > $coupon->applicable_amount) {
-                    if($coupon->end_date > now()){
+                    if ($coupon->end_date > now()) {
                         $apply = [
                             'amount' => $coupon->amount,
                             'name' => $coupon->name
                         ];
-                        Session::put('coupon',$apply);
-                        return back()->with('success','Coupon applied');
-                    }else{
-                        return back()->with('error','Date expire');
+                        Session::put('coupon', $apply);
+                        return back()->with('success', 'Coupon applied');
+                    } else {
+                        session()->forget('coupon');
+                        return back()->with('error', 'Date expire');
                     }
                 } else {
-                     return back()->with('error','Amount is low');
+                    session()->forget('coupon');
+                    return back()->with('error', 'Amount is low');
                 }
-            }else{
-                return back()->with('error','Date expireed');
+            } else {
+                session()->forget('coupon');
+                return back()->with('error', 'Date expireed');
             }
-         }else{
-            return back()->with('error','Coupon is not valid');
-         }
+        } else {
+            session()->forget('coupon');
+            return back()->with('error', 'Coupon is not valid');
+        }
     }
 
     /**
