@@ -261,8 +261,13 @@
                      },
                      success: function(data) {
                         $('#totalSum').html(data.total)
-                        $('.order_total').html(data.grand_total)                          
-
+                        // $('.order_total').html(data.grand_total)     
+                        if($('.shipping_fee').html() === "Free Shipping"){
+                            $('.order_total').html(data.grand_total)     
+                        } else{
+                            $('.order_total').html(data.grand_total + parseFloat($('.shipping_fee').html()))
+                        }                   
+                              
                      }
                  })
 
@@ -295,9 +300,12 @@
                      },
                      success: function(data) {
                         $('#totalSum').html(data.total)
-                        $('.order_total').html(data.grand_total)         
-                          
-                          
+                        // $('.order_total').html(data.grand_total + parseFloat($('.shipping_fee').html())) 
+                        if($('.shipping_fee').html() === "Free Shipping"){
+                            $('.order_total').html(data.grand_total)     
+                        } else{
+                            $('.order_total').html(data.grand_total + parseFloat($('.shipping_fee').html()))
+                        }            
                      }
                  })
 
