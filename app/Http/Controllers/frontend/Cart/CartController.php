@@ -105,7 +105,7 @@ class CartController extends Controller
             'quantity' => $request->quantity,
             'total_price' => $request->total,
         ]);
-        $total = Cart::where('user_id',auth()->user()->id)->where('id', $request->cart_id)->sum('total_price');
+        $total = Cart::where('user_id', auth()->user()->id)->sum('total_price');
         // $total = $cart->sum('total_price');
         $grand_total = $total - (Session::get('coupon')['amount'] ?? 0);
         $cart_data = [
