@@ -140,12 +140,12 @@
 
                      <div class="col col-lg-6">
                          <ul class="btns_group ul_li_right">
-                             <li><a class="btn btn_dark" href="#!">Prceed To Checkout</a></li>
+                             <li><a class="btn btn_dark" href="{{ route('frontend.cart.checkout') }}">Prceed To Checkout</a></li>
                          </ul>
                      </div>
                  </div>
              </div>
-
+             
              <div class="row">
                  <div class="col col-lg-6">
                      <div class="calculate_shipping">

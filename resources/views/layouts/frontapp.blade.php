@@ -31,11 +31,12 @@
     <!-- select option - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/nice-select.css') }}">
     <!-- woocommercen - css include -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/woocommerce.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/woocommerce.css') }}"> --}}
+    @yield('css')
     <!-- custom - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/toastr.min.css') }}">
-
+     
 </head>
 
 

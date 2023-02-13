@@ -131,4 +131,12 @@ class CartController extends Controller
 
         return back()->with('success', 'Cart delete successfull');
     }
+
+    // checkout function:
+    public function checkout(){
+        $carts = Cart::where('user_id', auth()->user()->id)->with(['inventory' => function ($q) {
+        }])->get(['id', 'inventory_id', 'quantity', 'total_price']);
+        // return $carts;
+        return view('frontend.checkout',compact('carts'));
+    }
 }

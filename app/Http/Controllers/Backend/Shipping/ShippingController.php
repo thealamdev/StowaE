@@ -41,6 +41,7 @@ class ShippingController extends Controller
         }else{
             $order_total = $total - (Session::get('coupon')['amount'] ?? 0) + $shipping_details->amount;
         }
+        Session::put('shipping_amount',$shipping_details->amount);
         $data =[
             'order_total' => $order_total,
             'shipping_amount' => $shipping_details->amount,
