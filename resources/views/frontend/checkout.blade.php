@@ -122,6 +122,11 @@
                                                 value="" />
                                         </p>
                                         <div class="clear"></div>
+                                        <p class="form-row form-row notes" id="order_comments_field">
+                                            <label for="order_comments" class="">Order Notes</label>
+                                            <textarea name="order_comments" class="input-text " id="order_comments"
+                                                placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="5"></textarea>
+                                        </p>
                                          
                                          
                                     </div>
@@ -137,48 +142,37 @@
                                         <div class="shipping_address">
                                             <p class="form-row form-row form-row-first validate-required"
                                                 id="shipping_first_name_field">
-                                                <label for="shipping_first_name" class="">First Name <abbr
+                                                <label for="shipping_first_name" class=""> Name <abbr
                                                         class="required" title="required">*</abbr></label>
-                                                <input type="text" class="input-text " name="shipping_first_name"
+                                                <input type="text" class="input-text " name="shipping_name"
                                                     id="shipping_first_name" placeholder="" autocomplete="given-name"
                                                     value="" />
                                             </p>
                                             <p class="form-row form-row form-row-last validate-required"
                                                 id="shipping_last_name_field">
-                                                <label for="shipping_last_name" class="">Last Name <abbr
+                                                <label for="shipping_last_name" class="">Phone<abbr
                                                         class="required" title="required">*</abbr></label>
-                                                <input type="text" class="input-text " name="shipping_last_name"
+                                                <input type="text" class="input-text " name="shipping_phone"
                                                     id="shipping_last_name" placeholder="" autocomplete="family-name"
                                                     value="" />
                                             </p>
                                             <div class="clear"></div>
-                                            <p class="form-row form-row form-row-wide" id="shipping_company_field">
-                                                <label for="shipping_company" class="">Company Name</label>
-                                                <input type="text" class="input-text " name="shipping_company"
-                                                    id="shipping_company" placeholder="" autocomplete="organization"
-                                                    value="" />
-                                            </p>
+                                             
                                          
                                             <p class="form-row form-row form-row-wide address-field validate-required"
                                                 id="shipping_address_1_field">
                                                 <label for="shipping_address_1" class="">Address <abbr
                                                         class="required" title="required">*</abbr></label>
-                                                <input type="text" class="input-text " name="shipping_address_1"
+                                                <input type="text" class="input-text " name="shipping_address"
                                                     id="shipping_address_1" placeholder="Street address"
                                                     autocomplete="address-line1" value="" />
                                             </p>
-                                            <p class="form-row form-row form-row-wide address-field"
-                                                id="shipping_address_2_field">
-                                                <input type="text" class="input-text " name="shipping_address_2"
-                                                    id="shipping_address_2"
-                                                    placeholder="Apartment, suite, unit etc. (optional)"
-                                                    autocomplete="address-line2" value="" />
-                                            </p>
+                                             
                                             <p class="form-row form-row address-field validate-postcode validate-required form-row-first  woocommerce-invalid-required-field"
                                                 id="billing_city_field2">
                                                 <label for="billing_city" class="">Town / City <abbr
                                                         class="required" title="required">*</abbr></label>
-                                                <input type="text" class="input-text " name="billing_city"
+                                                <input type="text" class="input-text " name="shipping_city"
                                                     id="billing_city3" placeholder="" autocomplete="address-level2"
                                                     value="" />
                                             </p>
@@ -186,17 +180,13 @@
                                                 id="billing_postcode_field17">
                                                 <label for="billing_postcode" class="">Postcode / ZIP <abbr
                                                         class="required" title="required">*</abbr></label>
-                                                <input type="text" class="input-text " name="billing_postcode"
+                                                <input type="text" class="input-text " name="shipping_zip"
                                                     id="billing_postcode4" placeholder="" autocomplete="postal-code"
                                                     value="" />
                                             </p>
                                             <div class="clear"></div>
                                         </div>
-                                        <p class="form-row form-row notes" id="order_comments_field">
-                                            <label for="order_comments" class="">Order Notes</label>
-                                            <textarea name="order_comments" class="input-text " id="order_comments"
-                                                placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="5"></textarea>
-                                        </p>
+                                         
                                     </div>
                                 </div>
                             </div>
