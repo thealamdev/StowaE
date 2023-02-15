@@ -17,10 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('order_status')->default('processing')->comment('processing','complete','cancel');
+            $table->string('payment_status')->default('unpaid')->comment('unpaid','paid');
             $table->string('coupon_name')->nullable();
             $table->integer('coupon_amount')->nullable();
             $table->integer('shipping_charge')->nullable();
-            $table->boolean('status')->default(true);
+            $table->string('order_note')->nullable();
             $table->string('transaction_id')->nullable();
             $table->decimal('total');
             $table->softDeletes();

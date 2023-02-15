@@ -2,7 +2,7 @@
 @section('title', 'Checkout')
 @section('frontPageContent')
     <!-- breadcrumb_section - start
-                        ================================================== -->
+                            ================================================== -->
     <div class="breadcrumb_section">
         <div class="container">
             <ul class="breadcrumb_nav ul_li">
@@ -12,11 +12,12 @@
         </div>
     </div>
     <!-- breadcrumb_section - end
-                        ================================================== -->
+                            ================================================== -->
 
 
     <!-- checkout-section - start
-                        ================================================== -->
+                            ================================================== -->
+    @include('frontend.message')
     <section class="checkout-section section_space">
         <div class="container">
             <div class="row">
@@ -62,43 +63,44 @@
                             </p>
                             <div class="clear"></div>
                         </form>
-                        <form name="checkout" method="post" class="checkout woocommerce-checkout"
-                            action="http://localhost/wp/?page_id=6" enctype="multipart/form-data">
+                        <form action="{{ route('pay') }}" method="POST" class="checkout woocommerce-checkout"
+                             enctype="multipart/form-data">
+                             @csrf
                             <div class="col2-set" id="customer_details">
                                 <div class="coll-1">
                                     <div class="woocommerce-billing-fields">
                                         <h3>Billing Details</h3>
                                         <p class="form-row form-row form-row-first validate-required"
-                                            id="billing_last_name_field">
-                                            <label for="billing_last_name" class=""> Name <abbr class="required"
+                                            id="billing_name">
+                                            <label for="billing_name" class=""> Name <abbr class="required"
                                                     title="required">*</abbr></label>
-                                            <input type="text" class="input-text " name="name"
+                                            <input type="text" class="input-text " name="billing_name"
                                                 placeholder="Enter Name" value="{{ auth()->user()->name }}" />
                                         </p>
 
                                         <p class="form-row form-row form-row-last validate-required"
-                                            id="billing_last_name_field">
-                                            <label for="billing_last_name" class="">Email address <abbr
+                                            id="billing_email">
+                                            <label for="billing_email" class="">Email address <abbr
                                                     class="required" title="required">*</abbr></label>
-                                            <input type="text" class="input-text " name="email"
+                                            <input type="text" class="input-text " name="billing_email"
                                                 placeholder="Enter email" value="{{ auth()->user()->email }}" />
                                         </p>
                                         <div class="clear"></div>
 
                                         <p class="form-row form-row form-row-first validate-required validate-email"
-                                            id="billing_email_field">
-                                            <label for="billing_email" class="">Phone Number<abbr class="required"
+                                            id="billing_phone">
+                                            <label for="billing_phone" class="">Phone Number<abbr class="required"
                                                     title="required">*</abbr></label>
-                                            <input type="tel" class="input-text " name="phone"
-                                                placeholder="Enter phone number" value="" />
+                                            <input type="tel" class="input-text " name="billing_phone"
+                                                placeholder="Enter phone number" value="{{ auth()->user()->user_info->phone ?? ''}}" />
                                         </p>
 
                                         <p class="form-row form-row form-row-last validate-required validate-phone"
-                                            id="billing_phone_field">
-                                            <label for="billing_phone" class="">Address <abbr class="required"
+                                            id="billing_address">
+                                            <label for="billing_address" class="">Address <abbr class="required"
                                                     title="required">*</abbr></label>
-                                            <input type="text" class="input-text " name="address"
-                                                placeholder="Enter address" value="" />
+                                            <input type="text" class="input-text " name="billing_address"
+                                                placeholder="Enter address" value="{{ auth()->user()->user_info->address ?? '' }}" />
                                         </p>
                                         <div class="clear"></div>
 
@@ -107,21 +109,21 @@
                                             id="billing_city_field">
                                             <label for="billing_city" class="">Town / City <abbr class="required"
                                                     title="required">*</abbr></label>
-                                            <input type="text" class="input-text " name="city" id="billing_city"
+                                            <input type="text" class="input-text " name="billing_city" id="billing_city"
                                                 placeholder="Ente city name" autocomplete="address-level2"
-                                                value="" />
+                                                value="{{ auth()->user()->user_info->city ?? '' }}" />
                                         </p>
                                         <p class="form-row form-row form-row-last address-field validate-required validate-postcode"
-                                            id="billing_postcode_field">
+                                            id="billing_postcode">
                                             <label for="billing_postcode" class="">Postcode / ZIP <abbr
                                                     class="required" title="required">*</abbr></label>
-                                            <input type="text" class="input-text " name="zip"
-                                                id="billing_postcode" placeholder="Enter zip code" value="" />
+                                            <input type="text" class="input-text " name="billing_postcode"
+                                                id="billing_postcode" placeholder="Enter zip code" value="{{ auth()->user()->user_info->zip ?? '' }}" />
                                         </p>
                                         <div class="clear"></div>
-                                        <p class="form-row form-row notes" id="order_comments_field">
-                                            <label for="order_comments" class="">Order Notes</label>
-                                            <textarea name="order_comments" class="input-text " id="order_comments"
+                                        <p class="form-row form-row notes" id="order_note">
+                                            <label for="order_note" class="">Order Notes</label>
+                                            <textarea name="order_note" class="input-text " id="order_note"
                                                 placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="5"></textarea>
                                         </p>
 
@@ -226,9 +228,7 @@
                                                     -$ {{ Session::get('coupon')['amount'] }}
                                                 @endif
 
-                                                <input type="hidden" name="shipping_method[0]" data-index="0"
-                                                    id="shipping_method_0" value="free_shipping:1"
-                                                    class="shipping_method" />
+                                                 
                                             </td>
                                         </tr>
                                         <tr class="shipping">
@@ -237,21 +237,19 @@
                                                 @if (Session::has('shipping_amount'))
                                                     +$ {{ Session::get('shipping_amount') }}
                                                 @endif
-                                                <input type="hidden" name="shipping_method[0]" data-index="0"
-                                                    id="shipping_method_0" value="free_shipping:1"
-                                                    class="shipping_method" />
+                                                 
                                             </td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Total</th>
-                                            <td> 
-                                                    <span class="woocommerce-Price-amount amount">
-                                                        $
-                                                        <strong class="woocommerce-Price-currencySymbol">
-                                                            {{ $carts->sum('total_price') - (Session::has('coupon') ? Session::get('coupon')['amount'] : 0) + (Session::has('shipping_amount') ? Session::get('shipping_amount'):0)}}
-                                                        </strong>
-                                                    </span>
-                                                 
+                                            <td>
+                                                <span class="woocommerce-Price-amount amount">
+                                                    $
+                                                    <strong class="woocommerce-Price-currencySymbol">
+                                                        {{ $carts->sum('total_price') - (Session::has('coupon') ? Session::get('coupon')['amount'] : 0) + (Session::has('shipping_amount') ? Session::get('shipping_amount') : 0) }}
+                                                    </strong>
+                                                </span>
+
 
 
                                             </td>
@@ -261,9 +259,9 @@
                                 <div id="payment" class="woocommerce-checkout-payment">
                                     <ul class="wc_payment_methods payment_methods methods">
                                         <li class="wc_payment_method payment_method_cheque">
-                                            <input id="payment_method_cheque" type="radio" class="input-radio"
+                                            {{-- <input id="payment_method_cheque" type="radio" class="input-radio"
                                                 name="payment_method" value="cheque" checked='checked'
-                                                data-order_button_text="" />
+                                                data-order_button_text="" /> --}}
                                             <!--grop add span for radio button style-->
                                             <span class='grop-woo-radio-style'></span>
                                             <!--custom change-->
@@ -297,13 +295,16 @@
                                             you click the <em>Update Totals</em> button before placing your order. You may
                                             be charged more than the amount stated above if you fail to do so.
                                             <br />
-                                            <input type="submit" class="button alt"
-                                                name="woocommerce_checkout_update_totals" value="Update totals" />
+                                            {{-- <input type="submit" class="button alt"
+                                                name="woocommerce_checkout_update_totals" value="Update totals" /> --}}
                                         </noscript>
-                                        <input type="submit" class="button alt" name="woocommerce_checkout_place_order"
-                                            id="place_order" value="Place order" data-value="Place order" />
-                                        <input type="hidden" id="_wpnonce5" name="_wpnonce" value="783c1934b0" />
-                                        <input type="hidden" name="_wp_http_referer" value="/wp/?page_id=6" />
+                                        {{-- <button id="sslczPayBtn" token="if you have any token validation" postdata=""
+                                            order="If you already have the transaction generated for current order"
+                                            endpoint="/pay-via-ajax"> Pay Now
+                                        </button> --}}
+                                        <input type="submit" class="button alt"  
+                                                 />
+
                                     </div>
                                 </div>
                             </div>
@@ -312,12 +313,27 @@
                 </div>
             </div>
         </div>
+        
     </section>
     <!-- checkout-section - end
-                        ================================================== -->
+                            ================================================== -->
 
 @endsection
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/woocommerce-2.css') }}">
 @endsection
+@section('footer-js')
+{{-- <script>
+    (function (window, document) {
+        var loader = function () {
+            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+            script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
+            tag.parentNode.insertBefore(script, tag);
+        };
+
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+    })(window, document);
+</script> --}}
+@endsection
+

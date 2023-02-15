@@ -49,6 +49,9 @@ class User extends Authenticatable
     ];
 
 
+    public function user_info(){
+        return $this->hasOne(User_info::class);
+    }
     public function category(){
         return $this->hasMany(Category::class);
     }

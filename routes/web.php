@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Backend\BackendController;
-use App\Http\Controllers\Backend\Category\CategoryController;
-use App\Http\Controllers\Backend\PermissionController;
-use App\Http\Controllers\Backend\RoleAssign\RoleAssignController;
-use App\Http\Controllers\Backend\RolePermissionController;
-use App\Http\Controllers\frontend\frontendController;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\frontend\frontendController;
+use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\Backend\PermissionController;
+use App\Http\Controllers\Backend\RolePermissionController;
+use App\Http\Controllers\Backend\Category\CategoryController;
+use App\Http\Controllers\Backend\RoleAssign\RoleAssignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,20 @@ use Illuminate\Support\Facades\Route;
  
 // Frontend show route:
 Route::get('/',[frontendController::class, 'index'])->name('frontend.home');
+
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout'])->name('example1');
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index'])->name('pay');
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
 
 Auth::routes();
 // ============== Backend Routes =================
