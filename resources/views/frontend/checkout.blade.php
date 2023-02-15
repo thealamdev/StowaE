@@ -2,7 +2,7 @@
 @section('title', 'Checkout')
 @section('frontPageContent')
     <!-- breadcrumb_section - start
-                    ================================================== -->
+                        ================================================== -->
     <div class="breadcrumb_section">
         <div class="container">
             <ul class="breadcrumb_nav ul_li">
@@ -12,11 +12,11 @@
         </div>
     </div>
     <!-- breadcrumb_section - end
-                    ================================================== -->
+                        ================================================== -->
 
 
     <!-- checkout-section - start
-                    ================================================== -->
+                        ================================================== -->
     <section class="checkout-section section_space">
         <div class="container">
             <div class="row">
@@ -73,26 +73,24 @@
                                             <label for="billing_last_name" class=""> Name <abbr class="required"
                                                     title="required">*</abbr></label>
                                             <input type="text" class="input-text " name="name"
-                                                 placeholder="Enter Name" 
-                                                value="{{ auth()->user()->name }}" />
+                                                placeholder="Enter Name" value="{{ auth()->user()->name }}" />
                                         </p>
-                                        
+
                                         <p class="form-row form-row form-row-last validate-required"
                                             id="billing_last_name_field">
-                                            <label for="billing_last_name" class="">Email address <abbr class="required"
-                                                    title="required">*</abbr></label>
+                                            <label for="billing_last_name" class="">Email address <abbr
+                                                    class="required" title="required">*</abbr></label>
                                             <input type="text" class="input-text " name="email"
-                                                 placeholder="Enter email" 
-                                                value="{{ auth()->user()->email }}" />
+                                                placeholder="Enter email" value="{{ auth()->user()->email }}" />
                                         </p>
                                         <div class="clear"></div>
-                                         
+
                                         <p class="form-row form-row form-row-first validate-required validate-email"
                                             id="billing_email_field">
-                                            <label for="billing_email" class="">Phone Number<abbr
-                                                    class="required" title="required">*</abbr></label>
+                                            <label for="billing_email" class="">Phone Number<abbr class="required"
+                                                    title="required">*</abbr></label>
                                             <input type="tel" class="input-text " name="phone"
-                                                  placeholder="Enter phone number" value="" />
+                                                placeholder="Enter phone number" value="" />
                                         </p>
 
                                         <p class="form-row form-row form-row-last validate-required validate-phone"
@@ -100,17 +98,17 @@
                                             <label for="billing_phone" class="">Address <abbr class="required"
                                                     title="required">*</abbr></label>
                                             <input type="text" class="input-text " name="address"
-                                                 placeholder="Enter address"  value="" />
+                                                placeholder="Enter address" value="" />
                                         </p>
                                         <div class="clear"></div>
-                                        
-                                         
+
+
                                         <p class="form-row form-row address-field validate-postcode validate-required form-row-first  woocommerce-invalid-required-field"
                                             id="billing_city_field">
                                             <label for="billing_city" class="">Town / City <abbr class="required"
                                                     title="required">*</abbr></label>
-                                            <input type="text" class="input-text " name="city"
-                                                id="billing_city" placeholder="Ente city name" autocomplete="address-level2"
+                                            <input type="text" class="input-text " name="city" id="billing_city"
+                                                placeholder="Ente city name" autocomplete="address-level2"
                                                 value="" />
                                         </p>
                                         <p class="form-row form-row form-row-last address-field validate-required validate-postcode"
@@ -118,8 +116,7 @@
                                             <label for="billing_postcode" class="">Postcode / ZIP <abbr
                                                     class="required" title="required">*</abbr></label>
                                             <input type="text" class="input-text " name="zip"
-                                                id="billing_postcode" placeholder="Enter zip code"  
-                                                value="" />
+                                                id="billing_postcode" placeholder="Enter zip code" value="" />
                                         </p>
                                         <div class="clear"></div>
                                         <p class="form-row form-row notes" id="order_comments_field">
@@ -127,8 +124,8 @@
                                             <textarea name="order_comments" class="input-text " id="order_comments"
                                                 placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="5"></textarea>
                                         </p>
-                                         
-                                         
+
+
                                     </div>
                                 </div>
                                 <div class="coll-2">
@@ -157,8 +154,8 @@
                                                     value="" />
                                             </p>
                                             <div class="clear"></div>
-                                             
-                                         
+
+
                                             <p class="form-row form-row form-row-wide address-field validate-required"
                                                 id="shipping_address_1_field">
                                                 <label for="shipping_address_1" class="">Address <abbr
@@ -167,7 +164,7 @@
                                                     id="shipping_address_1" placeholder="Street address"
                                                     autocomplete="address-line1" value="" />
                                             </p>
-                                             
+
                                             <p class="form-row form-row address-field validate-postcode validate-required form-row-first  woocommerce-invalid-required-field"
                                                 id="billing_city_field2">
                                                 <label for="billing_city" class="">Town / City <abbr
@@ -186,7 +183,7 @@
                                             </p>
                                             <div class="clear"></div>
                                         </div>
-                                         
+
                                     </div>
                                 </div>
                             </div>
@@ -238,7 +235,7 @@
                                             <th>Shipping</th>
                                             <td data-title="Shipping">
                                                 @if (Session::has('shipping_amount'))
-                                                   +$ {{ Session::get('shipping_amount') }}
+                                                    +$ {{ Session::get('shipping_amount') }}
                                                 @endif
                                                 <input type="hidden" name="shipping_method[0]" data-index="0"
                                                     id="shipping_method_0" value="free_shipping:1"
@@ -247,8 +244,16 @@
                                         </tr>
                                         <tr class="order-total">
                                             <th>Total</th>
-                                            <td><strong><span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">$</span>{{ $carts->sum('total_price') - Session::get('coupon')['amount'] + Session::get('shipping_amount')}}</span></strong>
+                                            <td> 
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        $
+                                                        <strong class="woocommerce-Price-currencySymbol">
+                                                            {{ $carts->sum('total_price') - (Session::has('coupon') ? Session::get('coupon')['amount'] : 0) + (Session::has('shipping_amount') ? Session::get('shipping_amount'):0)}}
+                                                        </strong>
+                                                    </span>
+                                                 
+
+
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -309,7 +314,7 @@
         </div>
     </section>
     <!-- checkout-section - end
-                    ================================================== -->
+                        ================================================== -->
 
 @endsection
 
