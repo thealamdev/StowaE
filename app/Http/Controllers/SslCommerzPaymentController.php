@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\Order;
+use App\Models\Shipping_address;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -91,14 +92,25 @@ class SslCommerzPaymentController extends Controller
         $order->order_status = 'Pending';
         $order->coupon_name = Session::has('coupon') ? Session::get('coupon')['name'] : '';
         $order->coupon_amount = Session::has('coupon') ? Session::get('coupon')['amount'] : 0;
-        $order->shipping_charge = Session::has('shipping_charge') ? Session::get('shipping_charge') : 0;
+        $order->shipping_charge = Session::has('shipping_amount') ? Session::get('shipping_amount') : 0;
         $order->payment_status = 'unpaid';
         $order->order_note = $request->order_note;
         $order->save();
         foreach ($carts as $cart) {
-            $order->inventory_order()->attach($cart->inventory_id, ['quantity' => $cart->quantity]);
+            $order->inventory_order()->attach($cart->inventory_id, ['quantity' => $cart->quantity,'amount' => $cart->inventory->product->sale_price ?? $cart->inventory->product->price ,'additional_price' => $cart->inventory->additional_price ?? 0]);
         }
 
+
+        if($request->ship_to_different_address == true){
+            $shipping = Shipping_address::create([
+                'order_id' => $order->id,
+                'name' => $request-> shipping_name,
+                'address' => $request->shipping_address,
+                'city' => $request->shipping_city ,
+                'zip' => $request->shipping_zip,
+                'phone' => $request->shipping_phone,
+            ]);
+        }
 
 
         // $order = Order::create([
