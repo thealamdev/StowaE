@@ -179,6 +179,8 @@ class SslCommerzPaymentController extends Controller
             print_r($payment_options);
             $payment_options = array();
         }
+
+        // return redirect(route('success'));
     }
 
   
