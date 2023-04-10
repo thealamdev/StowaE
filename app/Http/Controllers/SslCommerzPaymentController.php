@@ -8,6 +8,7 @@ use App\Models\User_info;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Library\SslCommerz\SslCommerzNotification;
+use App\Models\Inventory;
 use App\Models\Order;
 use App\Models\Shipping_address;
 
@@ -192,11 +193,17 @@ class SslCommerzPaymentController extends Controller
         $sslc = new SslCommerzNotification();
 
         #Check order status in order tabel against the transaction id or order id.
-        $order_details = Order::where('transaction_id', $tran_id)->select('transaction_id', 'order_status', 'total', 'payment_status')->first();
-        // return $order_details;
+        $order_details = Order::where('transaction_id', $tran_id)->select('id','transaction_id', 'order_status', 'total', 'payment_status')->first();
+        $inventory_orders  = DB::table('inventory_order')
+            ->where('order_id',$order_details->id)
+            ->get();
+
+            // return $inventory_orders;
+        
         if ($order_details->order_status == 'Pending') {
             $validation = $sslc->orderValidate($request->all(), $tran_id, $amount);
-            // return $validation;
+            
+            
             if ($validation) {
                  
                 $update_product = DB::table('orders')
@@ -205,6 +212,11 @@ class SslCommerzPaymentController extends Controller
                         'order_status' => 'Processing',
                         'payment_status' => 'Paid'
                     ]);
+
+                    foreach($inventory_orders as $inventory_order){
+                        $inventory = Inventory::where('id',$inventory_order->inventory_id)->decrement('quantity');
+                        $card = Cart::where('user_id',auth()->user()->id)->where('inventory_id',$inventory_order->inventory_id)->delete();
+                    }
 
                 return redirect(route('frontend.home'))->with('success', 'Transaction Successfull');
             }
