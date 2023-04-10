@@ -13,7 +13,7 @@ use App\Models\Shipping_address;
 
 class SslCommerzPaymentController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         $validate = $request->validate([
@@ -86,16 +86,16 @@ class SslCommerzPaymentController extends Controller
         $order->order_note = $request->order_note;
         $order->save();
         foreach ($carts as $cart) {
-            $order->inventory_order()->attach($cart->inventory_id, ['quantity' => $cart->quantity,'amount' => $cart->inventory->product->sale_price ?? $cart->inventory->product->price ,'additional_price' => $cart->inventory->additional_price ?? 0]);
+            $order->inventory_order()->attach($cart->inventory_id, ['quantity' => $cart->quantity, 'amount' => $cart->inventory->product->sale_price ?? $cart->inventory->product->price, 'additional_price' => $cart->inventory->additional_price ?? 0]);
         }
 
 
-        if($request->ship_to_different_address == true){
+        if ($request->ship_to_different_address == true) {
             $shipping = Shipping_address::create([
                 'order_id' => $order->id,
-                'name' => $request-> shipping_name,
+                'name' => $request->shipping_name,
                 'address' => $request->shipping_address,
-                'city' => $request->shipping_city ,
+                'city' => $request->shipping_city,
                 'zip' => $request->shipping_zip,
                 'phone' => $request->shipping_phone,
             ]);
@@ -183,46 +183,41 @@ class SslCommerzPaymentController extends Controller
         // return redirect(route('success'));
     }
 
-  
+
     public function success(Request $request)
     {
-        echo "Transaction is Successful";
+        $tran_id = $request->input('tran_id');
+        $amount = $request->input('amount');
 
-        // $tran_id = $request->input('tran_id');
-        // $amount = $request->input('amount');
-        // $currency = $request->input('currency');
+        $sslc = new SslCommerzNotification();
 
-        // $sslc = new SslCommerzNotification();
+        #Check order status in order tabel against the transaction id or order id.
+        $order_details = Order::where('transaction_id', $tran_id)->select('transaction_id', 'order_status', 'total', 'payment_status')->first();
+        // return $order_details;
+        if ($order_details->order_status == 'Pending') {
+            $validation = $sslc->orderValidate($request->all(), $tran_id, $amount);
+            // return $validation;
+            if ($validation) {
+                 
+                $update_product = DB::table('orders')
+                    ->where('transaction_id', $tran_id)
+                    ->update([
+                        'order_status' => 'Processing',
+                        'payment_status' => 'Paid'
+                    ]);
 
-        // #Check order status in order tabel against the transaction id or order id.
-        // $order_details = DB::table('orders')
-        //     ->where('transaction_id', $tran_id)
-        //     ->select('transaction_id', 'status', 'currency', 'amount')->first();
-
-        // if ($order_details->status == 'Pending') {
-        //     $validation = $sslc->orderValidate($request->all(), $tran_id, $amount, $currency);
-
-        //     if ($validation) {
-        //         /*
-        //         That means IPN did not work or IPN URL was not set in your merchant panel. Here you need to update order status
-        //         in order table as Processing or Complete.
-        //         Here you can also sent sms or email for successfull transaction to customer
-        //         */
-        //         $update_product = DB::table('orders')
-        //             ->where('transaction_id', $tran_id)
-        //             ->update(['status' => 'Processing']);
-
-        //         echo "<br >Transaction is successfully Completed";
-        //     }
-        // } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
-        //     /*
-        //      That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
-        //      */
-        //     echo "Transaction is successfully Completed";
-        // } else {
-        //     #That means something wrong happened. You can redirect customer to your product page.
-        //     echo "Invalid Transaction";
-        // }
+                return redirect(route('frontend.home'))->with('success', 'Transaction Successfull');
+            }
+        } else if ($order_details->order_status == 'Processing' || $order_details->order_status == 'Complete') {
+            /*
+             That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
+             */
+            return "success";
+            // return redirect(route('frontend.cart.show'))->with('success','Transaction Successfull');
+        } else {
+            #That means something wrong happened. You can redirect customer to your product page.
+            return back()->with('error', 'Transaction Invalid');
+        }
     }
 
     public function fail(Request $request)
