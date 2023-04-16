@@ -597,6 +597,7 @@
     <!-- custom - main-js -->
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/toastr.min.js') }}"></script>
+    @include('frontend.message')
     @yield('footer-js')
     
 </body>

@@ -216,7 +216,10 @@ class SslCommerzPaymentController extends Controller
                     foreach($inventory_orders as $inventory_order){
                         $inventory = Inventory::where('id',$inventory_order->inventory_id)->decrement('quantity');
                         $card = Cart::where('user_id',auth()->user()->id)->where('inventory_id',$inventory_order->inventory_id)->delete();
+                        // return $card;
                     }
+
+                    $request->session()->forget(['coupon','shipping_charge']);
 
                 return redirect(route('frontend.home'))->with('success', 'Transaction Successfull');
             }

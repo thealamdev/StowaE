@@ -226,7 +226,7 @@
 
 
  @section('footer-js')
-     @include('frontend.message')
+     
 
      <script>
          $(document).ready(function() {
