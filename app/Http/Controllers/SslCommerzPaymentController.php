@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\Inventory;
 use App\Models\User_info;
 use Illuminate\Http\Request;
+use App\Models\Shipping_address;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Library\SslCommerz\SslCommerzNotification;
-use App\Models\Inventory;
-use App\Models\Order;
-use App\Models\Shipping_address;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -211,12 +212,12 @@ class SslCommerzPaymentController extends Controller
                     ->update([
                         'order_status' => 'Processing',
                         'payment_status' => 'Paid'
-                    ]);
+                    ]); 
 
                     foreach($inventory_orders as $inventory_order){
                         $inventory = Inventory::where('id',$inventory_order->inventory_id)->decrement('quantity');
-                        $card = Cart::where('user_id',auth()->user()->id)->where('inventory_id',$inventory_order->inventory_id)->delete();
-                        // return $card;
+                        $card = Cart::where('inventory_id',$inventory_order->inventory_id)->where('user_id',auth()->user()->id)->delete();
+                        return $card;
                     }
 
                     $request->session()->forget(['coupon','shipping_charge']);
@@ -239,14 +240,15 @@ class SslCommerzPaymentController extends Controller
     {
         $tran_id = $request->input('tran_id');
 
-        $order_details = DB::table('orders')
-            ->where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status', 'currency', 'amount')->first();
+        $order_details = Order::where('transaction_id', $tran_id)->select('id','transaction_id', 'order_status', 'total', 'payment_status')->first();
 
-        if ($order_details->status == 'Pending') {
+        if ($order_details->order_status == 'Pending') {
             $update_product = DB::table('orders')
-                ->where('transaction_id', $tran_id)
-                ->update(['status' => 'Failed']);
+            ->where('transaction_id', $tran_id)
+            ->update([
+                'order_status' => 'Pending',
+                'payment_status' => 'unpaid'
+            ]);
             echo "Transaction is Falied";
         } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
             echo "Transaction is already Successful";
