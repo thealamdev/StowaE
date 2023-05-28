@@ -8,10 +8,12 @@ use App\Models\Order;
 use App\Models\Inventory;
 use App\Models\User_info;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Shipping_address;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Library\SslCommerz\SslCommerzNotification;
+use App\Models\Invoice;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -217,8 +219,21 @@ class SslCommerzPaymentController extends Controller
                     foreach($inventory_orders as $inventory_order){
                         $inventory = Inventory::where('id',$inventory_order->inventory_id)->decrement('quantity');
                         $card = Cart::where('inventory_id',$inventory_order->inventory_id)->where('user_id',auth()->user()->id)->delete();
-                        return $card;
+                        // return $card;
                     }
+
+                // invoice create:
+                
+                    $pdf = Pdf::loadView('invoice.orderinvoice', compact('order_details'));
+                    $path = $order_details->id . "_" . "invoice.pdf";
+                    $full_path = public_path('/storage/invoice/'.$path);
+                    $pdf->save(public_path('/storage/invoice/'.$path));
+
+                    $invoice = Invoice::create([
+                        'order_id' => $order_details->id,
+                        'inventory_path' => $full_path,
+                        'path' => $path,
+                    ]);
 
                     $request->session()->forget(['coupon','shipping_charge']);
 
