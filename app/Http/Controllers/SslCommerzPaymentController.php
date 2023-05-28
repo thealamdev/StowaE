@@ -196,46 +196,51 @@ class SslCommerzPaymentController extends Controller
         $sslc = new SslCommerzNotification();
 
         #Check order status in order tabel against the transaction id or order id.
-        $order_details = Order::where('transaction_id', $tran_id)->select('id','transaction_id', 'order_status', 'total', 'payment_status')->first();
-        $inventory_orders  = DB::table('inventory_order')
-            ->where('order_id',$order_details->id)
-            ->get();
+        $order_details = Order::where('transaction_id', $tran_id)->select('id', 'transaction_id', 'order_status', 'total', 'payment_status','coupon_name','coupon_amount','shipping_charge')->first();
 
-            // return $inventory_orders;
-        
+        $inventory_orders = DB::table('inventory_order as io')
+        ->join('inventories as in', 'io.inventory_id', '=', 'in.id')
+        ->join('products', 'products.id', '=', 'in.product_id')
+        ->where('io.order_id', $order_details->id)
+        ->select('io.quantity', 'io.amount','io.additional_price','io.inventory_id' ,'products.title')
+        ->get();
+    
+         
+        // return $inventory_orders;
+
         if ($order_details->order_status == 'Pending') {
             $validation = $sslc->orderValidate($request->all(), $tran_id, $amount);
-            
-            
+
+
             if ($validation) {
-                 
+
                 $update_product = DB::table('orders')
                     ->where('transaction_id', $tran_id)
                     ->update([
                         'order_status' => 'Processing',
                         'payment_status' => 'Paid'
-                    ]); 
-
-                    foreach($inventory_orders as $inventory_order){
-                        $inventory = Inventory::where('id',$inventory_order->inventory_id)->decrement('quantity');
-                        $card = Cart::where('inventory_id',$inventory_order->inventory_id)->where('user_id',auth()->user()->id)->delete();
-                        // return $card;
-                    }
-
-                // invoice create:
-                
-                    $pdf = Pdf::loadView('invoice.orderinvoice', compact('order_details'));
-                    $path = $order_details->id . "_" . "invoice.pdf";
-                    $full_path = public_path('/storage/invoice/'.$path);
-                    $pdf->save(public_path('/storage/invoice/'.$path));
-
-                    $invoice = Invoice::create([
-                        'order_id' => $order_details->id,
-                        'inventory_path' => $full_path,
-                        'path' => $path,
                     ]);
 
-                    $request->session()->forget(['coupon','shipping_charge']);
+                foreach ($inventory_orders as $inventory_order) {
+                    $inventory = Inventory::where('id', $inventory_order->inventory_id)->decrement('quantity');
+                    $card = Cart::where('inventory_id', $inventory_order->inventory_id)->where('user_id', auth()->user()->id)->delete();
+                    // return $card;
+                }
+
+                // invoice create:
+
+                $pdf = Pdf::loadView('invoice.orderinvoice', compact('order_details', 'inventory_orders'));
+                $path = $order_details->id . "_" . "invoice.pdf";
+                $full_path = public_path('/storage/invoice/' . $path);
+                $pdf->save(public_path('/storage/invoice/' . $path));
+
+                $invoice = Invoice::create([
+                    'order_id' => $order_details->id,
+                    'inventory_path' => $full_path,
+                    'path' => $path,
+                ]);
+
+                $request->session()->forget(['coupon', 'shipping_charge']);
 
                 return redirect(route('frontend.home'))->with('success', 'Transaction Successfull');
             }
@@ -255,15 +260,15 @@ class SslCommerzPaymentController extends Controller
     {
         $tran_id = $request->input('tran_id');
 
-        $order_details = Order::where('transaction_id', $tran_id)->select('id','transaction_id', 'order_status', 'total', 'payment_status')->first();
+        $order_details = Order::where('transaction_id', $tran_id)->select('id', 'transaction_id', 'order_status', 'total', 'payment_status')->first();
 
         if ($order_details->order_status == 'Pending') {
             $update_product = DB::table('orders')
-            ->where('transaction_id', $tran_id)
-            ->update([
-                'order_status' => 'Pending',
-                'payment_status' => 'unpaid'
-            ]);
+                ->where('transaction_id', $tran_id)
+                ->update([
+                    'order_status' => 'Pending',
+                    'payment_status' => 'unpaid'
+                ]);
             echo "Transaction is Falied";
         } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
             echo "Transaction is already Successful";
