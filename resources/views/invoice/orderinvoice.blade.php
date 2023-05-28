@@ -365,55 +365,7 @@
                 </table>
             </div>
 
-            {{-- <div class="item-description">
-                <div class="table-responsive">
-                    <h5 class="table-title"> {{ __('Additional Services') }} </h5>
-                    <table class="custom--table">
-                        <thead class="head-bg">
-                            <tr>
-                                <th>{{ __('Title') }}</th>
-                                <th>{{ __('Unit Price') }}</th>
-                                <th>{{ __('Quantity') }}</th>
-                                <th>{{ __('Total') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{ __('Car Cleaning') }}</td>
-                                <td>$20</td>
-                                <td>2</td>
-                                <td>$40</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3"><strong>{{ __('Extra Service') }}</strong></td>
-                                <td><strong>$10</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="item-description page_break">
-                <div class="table-responsive table-responsive--md">
-                    <h5 class="table-title"> {{ __('Coupon Details') }} </h5>
-                    <table class="custom--table">
-                        <thead class="head-bg">
-                            <tr>
-                                <th>{{ __('Coupon Code') }}</th>
-                                <th>{{ __('Coupon Type') }}</th>
-                                <th>{{ __('Coupon Amount') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{ __('Webjourney') }}</td>
-                                <td>{{ __('Percentage') }}</td>
-                                <td>$10</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div> --}}
+           
 
             <div class="item-description">
                 <div class="table-responsive">
