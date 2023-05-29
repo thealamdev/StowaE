@@ -303,7 +303,7 @@
             <div class="invoice-header">
                 <div class="invoice-flex-contents">
                     <div class="invoice-logo">
-                        <img src="#" alt="">
+                        <img src="https://www.logodesign.net/images/nature-logo.png" alt="" width="100px" height="100px">
                     </div>
                     <div class="invoice-header-contents" style="float:right;margin-top:-120px;">
                         <h2 class="invoice-title">{{ __('INVOICE') }}</h2>
@@ -313,8 +313,9 @@
             <div class="invoice-details">
                 <div class="invoice-details-flex">
                     <div class="invoice-single-details">
-                        <h4 class="invoice-details-title">{{ __('Bill To:') }}</h4>
+                        <h4 class="invoice-details-title">{{ __('Invoice To:') }}</h4>
                         <ul class="details-list">
+                            <li class="list"> <a href="#">{{ "Invoice No #" }} {{ $order_details->id }}</a> </li>
                             <li class="list"> <a href="#">{{ auth()->user()->name }}</a> </li>
                             <li class="list"> <a href="#"> {{ auth()->user()->user_info->phone }}</a> </li>
                         </ul>
@@ -381,24 +382,16 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <span class="data-span"> {{ __('Name: ') }}</span>{{ __('Nazmul Hoque') }} <br>
-                                    <span class="data-span"> {{ __('Email: ') }}</span>Nazmul@gmail.com <br>
-                                    <span class="data-span"> {{ __('Phone: ') }}01678985958 <br>
-                                        <span class="data-span">
-                                            {{ __('Address: ') }}</span>{{ __('West Panthapath, Dhanmondi') }}
+                                    <span class="data-span"> {{ __('Name: ') }}</span>{{ auth()->user()->name }} <br>
+                                    <span class="data-span"> {{ __('Email: ') }}</span> {{ auth()->user()->email }} <br>
+                                    <span class="data-span"> {{ __('Phone: ') }}{{ auth()->user()->user_info->phone }} <br>
+                                        
                                 </td>
                                 <td>
-                                    30-9-2022 <br>
-                                    {{ __('Fri, 10pm') }}
+                                     
                                 </td>
                                 <td>
-                                    <span class="data-span"> {{ __('Package Fee:') }} </span>$80 <br>
-                                    <span class="data-span"> {{ __('Extra Service:') }} </span>$20 <br>
-                                    <span class="data-span"> {{ __('Sub Total:') }} </span>$100 <br>
-                                    <span class="data-span"> {{ __('Tax:') }} </span>$10 <br>
-                                    <span class="data-span"> {{ __('Coupon Amount:') }} </span>$5 <br>
-                                    <span class="data-span"> {{ __('Total:') }} </span>$105 <br>
-                                    <span class="data-span"> {{ __('Payment Status:') }} </span>{{ __('Pending') }}
+                                     
                                 </td>
                             </tr>
                         </tbody>

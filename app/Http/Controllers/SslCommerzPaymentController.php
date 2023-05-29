@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use DB;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Invoice;
 use App\Models\Inventory;
 use App\Models\User_info;
+use App\Mail\InventoryOrder;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Shipping_address;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Library\SslCommerz\SslCommerzNotification;
-use App\Models\Invoice;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -196,16 +198,18 @@ class SslCommerzPaymentController extends Controller
         $sslc = new SslCommerzNotification();
 
         #Check order status in order tabel against the transaction id or order id.
-        $order_details = Order::where('transaction_id', $tran_id)->select('id', 'transaction_id', 'order_status', 'total', 'payment_status','coupon_name','coupon_amount','shipping_charge')->first();
+        $order_details = Order::where('transaction_id', $tran_id)->select('id', 'transaction_id', 'order_status', 'total', 'payment_status', 'coupon_name', 'coupon_amount', 'shipping_charge')->first();
+
+        // return $order_details->invoice->inventory_path;
 
         $inventory_orders = DB::table('inventory_order as io')
-        ->join('inventories as in', 'io.inventory_id', '=', 'in.id')
-        ->join('products', 'products.id', '=', 'in.product_id')
-        ->where('io.order_id', $order_details->id)
-        ->select('io.quantity', 'io.amount','io.additional_price','io.inventory_id' ,'products.title')
-        ->get();
-    
-         
+            ->join('inventories as in', 'io.inventory_id', '=', 'in.id')
+            ->join('products', 'products.id', '=', 'in.product_id')
+            ->where('io.order_id', $order_details->id)
+            ->select('io.quantity', 'io.amount', 'io.additional_price', 'io.inventory_id', 'products.title')
+            ->get();
+
+
         // return $inventory_orders;
 
         if ($order_details->order_status == 'Pending') {
@@ -227,6 +231,8 @@ class SslCommerzPaymentController extends Controller
                     // return $card;
                 }
 
+                $request->session()->forget(['coupon', 'shipping_charge']);
+
                 // invoice create:
 
                 $pdf = Pdf::loadView('invoice.orderinvoice', compact('order_details', 'inventory_orders'));
@@ -240,7 +246,9 @@ class SslCommerzPaymentController extends Controller
                     'path' => $path,
                 ]);
 
-                $request->session()->forget(['coupon', 'shipping_charge']);
+                // send mail:
+                $mail = auth()->user()->email;
+                Mail::to($mail)->send(new InventoryOrder($order_details));
 
                 return redirect(route('frontend.home'))->with('success', 'Transaction Successfull');
             }
