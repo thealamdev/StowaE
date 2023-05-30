@@ -237,12 +237,12 @@ class SslCommerzPaymentController extends Controller
 
                 $pdf = Pdf::loadView('invoice.orderinvoice', compact('order_details', 'inventory_orders'));
                 $path = $order_details->id . "_" . "invoice.pdf";
-                $full_path = public_path('/storage/invoice/' . $path);
+                $full_path = '/storage/invoice/' . $path;
                 $pdf->save(public_path('/storage/invoice/' . $path));
 
                 $invoice = Invoice::create([
                     'order_id' => $order_details->id,
-                    'inventory_path' => $full_path,
+                    'inventory_path' => url('/'). $full_path,
                     'path' => $path,
                 ]);
 
