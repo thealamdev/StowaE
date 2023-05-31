@@ -9,8 +9,26 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <input type="search" class="form-control" placeholder="order id" name="order_id" value="{{ request()->order_id }}">
+                    </div>
 
-                        <button class="btn btn-info" type="submit" value="search"></button>
+                    <div class="col-lg-2">
+                        <input type="text" class="form-control" placeholder="order id" name="order_status" value="{{ request()->order_id }}">
+                    </div>
+
+                    <div class="col-lg-2">
+                        <input type="text" class="form-control" placeholder="order id" name="payment_status" value="{{ request()->order_id }}">
+                    </div>
+
+                    <div class="col-lg-2">
+                        <input type="date" class="form-control" placeholder="order id" name="start_date" value="{{ request()->order_id }}">
+                    </div>
+
+                    <div class="col-lg-2">
+                        <input type="date" class="form-control" placeholder="order id" name="end_date" value="{{ request()->order_id }}">
+                    </div>
+
+                    <div class="col-lg-2">
+                        <button class="btn btn-info form-control" type="submit" value="search">Search</button>
                     </div>
                 </div>
              </form>
