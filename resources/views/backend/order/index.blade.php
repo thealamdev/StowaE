@@ -3,28 +3,45 @@
 @extends('layouts.backendapp')
 @section('title','Orders')
 @section('backendContent')
+    <div class="row mt-5">
+        <div class="col-lg-12">
+             <a href="{{ route('dashboard.order.index') }}"><button class="btn btn-info">Refresh</button></a>
+        </div>
+    </div>
      <div class="card mt-4">
         <div class="card-header">
              <form action="{{ route('dashboard.order.index') }}" method="GET">
-                <div class="row">
+                <div class="row align-items-end">
                     <div class="col-lg-2">
                         <input type="search" class="form-control" placeholder="order id" name="order_id" value="{{ request()->order_id }}">
                     </div>
 
                     <div class="col-lg-2">
-                        <input type="text" class="form-control" placeholder="order id" name="order_status" value="{{ request()->order_id }}">
+                        <select class="form-control" name="order_status">
+                            <option selected disabled>Select Order Status</option>
+                            <option value="Pending" {{ request()->order_status == 'Pending' ? 'selected' : '' }} >Pending</option>
+                            <option value="Processing" {{ request()->order_status == 'Processing' ? 'selected' : '' }}>Processing</option>
+                            <option value="Cancel"{{ request()->order_status == 'Cancel' ? 'selected' : '' }} >Cancel</option>
+                        </select>
+                          
                     </div>
 
                     <div class="col-lg-2">
-                        <input type="text" class="form-control" placeholder="order id" name="payment_status" value="{{ request()->order_id }}">
+                        <select class="form-control" name="payment_status">
+                            <option selected disabled>Select Payment Status</option>
+                            <option value="Paid" {{ request()->payment_status == 'Paid' ? 'selected' : '' }} >Paid</option>
+                            <option value="Unpaid" {{ request()->payment_status == 'Unpaid' ? 'selected' : '' }}>Unpaid</option>
+                        </select>
                     </div>
 
                     <div class="col-lg-2">
-                        <input type="date" class="form-control" placeholder="order id" name="start_date" value="{{ request()->order_id }}">
+                        <label for="">Start Date</label>
+                        <input type="date" class="form-control" value="{{ request()->start_date }}" placeholder="order id" name="start_date">
                     </div>
 
                     <div class="col-lg-2">
-                        <input type="date" class="form-control" placeholder="order id" name="end_date" value="{{ request()->order_id }}">
+                        <label for="">End Date</label>
+                        <input type="date" class="form-control" placeholder="order id" name="end_date" value="{{ request()->end_date }}">
                     </div>
 
                     <div class="col-lg-2">
