@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en" dir="ltr">
+{{-- <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> --}}
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,36 +19,11 @@
 
         <!-- App CSS -->
         <link type="text/css" href="{{ asset('assets/backend/css/app.css')}}" rel="stylesheet">
-        <link type="text/css" href="{{ asset('assets/backend/css/app.rtl.css') }}" rel="stylesheet">
-
-        <!-- Material Design Icons -->
         <link type="text/css" href="{{ asset('assets/backend/css/vendor-material-icons.css') }}" rel="stylesheet">
-        <link type="text/css" href="{{ asset('assets/backend/css/vendor-material-icons.rtl.css') }}" rel="stylesheet">
-
-        <!-- Font Awesome FREE Icons -->
         <link type="text/css" href="{{ asset('assets/backend/css/vendor-fontawesome-free.css') }}" rel="stylesheet">
-        <link type="text/css" href="{{ asset('assets/backend/css/vendor-fontawesome-free.rtl.css') }}" rel="stylesheet">
         @yield('header-css')
-
-        <!-- Global site tag (gtag.js') }}) - Google Analytics -->
-        <script async
-                src="https://www.googletagmanager.com/gtag/js?id=UA-133433427-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-            gtag('config', 'UA-133433427-1');
-        </script>
-
-        <!-- Flatpickr -->
         <link type="text/css" href="{{ asset('assets/backend/css/vendor-flatpickr.css') }}" rel="stylesheet">
-        <link type="text/css" href="{{ asset('assets/backend/css/vendor-flatpickr.rtl.css') }}" rel="stylesheet">
         <link type="text/css" href="{{ asset('assets/backend/css/vendor-flatpickr-airbnb.css') }}" rel="stylesheet">
-        <link type="text/css" href="{{ asset('assets/backend/css/vendor-flatpickr-airbnb.rtl.css') }}" rel="stylesheet">
-
         <!-- Vector Maps -->
         <link type="text/css" href="{{ asset('assets/backend/vendor/jqvmap/jqvmap.min.css') }}" rel="stylesheet">
 
@@ -57,7 +33,7 @@
 
          
 
-        {{-- <div class="preloader"></div> --}}
+        <div class="preloader"></div>
 
         <!-- Header Layout -->
         <div class="mdk-header-layout js-mdk-header-layout">
@@ -129,7 +105,7 @@
                                                     <div class="mr-3">
                                                         <div class="avatar avatar-sm"
                                                              style="width: 32px; height: 32px;">
-                                                            <img src="{{ asset('assets/backend/images/256_daniel-gaffey-1060698-unsplash.jpg') }}" alt="Avatar" class="avatar-img rounded-circle">
+                                                             
                                                         </div>
                                                     </div>
                                                     <div class="flex">
@@ -171,9 +147,7 @@
                                                     <div class="mr-3">
                                                         <div class="avatar avatar-sm"
                                                              style="width: 32px; height: 32px;">
-                                                            <img src="assets/images/256_daniel-gaffey-1060698-unsplash.jpg"
-                                                                 alt="Avatar"
-                                                                 class="avatar-img rounded-circle">
+ 
                                                         </div>
                                                     </div>
                                                     <div class="flex">
@@ -215,9 +189,7 @@
                                                     <div class="mr-3">
                                                         <div class="avatar avatar-sm"
                                                              style="width: 32px; height: 32px;">
-                                                            <img src="assets/images/256_daniel-gaffey-1060698-unsplash.jpg"
-                                                                 alt="Avatar"
-                                                                 class="avatar-img rounded-circle">
+                                                            
                                                         </div>
                                                     </div>
                                                     <div class="flex">
@@ -272,10 +244,7 @@
                                         <span class="mr-1 d-flex-inline">
                                             <span class="text-light">Adrian D.</span>
                                         </span>                                   
-                                             <img src="{{ asset('assets/backend/images/avatar/demi.png') }}"
-                                             class="rounded-circle"
-                                             width="32"
-                                             alt="Frontted">
+                                             
                                     </a>
                                     <div id="account_menu"
                                          class="dropdown-menu dropdown-menu-right">
@@ -528,9 +497,7 @@
                                     <a href="profile.html"
                                        class="flex d-flex align-items-center text-underline-0 text-body">
                                         <span class="avatar avatar-sm mr-2">
-                                            <img src="{{ asset('assets/backend/images/avatar/demi.png') }}"
-                                                 alt="avatar"
-                                                 class="avatar-img rounded-circle">
+                                            
                                         </span>
                                         <span class="flex d-flex flex-column">
                                             <strong>{{ auth()->user()->name }}</strong>
@@ -595,17 +562,9 @@
         <!-- Bootstrap -->
         <script src="{{ asset('assets/backend/vendor/popper.min.js') }}"></script>
         <script src="{{ asset('assets/backend/vendor/bootstrap.min.js') }}"></script>
-
-        <!-- Perfect Scrollbar -->
         <script src="{{ asset('assets/backend/vendor/perfect-scrollbar.min.js') }}"></script>
-
-        <!-- DOM Factory -->
         <script src="{{ asset('assets/backend/vendor/dom-factory.js') }}"></script>
-
-        <!-- MDK -->
         <script src="{{ asset('assets/backend/vendor/material-design-kit.js') }}"></script>
-
-        <!-- App -->
         <script src="{{ asset('assets/backend/js/toggle-check-all.js') }}"></script>
         <script src="{{ asset('assets/backend/js/check-selected-row.js') }}"></script>
         <script src="{{ asset('assets/backend/js/dropdown.js') }}"></script>
@@ -626,16 +585,7 @@
         <script src="{{ asset('assets/backend/vendor/moment.min.js') }}"></script>
         <script src="{{ asset('assets/backend/vendor/moment-range.js') }}"></script>
 
-        <!-- Chart.js') }} -->
-        <script src="{{ asset('assets/backend/vendor/Chart.min.js') }}"></script>
-
-        <!-- App Charts JS -->
-        <script src="{{ asset('assets/backend/js/charts.js') }}"></script>
-        <script src="{{ asset('assets/backend/js/chartjs-rounded-bar.js') }}"></script>
-
-        <!-- Chart Samples -->
-        <script src="{{ ('assets/backend/js/page.dashboard.js') }}"></script>
-        <script src="assets/js/progress-charts.js') }}"></script>
+       
         @yield('footer-js')
 
         <!-- Vector Maps -->
