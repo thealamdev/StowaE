@@ -75,7 +75,7 @@
                                 <td>{{ $order->payment_status }}</td>
                                 <td>{{ $order->created_at->format('d-M-y') }}</td>
                                 <td>
-                                    <a href="#" class="btn  btn-success">View</a>
+                                    <a href="{{route('dashboard.order.show',$order->id)}}" class="btn  btn-success">View</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -7,6 +7,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 
 use App\Models\InventoryOrder;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
@@ -38,20 +39,19 @@ class OrderController extends Controller
                 }
         
                 if ($request->start_date && $request->end_date) {
-                    $q->whereBetween('created_at', [
+                    $q->WhereBetween('created_at', [
                         Carbon::createFromFormat('Y-m-d', $request->start_date),
-                        Carbon::createFromFormat('Y-m-d', $request->end_date)->endOfDay(),
+                        Carbon::createFromFormat('Y-m-d', $request->end_date)
                     ]);
                 }
-                if($request->start_date && $request->end_date === null){
+                if($request->start_date && $request->end_date == null){
                     $q->whereDate('created_at','>=',Carbon::createFromFormat('Y-m-d',$request->start_date));
                 }
-            })->paginate(10)->appends(request()->query());
+            })->paginate(10)->withQueryString();
         } else {
             $orders = Order::paginate(10)->withQueryString();
         }
-        
-
+         
         return view('backend.order.index', compact('orders'));
     }
 
@@ -65,57 +65,37 @@ class OrderController extends Controller
         return view('backend.order.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+     
     public function show($id)
     {
-        //
+        $order = DB::table('orders as o')
+        ->where('o.id',$id)
+        ->join('inventory_order as io','o.id' , '=','io.order_id')
+        ->join('inventories as in','io.inventory_id' , '=','in.id')
+        ->get();
+
+        return $order;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+     
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         //
