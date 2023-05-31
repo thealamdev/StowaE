@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class InventoryOrders extends Model
 {
     use HasFactory;
+
+    
 }

@@ -12,6 +12,10 @@ class Order extends Model
         'id'
     ];
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     public function inventory_order(){
         return $this->belongsToMany(Inventory::class);
     }
@@ -19,4 +23,6 @@ class Order extends Model
     public function invoice(){
         return $this->hasOne(Invoice::class);
     }
+
+    
 }

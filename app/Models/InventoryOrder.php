@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class InventoryOrder extends Model
 {
     use HasFactory;
+
+    // public function inventories(){
+    //     return $this->hasOne(Inventory::class);
+    // }
 }

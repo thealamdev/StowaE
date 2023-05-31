@@ -1,6 +1,6 @@
-@foreach ($productss->inventories as $inv)
+{{-- @foreach ($productss->inventories as $inv)
     {{ $inv }}
-@endforeach
+@endforeach --}}
 
 @extends('layouts.backendapp')
 @section('title','Inventory')

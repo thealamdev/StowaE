@@ -115,6 +115,12 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
             require __DIR__ . "/shipping/shipping.php";
         });
     });
+
+    Route::middleware(['auth'])->group(function () {
+        Route::prefix('order')->name('order.')->group(function () {
+            require __DIR__ . "/order/order.php";
+        });
+    });
 });
 
 // ============== Frontend Routes ================
