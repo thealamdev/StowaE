@@ -12,4 +12,7 @@ class InventoryOrder extends Model
     // public function inventories(){
     //     return $this->hasOne(Inventory::class);
     // }
+
+    protected $table = 'inventory_order';
+     
 }

@@ -74,12 +74,11 @@ class OrderController extends Controller
      
     public function show($id)
     {
-        $order = DB::table('orders as o')
-        ->where('o.id',$id)
-        ->join('inventory_order as io','o.id' , '=','io.order_id')
-        ->join('inventories as in','io.inventory_id' , '=','in.id')
-        ->get();
 
+         $order = Order::where('id',$id)->with(['inventory_order'=>function($q){
+            $q->with('product');
+         }])->first();
+         
         return $order;
     }
 
