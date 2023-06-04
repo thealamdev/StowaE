@@ -76,10 +76,12 @@ class OrderController extends Controller
     {
 
          $order = Order::where('id',$id)->with(['inventory_order'=>function($q){
-            $q->with('product');
-         }])->first();
+            $q->with('product','inventoryOr');
+         }])->select('id','coupon_name','coupon_amount','shipping_charge','payment_status')->first();
          
-        return $order;
+         return $order;
+         return view('backend.order.show',compact('order'));
+         
     }
 
      

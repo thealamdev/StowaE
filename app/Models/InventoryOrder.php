@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class InventoryOrder extends Model
 {
+    protected $table = 'inventory_order';
     use HasFactory;
 
-    // public function inventories(){
-    //     return $this->hasOne(Inventory::class);
-    // }
+    public function inventories(){
+        return $this->belongsTo(Inventory::class);
+    }
 
-    protected $table = 'inventory_order';
+     
      
 }
