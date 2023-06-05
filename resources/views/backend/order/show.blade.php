@@ -21,8 +21,8 @@
                                    @foreach ($order->inventory_order as $products)
                                    <tr>
                                         <td><img src="{{ asset('storage/products/'.$products->product->image) }}" alt="" width="50px"></td>
-                                        <td>{{ $products->product->image }}</td>
-                                        <td>{{ $order->inventory_order->quantity }}</td>
+                                        <td>{{ $products->product->title }}</td>
+                                         <td>{{ $products->inventory_or }}</td>
                                    </tr>
                                    @endforeach
                               </tbody>

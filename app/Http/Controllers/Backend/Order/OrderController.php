@@ -75,11 +75,15 @@ class OrderController extends Controller
     public function show($id)
     {
 
+        $order_details = Order::where('id', $id)->select('id', 'transaction_id', 'order_status', 'total', 'payment_status', 'coupon_name', 'coupon_amount', 'shipping_charge')->first();
+        $inventory_order = InventoryOrder::with(['inventories' => function($q){
+            $q->with('product');
+        }])->where('id',$id)->get();
          $order = Order::where('id',$id)->with(['inventory_order'=>function($q){
             $q->with('product','inventoryOr');
-         }])->select('id','coupon_name','coupon_amount','shipping_charge','payment_status')->first();
+         }])->select('id','coupon_name','coupon_amount','shipping_charge','payment_status','transaction_id')->first();
          
-         return $order;
+         return $inventory_order;
          return view('backend.order.show',compact('order'));
          
     }

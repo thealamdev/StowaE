@@ -366,7 +366,6 @@
                 </table>
             </div>
 
-           
 
             <div class="item-description">
                 <div class="table-responsive">
