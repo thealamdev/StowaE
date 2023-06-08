@@ -10,22 +10,10 @@ use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\RolePermissionController;
 use App\Http\Controllers\Backend\Category\CategoryController;
 use App\Http\Controllers\Backend\RoleAssign\RoleAssignController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+ 
 
 // Frontend show route:
 Route::get('/', [frontendController::class, 'index'])->name('frontend.home');
-
 
 
 Route::middleware('auth')->group(function () {
