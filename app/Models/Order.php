@@ -24,5 +24,9 @@ class Order extends Model
         return $this->hasOne(Invoice::class);
     }
 
+    public function shipping_address(){
+        return $this->hasOne(Shipping_address::class);
+    }
+
     
 }
