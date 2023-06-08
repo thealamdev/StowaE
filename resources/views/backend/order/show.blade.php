@@ -5,8 +5,8 @@
 
     <div class="flex-row-fluid ml-lg-8 mt-3">
     
-        <div class="card card-custom gutter-b">
-            <div class="card-body p-0">
+        <div class="card card-custom">
+            <div class="card-body">
                 
                 <div class="row justify-content-center py-8 px-8 py-md-27 px-md-0">
                     <div class="col-md-10">
@@ -87,8 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- end: Invoice body-->
-                <!-- begin: Invoice footer-->
+                 
                 <div class="row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0 mx-0">
                     <div class="col-md-10">
                         <div class="table-responsive">
@@ -113,8 +112,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- end: Invoice footer-->
-                <!-- begin: Invoice action-->
+                 
                 <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
                     <div class="col-md-10">
                         <div class="d-flex justify-content-between">
@@ -125,10 +123,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- end: Invoice action-->
-                <!-- end: Invoice-->
+               
             </div>
         </div>
-        <!--end::Card-->
+        
     </div>
 @endsection

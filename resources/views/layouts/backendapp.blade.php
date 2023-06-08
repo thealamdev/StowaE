@@ -552,9 +552,7 @@
     <!-- Global Settings -->
     <script src="{{ asset('assets/backend/js/settings.js') }}"></script>
 
-    <!-- Moment.js') }} -->
-    {{-- <script src="{{ asset('assets/backend/vendor/moment.min.js') }}"></script>
-    <script src="{{ asset('assets/backend/vendor/moment-range.js') }}"></script> --}}
+
 
 
     @yield('footer-js')
