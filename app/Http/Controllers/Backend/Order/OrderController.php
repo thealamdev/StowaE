@@ -75,16 +75,27 @@ class OrderController extends Controller
     public function show($id)
     {
 
-        $order_details = Order::where('id', $id)->select('id', 'transaction_id', 'order_status', 'total', 'payment_status', 'coupon_name', 'coupon_amount', 'shipping_charge')->first();
-        $inventory_order = InventoryOrder::with(['inventories' => function($q){
-            $q->with('product');
-        }])->where('id',$id)->get();
-         $order = Order::where('id',$id)->with(['inventory_order'=>function($q){
-            $q->with('product','inventoryOr');
-         }])->select('id','coupon_name','coupon_amount','shipping_charge','payment_status','transaction_id')->first();
-         
-         return $inventory_order;
-         return view('backend.order.show',compact('order'));
+        $order_details = Order::where('id', $id)->select('id', 'transaction_id', 'order_status', 'total', 'payment_status', 'coupon_name', 'coupon_amount', 'shipping_charge','created_at')->first();
+
+         $inventory_orders = InventoryOrder::leftJoin('inventories as in','inventory_order.inventory_id','=','in.id')
+        ->join('products as p','in.product_id','=','p.id')
+        ->join('sizes as s', 'in.size_id','=','s.id')
+        ->join('colors as c', 'in.color_id','=','c.id')
+        ->where('order_id',$order_details->id)
+        ->select(
+            'inventory_order.quantity',
+            'inventory_order.amount',
+            'inventory_order.additional_price',
+            'inventory_order.created_at',
+            'p.title',
+            'p.image',
+            's.name as size_name',
+            'c.name as color_name'
+        )
+        ->get();
+
+
+         return view('backend.order.show',compact('order_details','inventory_orders'));
          
     }
 
