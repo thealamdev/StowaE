@@ -76,36 +76,32 @@ class OrderController extends Controller
     {
 
         // if i want just relationship model and just select their name i can use this query:
-        // $order_details = Order::where('id', $id)
-        // ->with('shipping_address:id,name', 'user:id,name,email','user.user_info:id,user_id,address,zip')
-        // ->select('id', 'transaction_id','user_id', 'order_status', 'total', 'payment_status', 'coupon_name', 'coupon_amount', 'shipping_charge', 'created_at')
-        // ->first();
+
+        /*
+        
+        $order_details = Order::where('id', $id)
+        ->with('shipping_address:id,name', 'user:id,name,email','user.user_info:id,user_id,address,zip')
+        ->select('id', 'transaction_id','user_id', 'order_status', 'total', 'payment_status', 'coupon_name', 'coupon_amount', 'shipping_charge', 'created_at')
+        ->first();
+        
+        */
 
 
-        // $order_details = Order::with(['user' => function($q){
-        //     $q->select('id','name');
-        // }])
-        // ->with(['shipping_address'=>function($q){
-        //     $q->select('id','name');
-        // }])
-        // ->select('id','total','user_id')
-        // ->where('id',$id)->first();
-        // return $order_details;
 
         // if you need with relationship and need many query then you can use this way:
         $order_details = Order::where('id', $id)
-        ->with([
-            'shipping_address' => function ($sh) {
-                $sh->select('id','name','order_id', 'phone', 'address', 'city', 'zip');
-            },
-            'user' => function ($u) {
-                $u->select('id','name');
-                $u->with('user_info:id,user_id,address,zip,phone,city');
-            }
-        ])
-        ->select('id','transaction_id','user_id', 'order_status', 'total', 'payment_status', 'coupon_name', 'coupon_amount', 'shipping_charge', 'created_at')
-        ->first();
-    
+            ->with([
+                'shipping_address' => function ($sh) {
+                    $sh->select('id', 'name', 'order_id', 'phone', 'address', 'city', 'zip');
+                },
+                'user' => function ($u) {
+                    $u->select('id', 'name');
+                    $u->with('user_info:id,user_id,address,zip,phone,city');
+                }
+            ])
+            ->select('id', 'transaction_id', 'user_id', 'order_status', 'total', 'payment_status', 'coupon_name', 'coupon_amount', 'shipping_charge', 'created_at')
+            ->first();
+
 
         $inventory_orders = InventoryOrder::leftJoin('inventories as in', 'inventory_order.inventory_id', '=', 'in.id')
             ->join('products as p', 'in.product_id', '=', 'p.id')

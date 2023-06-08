@@ -8,24 +8,24 @@
         <div class="card card-custom">
             <div class="card-body">
                 
-                <div class="row justify-content-center py-8 px-8 py-md-27 px-md-0">
+                <div class="row justify-content-center py-8 px-8 py-md-27 px-md-0 mt-3">
                     <div class="col-md-10">
                         <div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
-                            <h1 class="display-5 font-weight-boldest mb-10">ORDER DETAILS</h1>
+                            <h1 class="display-6 font-weight-boldest mb-10">ORDER DETAILS</h1>
                             <div class="d-flex flex-column align-items-md-end px-0">
                                 <!--begin::Logo-->
-                                <a href="#" class="mb-5">
-                                    <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fillustrations%2Fleadership-logo&psig=AOvVaw17s1-JCo7rx5OXObHyfpaG&ust=1686324866701000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCJig1-n_s_8CFQAAAAAdAAAAABAE" alt="" width="50px">
+                                <a href="#" class="mb-3">
+                                    <img src="https://img.freepik.com/free-vector/colorful-company-logo-template-with-tagline_23-2148802643.jpg" alt="dd" width="50px">
                                 </a>
                                 <!--end::Logo-->
                                 <span class="d-flex flex-column align-items-md-end opacity-70">
-                                    <span>{{ auth()->user()->user_info->address }}</span>
-                                    <span>{{ auth()->user()->user_info->city . ','. auth()->user()->user_info->zip }}</span>
+                                    <span>{{  $order_details->shipping_address->address ?? $order_details->user->user_info->address }}</span>
+                                    <span>{{  $order_details->shipping_address->phone ?? $order_details->user->user_info->phone }}</span>
                                 </span>
                             </div>
                         </div>
-                        <div class="border-bottom w-100"></div>
-                        <div class="d-flex justify-content-between pt-6">
+                        <div class="border-bottom w-100 pt-4"></div>
+                        <div class="d-flex justify-content-between pt-4">
                             <div class="d-flex flex-column flex-root">
                                 <span class="font-weight-bolder mb-2">ORDER DATE</span>
                                 <span class="opacity-70">{{ $order_details->created_at->format('Y-m-d') }}</span>
@@ -36,14 +36,14 @@
                             </div>
                             <div class="d-flex flex-column flex-root">
                                 <span class="font-weight-bolder mb-2">DELIVERED TO.</span>
-                                <span>{{ auth()->user()->name }}</span>
-                                <span>{{ auth()->user()->user_info->phone }}</span>
+                                <span>{{  $order_details->shipping_address->name ?? $order_details->user->name }}</span>
+                                <span>{{  $order_details->shipping_address->phone ?? $order_details->user->user_info->phone }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0 mx-0">
+                <div class="row justify-content-center py-8 px-8 py-md-27 px-md-0 mt-4 mt-4">
                     <div class="col-md-10">
                         <div class="table-responsive">
                             <table class="table">
@@ -51,16 +51,16 @@
                                     <tr>
                                         <th class="font-weight-bold text-muted text-uppercase">Shipping City</th>
                                         <th class="font-weight-bold text-muted text-uppercase">District</th>
-                                        <th class="font-weight-bold text-muted text-uppercase">PAYMENT DATE</th>
-                                        <th class="font-weight-bold text-muted text-uppercase text-right">TOTAL PAID</th>
+                                        <th class="font-weight-bold text-muted text-uppercase">Phone</th>
+                                        <th class="font-weight-bold text-muted text-uppercase text-right">Zip</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr class="font-weight-bolder">
                                         <td>{{ $order_details->shipping_address->address ?? $order_details->user->user_info->address }}</td>
                                         <td>{{ $order_details->shipping_address->city ?? $order_details->user->user_info->city }}</td>
-                                        <td>{{ $order_details->created_at->format('Y-m-d') }}</td>
-                                        <td class="text-primary font-size-h3 font-weight-boldest text-right">{{ $order_details->total }}</td>
+                                        <td>{{ $order_details->shipping_address->phone ?? $order_details->user->user_info->phone }}</td>
+                                        <td class="text-primary font-size-h3 font-weight-boldest text-right">{{ $order_details->shipping_address->zip ?? $order_details->user->user_info->zip }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                  
-                <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
+                <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0 mt-4">
                     <div class="col-md-10">
                         <div class="table-responsive">
                             <table class="table">
@@ -113,7 +113,7 @@
                     </div>
                 </div>
                  
-                <div class="row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0 mx-0">
+                <div class="row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0 mx-0 mt-4">
                     <div class="col-md-10">
                         <div class="table-responsive">
                             <table class="table">
@@ -138,7 +138,7 @@
                     </div>
                 </div>
                  
-                <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
+                <div class="row justify-content-center mt-4">
                     <div class="col-md-10">
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-light-primary font-weight-bold"
