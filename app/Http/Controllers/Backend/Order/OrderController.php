@@ -92,24 +92,20 @@ class OrderController extends Controller
         // ->where('id',$id)->first();
         // return $order_details;
 
-        // way no 1:
+        // if you need with relationship and need many query then you can use this way:
         $order_details = Order::where('id', $id)
         ->with([
             'shipping_address' => function ($sh) {
-                $sh->select('id','name', 'phone', 'address', 'city', 'zip');
+                $sh->select('id','name','order_id', 'phone', 'address', 'city', 'zip');
             },
             'user' => function ($u) {
                 $u->select('id','name');
-                $u->with('user_info:id,user_id,address,zip,phone');
+                $u->with('user_info:id,user_id,address,zip,phone,city');
             }
         ])
-        ->select('id', 'transaction_id','user_id', 'order_status', 'total', 'payment_status', 'coupon_name', 'coupon_amount', 'shipping_charge', 'created_at')
+        ->select('id','transaction_id','user_id', 'order_status', 'total', 'payment_status', 'coupon_name', 'coupon_amount', 'shipping_charge', 'created_at')
         ->first();
     
-
-
-        return $order_details;
-
 
         $inventory_orders = InventoryOrder::leftJoin('inventories as in', 'inventory_order.inventory_id', '=', 'in.id')
             ->join('products as p', 'in.product_id', '=', 'p.id')

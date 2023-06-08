@@ -42,6 +42,31 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0 mx-0">
+                    <div class="col-md-10">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="font-weight-bold text-muted text-uppercase">Shipping City</th>
+                                        <th class="font-weight-bold text-muted text-uppercase">District</th>
+                                        <th class="font-weight-bold text-muted text-uppercase">PAYMENT DATE</th>
+                                        <th class="font-weight-bold text-muted text-uppercase text-right">TOTAL PAID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="font-weight-bolder">
+                                        <td>{{ $order_details->shipping_address->address ?? $order_details->user->user_info->address }}</td>
+                                        <td>{{ $order_details->shipping_address->city ?? $order_details->user->user_info->city }}</td>
+                                        <td>{{ $order_details->created_at->format('Y-m-d') }}</td>
+                                        <td class="text-primary font-size-h3 font-weight-boldest text-right">{{ $order_details->total }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                  
                 <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
                     <div class="col-md-10">
