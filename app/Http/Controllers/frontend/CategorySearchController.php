@@ -26,7 +26,7 @@ class CategorySearchController extends Controller
             'c.slug as category_slug',
             'c.name',
         )
-        ->get();
+        ->paginate(6);
         
         return view('frontend.searching.category-view',compact('slug','products'));
     }

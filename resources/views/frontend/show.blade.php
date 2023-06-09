@@ -1,8 +1,8 @@
 @extends('layouts.frontapp')
 @section('title')
-{{ $products->title }}
+    {{ $products->title }}
 @endsection
-{{-- @section('title', 'Product-show') --}}
+
 @section('frontPageContent')
     <div class="container">
         <div class="row mt-4">
@@ -57,46 +57,46 @@
                     <hr>
 
                     <div id="form_all">
-                         
-                            <div class="item_attribute">
-                                <h3 class="title_text">Options <span class="underline"></span></h3>
+
+                        <div class="item_attribute">
+                            <h3 class="title_text">Options <span class="underline"></span></h3>
 
 
 
-                                <div class="row">
+                            <div class="row">
 
-                                    <div class="col col-md-6">
-                                        <div class="select_option clearfix">
-                                            <h4 class="input_title">Color *</h4>
-                                            <select id="ColorSelect" class="form-control" name="color_id">
-                                                <option disabled selected>Choose A Option</option>
-                                                @forelse ($inventory_color as $key => $inv_color)
-                                                    <option value="{{ $inv_color->id }}">{{ $inv_color->name }}</option>
-                                                @empty
-                                                    {{ 'No color found' }}
-                                                @endforelse
-                                            </select>
+                                <div class="col col-md-6">
+                                    <div class="select_option clearfix">
+                                        <h4 class="input_title">Color *</h4>
+                                        <select id="ColorSelect" class="form-control" name="color_id">
+                                            <option disabled selected>Choose A Option</option>
+                                            @forelse ($inventory_color as $key => $inv_color)
+                                                <option value="{{ $inv_color->id }}">{{ $inv_color->name }}</option>
+                                            @empty
+                                                {{ 'No color found' }}
+                                            @endforelse
+                                        </select>
 
-                                        </div>
                                     </div>
-
-                                    <div class="col col-md-6">
-
-                                        <div class="select_option clearfix">
-                                            <h4 class="input_title">Size *</h4>
-                                            <select class="form-control" id="sizeSelect" name="size_id">
-                                                <option selected disabled>Select a Product size</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
                                 </div>
 
+                                <div class="col col-md-6">
 
-                                <span class="repuired_text">Stock Quantity: <span class="quantity_limit"></span>
-
+                                    <div class="select_option clearfix">
+                                        <h4 class="input_title">Size *</h4>
+                                        <select class="form-control" id="sizeSelect" name="size_id">
+                                            <option selected disabled>Select a Product size</option>
+                                        </select>
+                                    </div>
+                                </div>
 
                             </div>
+
+
+                            <span class="repuired_text">Stock Quantity: <span class="quantity_limit"></span>
+
+
+                        </div>
 
                         <form action="{{ route('frontend.cart.store') }}" id="shopForm" method="POST">
                             @csrf
@@ -124,7 +124,7 @@
                                         {{ $products->discount ? $products->sale_price : $products->price }}
                                     </span>
                                     <div class="additional_price_box">
-                                        <p style="color:#333;font-size:14px;">Additional Price: <span> </span> </p> 
+                                        <p style="color:#333;font-size:14px;">Additional Price: <span> </span> </p>
                                     </div>
                                 </div>
                             </div>
@@ -137,33 +137,33 @@
                             </ul>
                         </form>
 
-                            <ul class="default_share_links ul_li">
-                                <li>
-                                    <a class="facebook" href="#!">
-                                        <span><i class="fab fa-facebook-square"></i> Like</span>
-                                        <small>10K</small>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="twitter" href="#!">
-                                        <span><i class="fab fa-twitter-square"></i> Tweet</span>
-                                        <small>15K</small>
-                                    </a>
-                                </li>
+                        <ul class="default_share_links ul_li">
+                            <li>
+                                <a class="facebook" href="#!">
+                                    <span><i class="fab fa-facebook-square"></i> Like</span>
+                                    <small>10K</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="twitter" href="#!">
+                                    <span><i class="fab fa-twitter-square"></i> Tweet</span>
+                                    <small>15K</small>
+                                </a>
+                            </li>
 
-                                <li>
-                                    <a class="google" href="#!">
-                                        <span><i class="fab fa-google-plus-square"></i> Google+</span>
-                                        <small>20K</small>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="share" href="#!">
-                                        <span><i class="fas fa-plus-square"></i> Share</span>
-                                    </a>
-                                </li>
-                            </ul>
-                         
+                            <li>
+                                <a class="google" href="#!">
+                                    <span><i class="fab fa-google-plus-square"></i> Google+</span>
+                                    <small>20K</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="share" href="#!">
+                                    <span><i class="fas fa-plus-square"></i> Share</span>
+                                </a>
+                            </li>
+                        </ul>
+
                     </div>
 
                 </div>
@@ -179,8 +179,8 @@
                     </button>
                 </li>
                 <li>
-                    <button data-bs-toggle="tab" data-bs-target="#additional_information_tab" type="button" role="tab"
-                        aria-controls="additional_information_tab" aria-selected="false">
+                    <button data-bs-toggle="tab" data-bs-target="#additional_information_tab" type="button"
+                        role="tab" aria-controls="additional_information_tab" aria-selected="false">
                         Additional information
                     </button>
                 </li>
@@ -474,7 +474,7 @@
                     }
                 })
                 $quantity.val(1)
-                 
+
 
 
             })
