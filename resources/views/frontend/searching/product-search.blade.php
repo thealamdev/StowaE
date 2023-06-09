@@ -1,13 +1,13 @@
 @extends('layouts.frontapp')
 @section('title')
-    {{ $slug }}
+    {{ $category ?? '' }}
 @endsection
 @section('frontPageContent')
     <div class="breadcrumb_section">
         <div class="container">
             <ul class="breadcrumb_nav ul_li">
                 <li><a href="{{ route('frontend.home') }}">Home</a></li>
-                <li><a href="{{ route('frontend.category-search.categoryView',$slug) }}">{{ $slug }}</a> </li>
+                <li>{{ $category ?? '--No Category found--' }}</li>
             </ul>
         </div>
     </div>
@@ -258,8 +258,8 @@
                                         @foreach ($products as $product)
                                             <div class="grid">
                                                 <div class="product-pic">
-                                                    <img src="{{ asset('storage/products/' . $product->image) }}"
-                                                        alt="{{ asset('storage/products/' . $product->image) }}">
+                                                    <img src="{{ asset('storage/products/' . $product->product->image) }}"
+                                                        alt="{{ asset('storage/products/' . $product->product->image) }}">
                                                     <div class="actions">
                                                         <ul>
                                                             <li>
@@ -319,7 +319,7 @@
                                                 </div>
                                                 <div class="details">
                                                     <h4><a
-                                                            href="{{ route('frontend.shop.show', $product->product_slug) }}">{{ $product->title }}</a>
+                                                            href="{{ route('frontend.shop.show', $product->product->slug) }}">{{ $product->product->title }}</a>
                                                     </h4>
                                                     <p> {!! $product->description !!}</p>
                                                     <div class="rating">
@@ -333,13 +333,13 @@
                                                         <ins>
                                                             <span class="woocommerce-Price-amount amount">
                                                                 <bdi> <span
-                                                                        class="woocommerce-Price-currencySymbol">$</span>{{ $product->sale_price ?? $product->price }}
+                                                                        class="woocommerce-Price-currencySymbol">$</span>{{ $product->product->sale_price ?? $product->product->price }}
                                                                 </bdi>
                                                             </span>
                                                         </ins>
                                                     </span>
                                                     <div class="add-cart-area">
-                                                        <a href="{{ route('frontend.shop.show', $product->product_slug) }}">
+                                                        <a href="{{ route('frontend.shop.show', $product->product->slug) }}">
                                                             <button class="add-to-cart">Add to cart</button></a>
                                                     </div>
                                                 </div>
@@ -352,7 +352,7 @@
 
                                 <div class="pagination_wrap">
                                     <ul class="pagination_nav">
-                                        {{ $products->links() }}
+                                        {{-- {{ $products->links() }} --}}
                                     </ul>
                                 </div>
                             </div>
@@ -363,8 +363,8 @@
                                         @foreach ($products as $product)
                                             <div class="grid clearfix">
                                                 <div class="product-pic">
-                                                    <img src="{{ asset('storage/products/' . $product->image) }}"
-                                                        alt="{{ asset('storage/products/' . $product->image) }}">
+                                                    <img src="{{ asset('storage/products/' . $product->product->image) }}"
+                                                        alt="{{ asset('storage/products/' . $product->product->image) }}">
                                                     <div class="actions">
                                                         <ul>
                                                             <li>
@@ -423,8 +423,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="details">
-                                                    <h4><a href="#">{{ $product->title }}</a></h4>
-                                                    <p><a href="#">{{ $product->description }}</a></p>
+                                                    <h4><a href="#">{{ $product->product->title }}</a></h4>
+                                                    <p><a href="#">{{ $product->product->description }}</a></p>
                                                     <div class="rating">
                                                         <i class="fas fa-star"></i>
                                                         <i class="fas fa-star"></i>
@@ -436,13 +436,13 @@
                                                         <ins>
                                                             <span class="woocommerce-Price-amount amount">
                                                                 <bdi> <span
-                                                                        class="woocommerce-Price-currencySymbol">$</span>{{ $product->sale_price ?? $product->price }}</bdi>
+                                                                        class="woocommerce-Price-currencySymbol">$</span>{{ $product->product->sale_price ?? $product->product->price }}</bdi>
                                                             </span>
                                                         </ins>
                                                     </span>
                                                     <div class="add-cart-area">
                                                         <a
-                                                            href="{{ route('frontend.shop.show', $product->product_slug) }}"><button
+                                                            href="{{ route('frontend.shop.show', $product->product->slug) }}"><button
                                                                 class="add-to-cart">Add to cart</button></a>
                                                     </div>
                                                 </div>
@@ -455,7 +455,7 @@
 
                                 <div class="pagination_wrap">
                                     <ul class="pagination_nav">
-                                        {{ $products->links() }}
+                                        {{-- {{ $products->links() }} --}}
                                     </ul>
                                 </div>
                             </div>

@@ -194,43 +194,15 @@
 
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="description_tab" role="tabpanel">
-                    <p>{{ $products->description }}</p>
-                    <p class="mb-0">
-                        Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros
-                        eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis
-                        vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit
-                        amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere
-                        nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam
-                        gravida vehicula tellus, in imperdiet ligula euismod eget.
-                    </p>
+
+                    {!! $products->description !!}
+
                 </div>
 
                 <div class="tab-pane fade" id="additional_information_tab" role="tabpanel">
-                    <p>
-                        {{ $products->additional_info }}
-                    </p>
 
-                    <div class="additional_info_list">
-                        <h4 class="info_title">Additional Info</h4>
-                        <ul class="ul_li_block">
-                            <li>No Side Effects</li>
-                            <li>Made in USA</li>
-                        </ul>
-                    </div>
+                    {!! $products->additional_info !!}
 
-                    <div class="additional_info_list">
-                        <h4 class="info_title">Product Features Info</h4>
-                        <ul class="ul_li_block">
-                            <li>Compatible for indoor and outdoor use</li>
-                            <li>Wide polypropylene shell seat for unrivalled comfort</li>
-                            <li>Rust-resistant frame</li>
-                            <li>Durable UV and weather-resistant construction</li>
-                            <li>Shell seat features water draining recess</li>
-                            <li>Shell and base are stackable for transport</li>
-                            <li>Choice of monochrome finishes and colourways</li>
-                            <li>Designed by Nagi</li>
-                        </ul>
-                    </div>
                 </div>
 
                 <div class="tab-pane fade" id="reviews_tab" role="tabpanel">

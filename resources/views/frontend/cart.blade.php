@@ -1,8 +1,7 @@
  @extends('layouts.frontapp')
  @section('title', 'Product-cart')
  @section('frontPageContent')
-     <!-- breadcrumb_section - start
-                                                            ================================================== -->
+ 
      <div class="breadcrumb_section">
          <div class="container">
              <ul class="breadcrumb_nav ul_li">
@@ -14,11 +13,7 @@
              </ul>
          </div>
      </div>
-     <!-- breadcrumb_section - end
-                                                            ================================================== -->
-
-     <!-- cart_section - start
-                                                        ================================================== -->
+    
      <section class="cart_section section_space">
          <div class="container">
              <div class="cart_update_wrap">

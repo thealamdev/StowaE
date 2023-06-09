@@ -43,23 +43,15 @@
 
 <body>
 
-    <!-- body_wrap - start -->
+ 
     <div class="body_wrap">
 
-        <!-- backtotop - start -->
         <div class="backtotop">
             <a href="#" class="scroll">
                 <i class="far fa-arrow-up"></i>
             </a>
         </div>
-        <!-- backtotop - end -->
-
-        <!-- preloader - start -->
-        <!-- <div id="preloader"></div> -->
-        <!-- preloader - end -->
-
-        <!-- header_section - start
-        ================================================== -->
+       
         <header class="header_section header-style-3">
             <div class="header_top">
                 <div class="container">
@@ -73,7 +65,7 @@
                                             <img src="{{ asset('assets/frontend/images/flug/flug_uk.png') }}"
                                                 alt="asset('assets/frontend/images/flug/flug_uk.png'">
                                         </div>
-                                        <select>
+                                        <select class="nice_select">
                                             <option data-display="Select Option">Select Your Language</option>
                                             <option value="1" selected>English</option>
                                             <option value="2">Bangla</option>
@@ -85,7 +77,7 @@
                                 <li>
                                     <div class="select_option">
                                         <h3 class="title_text">Currency:</h3>
-                                        <select>
+                                        <select class="nice_select">
                                             <option data-display="Select Option">Select Your Currency</option>
                                             <option value="united States Dollar" selected>USD</option>
                                             <option value="Armenian Dram">AMD</option>
@@ -118,22 +110,19 @@
                         </div>
 
                         <div class="col col-lg-6 col-md-6 col-sm-12">
-                            <form action="#">
+                            <form action="{{ route('frontend.category-search.productSearch') }}" method="GET">
+                                
                                 <div class="advance_serach">
                                     <div class="select_option mb-0 clearfix">
-                                        <select>
-                                            <option data-display="All Categories">Select A Category</option>
-                                            <option value="1">New Arrival Products</option>
-                                            <option value="2">Most Popular Products</option>
-                                            <option value="3">Deals of the day</option>
-                                            <option value="4">Mobile Accessories</option>
-                                            <option value="5">Computer Accessories</option>
-                                            <option value="6">Consumer Electronics</option>
-                                            <option value="7">Automobiles & Motorcycles</option>
+                                        <select class="nice_select" name="category">
+                                            <option selected disabled>Select A Category</option>
+                                             @foreach ($categories as $category)
+                                             <option value="{{ $category->slug }}">{{ $category->name }}</option>
+                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form_item">
-                                        <input type="search" name="search" placeholder="Search Prudcts...">
+                                        <input type="search" name="product" placeholder="Search Prudcts...">
                                         <button type="submit" class="search_btn"><i
                                                 class="far fa-search"></i></button>
                                     </div>

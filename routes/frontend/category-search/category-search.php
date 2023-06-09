@@ -5,5 +5,6 @@ use App\Http\Controllers\Frontend\CategorySearchController;
 
 Route::controller(CategorySearchController::class)->group(function(){
     Route::get('category-view/{slug}','categoryView')->name('categoryView');
+    Route::get('product-search','productSearch')->name('productSearch');
     
 });
