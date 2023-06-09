@@ -35,10 +35,11 @@ class CategorySearchController extends Controller
 
     public function productSearch(Request $request)
     {
+
         $category = $request->category;
         if ($request->all()) {
 
-             $products = CategoryProduct::with('category:id,slug,name', 'product:id,title,slug,price,sale_price,description,image')
+            $products = CategoryProduct::with('category:id,slug,name', 'product:id,title,slug,price,sale_price,description,image')
                 ->where(function ($query) use ($request) {
                     if ($request->category) {
                         $query->whereHas('category', function ($q) use ($request) {
@@ -54,8 +55,14 @@ class CategorySearchController extends Controller
                 })
 
                 ->get();
-
-            return view('frontend.searching.product-search', compact('category', 'products'));
         }
+        if ($request->category == null && $request->product == null) {
+            $products = CategoryProduct::with('category:id,slug,name', 'product:id,title,slug,price,sale_price,description,image')
+                ->select('product_id')
+                ->distinct()
+                ->get();
+        }
+
+        return view('frontend.searching.product-search', compact('category', 'products'));
     }
 }
