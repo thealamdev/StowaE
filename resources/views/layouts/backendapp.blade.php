@@ -264,9 +264,7 @@
             </div>
         </div>
 
-        <!-- // END Header -->
-
-        <!-- Header Layout Content -->
+      
         <div class="mdk-header-layout__content">
 
             <div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="992px">

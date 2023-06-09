@@ -9,6 +9,7 @@ use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\RolePermissionController;
 use App\Http\Controllers\Backend\Category\CategoryController;
+use App\Http\Controllers\Backend\Order\OrderController;
 use App\Http\Controllers\Backend\RoleAssign\RoleAssignController;
  
 
@@ -129,3 +130,12 @@ Route::name('frontend.')->group(function () {
         require __DIR__ . "/frontend/couponApply/couponApply.php";
     });
 });
+
+
+Route::name('frontend.')->group(function () {
+    Route::prefix('category-search')->name('category-search.')->group(function () {
+        require __DIR__ . "/frontend/category-search/category-search.php";
+    });
+});
+
+ 

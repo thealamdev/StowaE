@@ -185,7 +185,7 @@
                                         <ul class="allcategories_list ul_li_block">
                                             @foreach ($categories->take(10) as $category)
                                                 <li>
-                                                    <a href="#"><i class="icon icon-Starship"></i> {{ $category->name }}</a>
+                                                    <a href="{{ route('frontend.category-search.categoryView',$category->slug) }}"><i class="icon icon-Starship"></i> {{ $category->name }}</a>
                                                 </li>
                                             @endforeach
 

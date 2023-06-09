@@ -141,4 +141,8 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function search(){
+        return view('frontend.search');
+    }
 }
