@@ -23,7 +23,8 @@
                             </div>
                         </div>
                         
-                        <div class="slider_item set-bg-image slick-slide" data-background="{{ asset('assets/frontend/images/slider/slide-2.jpg') }}" data-slick-index="1" aria-hidden="true" style="width: 844px; position: relative; left: -844px; top: 0px; z-index: 998; opacity: 0; background-image: url({{ asset('assets/frontend/images/slider/slide-3.jpg') }}); background-size: cover; background-repeat: no-repeat; background-position: center center;" tabindex="-1" role="tabpanel" id="slick-slide01" aria-describedby="slick-slide-control01">
+                        <div class="slider_item set-bg-image slick-slide" data-background="{{ asset('assets/frontend/images/slider/slide-2.jpg') }}" data-slick-index="1" aria-hidden="true" style="width: 844px; position: relative; left: -844px; top: 0px; z-index: 998; opacity: 0; background-image: background-image: url('{{ asset('assets/frontend/images/slider/slide-3.jpg') }}');
+                         background-size: cover; background-repeat: no-repeat; background-position: center center;" tabindex="-1" role="tabpanel" id="slick-slide01" aria-describedby="slick-slide-control01">
                             <div class="slider_content">
                                 <h3 class="small_title" data-animation="fadeInUp2" data-delay=".2s">Clothing</h3>
                                 <h4 class="big_title" data-animation="fadeInUp2" data-delay=".4s">Smart blood  <span>Pressure monitor</span></h4>
@@ -55,11 +56,7 @@
             </div>
         </div>
     </section>
-    <!-- slider_section - end
-    ================================================== -->
-    
-    <!-- policy_section - start
-    ================================================== -->
+  
     <section class="policy_section">
         <div class="container">
             <div class="row">
@@ -119,12 +116,8 @@
         </div>
 
     </section>
-    <!-- policy_section - end
-    ================================================== -->
-
-    
-    <!-- products-with-sidebar-section - start
-    ================================================== -->
+ 
+ 
     <section class="products-with-sidebar-section">
         <div class="container">
             <div class="row">

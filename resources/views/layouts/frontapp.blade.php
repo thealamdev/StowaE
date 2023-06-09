@@ -8,33 +8,18 @@
 
     <title>{{ config('app.name') }} - @yield('title')</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/images/logo/favourite_icon_1.png') }}">
-
-    <!-- fraimwork - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
-
-    <!-- icon font - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/fontawesome.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/stroke-gap-icons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/icofont.css') }}">
-
-    <!-- animation - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/animate.css') }}">
-
-    <!-- carousel - css include -->
     <link rel="stylesheet" type="text/css" href="assets/css/slick.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/slick.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/slick-theme.css') }}">
-    <!-- popup - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/magnific-popup.css') }}">
-    <!-- jquery-ui - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/jquery-ui.css') }}">
-
-    <!-- select option - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/nice-select.css') }}">
-    <!-- woocommercen - css include -->
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/woocommerce.css') }}"> --}}
     @yield('css')
-    <!-- custom - css include -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/toastr.min.css') }}">
 
@@ -43,7 +28,6 @@
 
 <body>
 
- 
     <div class="body_wrap">
 
         <div class="backtotop">
@@ -51,7 +35,7 @@
                 <i class="far fa-arrow-up"></i>
             </a>
         </div>
-       
+
         <header class="header_section header-style-3">
             <div class="header_top">
                 <div class="container">
@@ -111,18 +95,20 @@
 
                         <div class="col col-lg-6 col-md-6 col-sm-12">
                             <form action="{{ route('frontend.category-search.productSearch') }}" method="GET">
-                                
+
                                 <div class="advance_serach">
                                     <div class="select_option mb-0 clearfix">
                                         <select class="nice_select" name="category">
                                             <option selected disabled>Select A Category</option>
-                                             @foreach ($categories as $category)
-                                             <option value="{{ $category->slug }}">{{ $category->name }}</option>
-                                             @endforeach
+                                            @foreach ($categories as $category)
+                                                <option {{ $category->slug == request()->category ? 'selected' : '' }}
+                                                    value="{{ $category->slug }}">{{ $category->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form_item">
-                                        <input type="search" name="product" placeholder="Search Prudcts...">
+                                        <input type="search" name="product" value="{{ request()->product }}"
+                                            placeholder="Search Prudcts...">
                                         <button type="submit" class="search_btn"><i
                                                 class="far fa-search"></i></button>
                                     </div>
@@ -174,7 +160,9 @@
                                         <ul class="allcategories_list ul_li_block">
                                             @foreach ($categories->take(10) as $category)
                                                 <li>
-                                                    <a href="{{ route('frontend.category-search.categoryView',$category->slug) }}"><i class="icon icon-Starship"></i> {{ $category->name }}</a>
+                                                    <a
+                                                        href="{{ route('frontend.category-search.categoryView', $category->slug) }}"><i
+                                                            class="icon icon-Starship"></i> {{ $category->name }}</a>
                                                 </li>
                                             @endforeach
 
@@ -192,9 +180,7 @@
                                     </button>
                                     <ul class="main_menu_list ul_li">
                                         <li>
-                                            <a class="nav-link" href="#" id="shop_submenu" role="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false">Home</a>
-
+                                            <a href="{{ route('frontend.home') }}">Home</a>
                                         </li>
                                         <li>
                                             <a class="nav-link" href="{{ route('frontend.shop.index') }}">Shop</a>
@@ -395,7 +381,7 @@
 
                                         <div class="col-lg-6">
                                             <div class="product_details_content">
-                                                <h2 class="item_title">Macbook Pro</h2>
+                                                <h2 class="item_title">Macbook1 Pro</h2>
                                                 <p>
                                                     It is a long established fact that a reader will be distracted eget
                                                     velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce
