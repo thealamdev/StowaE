@@ -1,6 +1,6 @@
 @extends('layouts.frontapp')
 @section('title')
-    {{ $category ?? '' }}
+    {{ $category ?? 'produts' }}
 @endsection
 @section('frontPageContent')
     <div class="breadcrumb_section">
@@ -321,7 +321,7 @@
                                                     <h4><a
                                                             href="{{ route('frontend.shop.show', $product->product->slug) }}">{{ $product->product->title }}</a>
                                                     </h4>
-                                                    <p> {!! $product->description !!}</p>
+                                                    <p> {!! $product->product->description !!}</p>
                                                     <div class="rating">
                                                         <i class="fas fa-star"></i>
                                                         <i class="fas fa-star"></i>
