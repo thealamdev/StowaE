@@ -143,6 +143,7 @@ Route::middleware(['auth'])->group(function(){
     Route::controller(UserDashboardController::class)->group(function(){
         Route::prefix('user')->name('user.')->group(function(){
             Route::get('dashboard','index')->name('dashboard');
+            Route::get('orders','orders')->name('orders');
         });
     });
     

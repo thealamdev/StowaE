@@ -4,7 +4,7 @@
             <li class="active"><a href="#!">Account Dashboard</a></li>
             <li><a href="#!">Account Information</a></li>
             <li><a href="#!">Address Book</a></li>
-            <li><a href="#!">My Orders</a></li>
+            <li><a href="{{ route('user.orders') }}">My Orders</a></li>
             <li><a href="#!">Billing Agreements</a></li>
             <li><a href="#!">Recurring Profiles</a></li>
             <li><a href="#!">My Product Reviews</a></li>

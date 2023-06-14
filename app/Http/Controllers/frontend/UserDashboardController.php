@@ -15,12 +15,16 @@ class UserDashboardController extends Controller
         $this->middleware('role:user');
     }
 
-    public function index(){
-        $id = auth()->user()->id;
-        $orders = Order::where('user_id',auth()->user()->id)->get();
-        // return $orders;
-        return view('frontend.dashboard.index',compact('orders'));
+    public function index()
+    {
+        return view('frontend.dashboard.index');
     }
 
-
+    public function orders()
+    {
+        $id = auth()->user()->id;
+        $orders = Order::where('user_id', auth()->user()->id)->get();
+        // return $orders;
+        return view('frontend.dashboard.orders', compact('orders'));
+    }
 }
