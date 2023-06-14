@@ -1,10 +1,5 @@
  
-            
- 
-    
-    
-    <!-- slider_section - start
-    ================================================== -->
+        
     <section class="slider_section">
         <div class="container">
             <div class="row">

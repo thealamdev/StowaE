@@ -11,7 +11,7 @@ use App\Http\Controllers\Backend\RolePermissionController;
 use App\Http\Controllers\Backend\Category\CategoryController;
 use App\Http\Controllers\Backend\Order\OrderController;
 use App\Http\Controllers\Backend\RoleAssign\RoleAssignController;
- 
+use App\Http\Controllers\Frontend\UserDashboardController;
 
 // Frontend show route:
 Route::get('/', [frontendController::class, 'index'])->name('frontend.home');
@@ -136,6 +136,16 @@ Route::name('frontend.')->group(function () {
     Route::prefix('category-search')->name('category-search.')->group(function () {
         require __DIR__ . "/frontend/category-search/category-search.php";
     });
+});
+
+// user dashboard controller :
+Route::middleware(['auth'])->group(function(){
+    Route::controller(UserDashboardController::class)->group(function(){
+        Route::prefix('user')->name('user.')->group(function(){
+            Route::get('dashboard','index')->name('dashboard');
+        });
+    });
+    
 });
 
  

@@ -319,7 +319,7 @@
                                     </ul>
                                 </li>
 
-
+                                @role('super-admin')
                                 <li class="sidebar-menu-item active">
                                     <a class="sidebar-menu-button" data-toggle="collapse" href="#role_assign">
                                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
@@ -338,6 +338,8 @@
                                         </ul>
                                     @endcan
                                 </li>
+                            
+                                @endrole
 
 
                                 <li class="sidebar-menu-item active">

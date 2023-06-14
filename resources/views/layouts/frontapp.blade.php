@@ -273,7 +273,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="account.html">
+                                    <a href="{{ route('user.dashboard') }}">
                                         <svg role="img" xmlns="http://www.w3.org/2000/svg" width="30px"
                                             height="30px" viewBox="0 0 24 24" aria-labelledby="personIconTitle"
                                             stroke="#051d43" stroke-width="1" stroke-linecap="square"

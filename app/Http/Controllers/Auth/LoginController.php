@@ -31,7 +31,7 @@ class LoginController extends Controller
 
     public function authenticated(){
         if(Auth::user()->hasRole('user')){
-            return "hi";
+            return redirect(route('user.dashboard'));
         }
         else{
             return redirect(route('dashboard.dashboard'));
