@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Frontend\Shop;
 
+use App\Models\User;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Inventory;
 
 class ShopController extends Controller
 {
@@ -70,15 +71,12 @@ class ShopController extends Controller
             $inventory_color = Color::whereIn('id', $inv_colors)->get();
         }
 
+
+
         return view('frontend.show', compact('products', 'inventory_color', 'colorSize'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
@@ -116,53 +114,46 @@ class ShopController extends Controller
 
         $options = ["<option selected disabled>Select a Product size</option>"];
         foreach ($products->inventories as $inventory) {
-            
+
             if ($request->color_id == $inventory->color_id) {
-                $options[] = "<option value='$inventory->size_id'>" .$inventory->size->name ."</option>";
+                $options[] = "<option value='$inventory->size_id'>" . $inventory->size->name . "</option>";
             }
         }
 
         return response()->json($options);
     }
 
-        /* Ajax functions:
+    /* Ajax functions:
         additionalPrice function:
        */
 
-    public function additionalPrice(Request $request){
-        $product = Product::where('id',$request->product_id)->with(['inventories'=>function($q) use($request) {
-            
-            $q->where('color_id',$request->color_id)->where('size_id',$request->size_id)->first();
+    public function additionalPrice(Request $request)
+    {
+        $product = Product::where('id', $request->product_id)->with(['inventories' => function ($q) use ($request) {
+
+            $q->where('color_id', $request->color_id)->where('size_id', $request->size_id)->first();
         }])->first();
 
         // return $product;
-        
-        if($product->sale_price){
-            foreach($product->inventories as $inventory){
+
+        if ($product->sale_price) {
+            foreach ($product->inventories as $inventory) {
                 $price = $product->sale_price + $inventory->additional_price;
             }
-             
-        }
-        else{
-            foreach($product->inventories as $inventory){
+        } else {
+            foreach ($product->inventories as $inventory) {
                 $price = $product->price + $inventory->additional_price;
             }
-            
         }
 
         $data = [];
-        foreach($product->inventories as $inventory){
+        foreach ($product->inventories as $inventory) {
             $data['inventory_id'] = $inventory->id;
             $data['price'] = $price;
             $data['additional_price'] = $inventory->additional_price;
             $data['quantity'] = $inventory->quantity;
-            
         }
 
         return response()->json($data);
     }
-
-
 }
-
- 

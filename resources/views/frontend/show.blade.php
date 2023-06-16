@@ -450,6 +450,7 @@
                                      <div class="rating_box_name">
                                         <h5>Your Ratings:</h5>
                                      </div>
+                                      
 
                                     <div class='rating-widget'>
 
