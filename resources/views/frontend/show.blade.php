@@ -394,7 +394,7 @@
                             </div>
                         </div>
                     </div>
-
+  
                     <div class="customer_reviews">
                         <h4 class="reviews_tab_title">2 reviews for this product</h4>
                         <div class="customer_review_item clearfix">
@@ -442,7 +442,7 @@
                     @auth
                         <div class="customer_review_form">
                             <h4 class="reviews_tab_title">Add a review</h4>
-
+                            {{$order}}
 
                             <form action="#">
 
