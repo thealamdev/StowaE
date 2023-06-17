@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -72,22 +73,24 @@ class ShopController extends Controller
         }
 
 
-        $user_orders = User::join('orders as o','users.id' , '=' , 'o.user_id')
-        ->where('users.id',auth()->user()->id)
-        ->join('inventory_order as io','o.id','=' , 'io.order_id')
-        ->join('inventories as i', 'io.inventory_id','=','i.id')
-        ->select('i.product_id')
-        ->get();
+        if(Auth::check()){
+            $user_orders = User::join('orders as o','users.id' , '=' , 'o.user_id')
+            ->where('users.id',auth()->user()->id)
+            ->join('inventory_order as io','o.id','=' , 'io.order_id')
+            ->join('inventories as i', 'io.inventory_id','=','i.id')
+            ->select('i.product_id')
+            ->get();
+        }
+        else{
+            $user_orders = [];
+        }
          
-        $user_order =  $user_orders->toArray();
-           
-
-        foreach($user_order as $orders){
-            return $arr = in_array(5,$orders);
+        $user_order = [];
+        foreach($user_orders as $orders){
+            array_push($user_order,$orders['product_id']);
         }
 
-
-        return view('frontend.show', compact('products', 'inventory_color', 'colorSize','order'));
+        return view('frontend.show', compact('products', 'inventory_color', 'colorSize','user_order'));
     }
 
 
