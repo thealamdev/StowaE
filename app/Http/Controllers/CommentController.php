@@ -37,24 +37,6 @@ class CommentController extends Controller
     public function store(Request $request)
     {
 
-        // $star = 0;
-
-        // if($request->review_star == 1){
-        //     $star = $request->review_star;
-        // }
-        // elseif($request->review_star ==2){
-        //     $star = $request->review_star;
-        // }
-        // elseif($request->review_star ==3){
-        //     $star = $request->review_star;
-        // }
-        // elseif($request->review_star ==4){
-        //     $star = $request->review_star;
-        // }
-        // elseif($request->review_star ==5){
-        //     $star = $request->review_star;
-        // };
-
         $comment = Comment::create([
             'user_id' => auth()->user()->id,
             'product_id' => $request->product_id,

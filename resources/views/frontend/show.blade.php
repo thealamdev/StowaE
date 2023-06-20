@@ -396,10 +396,14 @@
                     </div>
   
                     <div class="customer_reviews">
-                        <h4 class="reviews_tab_title">2 reviews for this product</h4>
+                        <h4 class="reviews_tab_title">{{ count($products->comments) }} reviews for this product</h4>
+
+                        @foreach ($products->comments as $comment)
+                            
+                         
                         <div class="customer_review_item clearfix">
                             <div class="customer_image">
-                                <img src="assets/images/team/team_1.jpg" alt="image_not_found">
+                                <img src="{{ asset('storage/gallary/'.$comment->user->user_info->photo) }}" alt="image_not_found">
                             </div>
                             <div class="customer_content">
                                 <div class="customer_info">
@@ -410,34 +414,15 @@
                                         <li><i class="fas fa-star"></i></li>
                                         <li><i class="fas fa-star-half-alt"></i></li>
                                     </ul>
-                                    <h4 class="customer_name">Aonathor troet</h4>
-                                    <span class="comment_date">JUNE 2, 2021</span>
+                                    <h4 class="customer_name">{{ $comment->user->name }}</h4>
+                                    <span class="comment_date">{{ $comment->created_at->format('M d , Y') }}</span>
                                 </div>
-                                <p class="mb-0">Nice Product, I got one in black. Goes with anything!</p>
+                                <p class="mb-0">{{ $comment->comment }}</p>
                             </div>
                         </div>
 
-                        <div class="customer_review_item clearfix">
-                            <div class="customer_image">
-                                <img src="assets/images/team/team_2.jpg" alt="image_not_found">
-                            </div>
-                            <div class="customer_content">
-                                <div class="customer_info">
-                                    <ul class="rating_star ul_li">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star-half-alt"></i></li>
-                                    </ul>
-                                    <h4 class="customer_name">Danial obrain</h4>
-                                    <span class="comment_date">JUNE 2, 2021</span>
-                                </div>
-                                <p class="mb-0">
-                                    Great product quality, Great Design and Great Service.
-                                </p>
-                            </div>
-                        </div>
+                        @endforeach
+                        
                     </div>
                     
                     @if (Auth::check() && in_array($products->id, $user_order))

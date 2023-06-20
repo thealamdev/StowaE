@@ -54,7 +54,8 @@ class ShopController extends Controller
     public function show($slug)
     {
         //
-        $products = Product::where('slug', $slug)->with('product_gallaries')->first();
+        $products = Product::where('slug', $slug)->with('product_gallaries','comments')->first();
+
         $colorSize = Product::where('slug', $slug)->with(['inventories' => function ($q) {
             $q->with('color')
                 ->with('size');
@@ -89,6 +90,8 @@ class ShopController extends Controller
         foreach($user_orders as $orders){
             array_push($user_order,$orders['product_id']);
         }
+
+
 
         return view('frontend.show', compact('products', 'inventory_color', 'colorSize','user_order'));
     }
