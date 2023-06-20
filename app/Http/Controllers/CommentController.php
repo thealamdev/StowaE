@@ -15,6 +15,7 @@ class CommentController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -35,7 +36,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**

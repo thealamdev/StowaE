@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\RolePermissionController;
 use App\Http\Controllers\Backend\Category\CategoryController;
 use App\Http\Controllers\Backend\Order\OrderController;
 use App\Http\Controllers\Backend\RoleAssign\RoleAssignController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 
 // Frontend show route:
@@ -148,5 +149,17 @@ Route::middleware(['auth'])->group(function(){
     });
     
 });
+
+// Comment controller :
+Route::middleware(['auth'])->group(function(){
+    Route::controller(CommentController::class)->group(function(){
+        Route::prefix('comment')->name('comment.')->group(function(){
+            Route::post('store','store')->name('store');
+        });
+    });
+    
+});
+
+
 
  

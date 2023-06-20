@@ -445,7 +445,8 @@
                         <h4 class="reviews_tab_title">Add a review</h4>
                     
 
-                        <form action="#">
+                        <form action="{{ route('comment.store') }}" method="POST">
+                            @csrf
 
                             <div class="your_ratings">
                                  <div class="rating_box_name">
@@ -488,6 +489,7 @@
 
 
                             <div class="form_item">
+                                <input type="hidden" name="product_id" value="{{ $products->id }}">
                                 <input type="hidden" name="review_star" id="review_star" >
                                 <textarea name="comment" placeholder="Your Review*"></textarea>
                             </div>
