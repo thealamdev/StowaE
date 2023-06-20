@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('parent_id')->constrained('comments')->nullable();
             $table->longText('comment');
             $table->integer('one_star')->nullable();
