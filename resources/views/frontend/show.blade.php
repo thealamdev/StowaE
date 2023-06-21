@@ -394,94 +394,110 @@
                             </div>
                         </div>
                     </div>
-  
+
                     <div class="customer_reviews">
                         <h4 class="reviews_tab_title">{{ count($products->comments) }} reviews for this product</h4>
 
                         @foreach ($products->comments as $comment)
-                            
-                         
-                        <div class="customer_review_item clearfix">
-                            <div class="customer_image">
-                                <img src="{{ asset('storage/gallary/'.$comment->user->user_info->photo) }}" alt="image_not_found">
-                            </div>
-                            <div class="customer_content">
-                                <div class="customer_info">
-                                    <ul class="rating_star ul_li">
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star"></i></li>
-                                        <li><i class="fas fa-star-half-alt"></i></li>
-                                    </ul>
-                                    <h4 class="customer_name">{{ $comment->user->name }}</h4>
-                                    <span class="comment_date">{{ $comment->created_at->format('M d , Y') }}</span>
+                            @php
+                                $star = 0;
+                                if ($comment->one_star > 0) {
+                                    $star = $comment->one_star;
+                                } elseif ($comment->two > 0) {
+                                    $star = $comment->two_star;
+                                } elseif ($comment->three_star > 0) {
+                                    $star = $comment->three_star;
+                                } elseif ($comment->four_star > 0) {
+                                    $star = $comment->four_star;
+                                } elseif ($comment->five_star > 0) {
+                                    $star = $comment->five_star;
+                                }
+                            @endphp
+
+                            <div class="customer_review_item clearfix">
+                                <div class="customer_image">
+                                    <img src="{{ asset('storage/gallary/' . $comment->user->user_info->photo) }}"
+                                        alt="image_not_found">
                                 </div>
-                                <p class="mb-0">{{ $comment->comment }}</p>
-                            </div>
-                        </div>
+                                <div class="customer_content">
+                                    <div class="customer_info">
 
-                        @endforeach
-                        
-                    </div>
-                    
-                    @if (Auth::check() && in_array($products->id, $user_order))
-                    <div class="customer_review_form">
-                        <h4 class="reviews_tab_title">Add a review</h4>
-                    
-
-                        <form action="{{ route('comment.store') }}" method="POST">
-                            @csrf
-
-                            <div class="your_ratings">
-                                 <div class="rating_box_name">
-                                    <h5>Your Ratings:</h5>
-                                 </div>
-                                  
-
-                                <div class='rating-widget'>
-
-                                    <div class='rating-stars text-center'>
-                                        <ul id='stars'>
-                                            <li class='star' title='Poor' data-value='1'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='Fair' data-value='2'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='Good' data-value='3'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='Excellent' data-value='4'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                            </li>
-                                            <li class='star' title='WOW!!!' data-value='5'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                            </li>
+                                        <ul class="rating_star ul_li">
+                                            @for ($i = 0; $i < $star; $i++)
+                                                <li><i class="fas fa-star"></i></li>
+                                            @endfor
                                         </ul>
+
+
+                                        <h4 class="customer_name">{{ $comment->user->name }}</h4>
+                                        <span class="comment_date">{{ $comment->created_at->format('M d , Y') }}</span>
+                                    </div>
+                                    <p class="mb-0">{{ $comment->comment }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+
+
+
+                    @if (Auth::check() && in_array($products->id, $user_order))
+                        <div class="customer_review_form">
+                            <h4 class="reviews_tab_title">Add a review</h4>
+
+
+                            <form action="{{ route('comment.store') }}" method="POST">
+                                @csrf
+
+                                <div class="your_ratings">
+                                    <div class="rating_box_name">
+                                        <h5>Your Ratings:</h5>
                                     </div>
 
-                                    <div class='success-box' style="display: none">
-                                        <div class='clearfix'></div>
-                                        <img alt='tick image' width='32'
-                                            src='data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0MjYuNjY3IDQyNi42NjciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQyNi42NjcgNDI2LjY2NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiM2QUMyNTk7IiBkPSJNMjEzLjMzMywwQzk1LjUxOCwwLDAsOTUuNTE0LDAsMjEzLjMzM3M5NS41MTgsMjEzLjMzMywyMTMuMzMzLDIxMy4zMzMgIGMxMTcuODI4LDAsMjEzLjMzMy05NS41MTQsMjEzLjMzMy0yMTMuMzMzUzMzMS4xNTcsMCwyMTMuMzMzLDB6IE0xNzQuMTk5LDMyMi45MThsLTkzLjkzNS05My45MzFsMzEuMzA5LTMxLjMwOWw2Mi42MjYsNjIuNjIyICBsMTQwLjg5NC0xNDAuODk4bDMxLjMwOSwzMS4zMDlMMTc0LjE5OSwzMjIuOTE4eiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K' />
-                                        <div class='text-message'></div>
+
+                                    <div class='rating-widget'>
+
+                                        <div class='rating-stars text-center'>
+                                            <ul id='stars'>
+                                                <li class='star' title='Poor' data-value='1'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Fair' data-value='2'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Good' data-value='3'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='Excellent' data-value='4'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                                <li class='star' title='WOW!!!' data-value='5'>
+                                                    <i class='fa fa-star fa-fw'></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class='success-box' style="display: none">
+                                            <div class='clearfix'></div>
+                                            <img alt='tick image' width='32'
+                                                src='data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0MjYuNjY3IDQyNi42NjciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQyNi42NjcgNDI2LjY2NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiM2QUMyNTk7IiBkPSJNMjEzLjMzMywwQzk1LjUxOCwwLDAsOTUuNTE0LDAsMjEzLjMzM3M5NS41MTgsMjEzLjMzMywyMTMuMzMzLDIxMy4zMzMgIGMxMTcuODI4LDAsMjEzLjMzMy05NS41MTQsMjEzLjMzMy0yMTMuMzMzUzMzMS4xNTcsMCwyMTMuMzMzLDB6IE0xNzQuMTk5LDMyMi45MThsLTkzLjkzNS05My45MzFsMzEuMzA5LTMxLjMwOWw2Mi42MjYsNjIuNjIyICBsMTQwLjg5NC0xNDAuODk4bDMxLjMwOSwzMS4zMDlMMTc0LjE5OSwzMjIuOTE4eiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K' />
+                                            <div class='text-message'></div>
+                                        </div>
+
                                     </div>
 
                                 </div>
 
-                            </div>
 
+                                <div class="form_item">
+                                    <input type="hidden" name="product_id" value="{{ $products->id }}">
+                                    <input type="hidden" name="review_star" id="review_star">
+                                    <textarea name="comment" placeholder="Your Review*"></textarea>
+                                </div>
 
-                            <div class="form_item">
-                                <input type="hidden" name="product_id" value="{{ $products->id }}">
-                                <input type="hidden" name="review_star" id="review_star" >
-                                <textarea name="comment" placeholder="Your Review*"></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn_primary">Submit Now</button>
-                        </form>
-                    </div>
+                                <button type="submit" class="btn btn_primary">Submit Now</button>
+                            </form>
+                        </div>
                     @endif
 
                 </div>
