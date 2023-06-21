@@ -132,7 +132,7 @@
             <div class="col-lg-6">
                 <div class="product_details_content">
                     <h2 class="item_title">{{ $products->title }}</h2>
-                    <p>{{ $products->short_description }}</p>
+                    <p>{!! $products->short_description !!}</p>
                     <div class="item_review">
                         <ul class="rating_star ul_li">
                             <li><i class="fas fa-star"></i></li>
