@@ -1,6 +1,6 @@
 {{-- {{ $product->categories->name }} --}}
 @extends('layouts.backendapp')
-@section('title','Product')
+@section('title', 'Product')
 @section('backendContent')
 
     <div class="page_header mt-3">
@@ -46,56 +46,55 @@
                 </thead>
 
                 @forelse ($products as $product)
-                <tr>
-                    <td>
-                        <img src="{{ asset('storage/products/'.$product->image) }}" alt="" width="60" style="border-radius: 10px">
-                    </td>
-                    <td>{{ $product->user->name }}</td>
-                    <td>{{ Str::limit($product->title, 15, '...') }}</td>
-                    <td>
-                    @foreach ($product->categories as $category)
-                    <a class="badge badge-info">
-                        {{ $category->name ?? "" }}
-                    </a>
-                       
-                    @endforeach
-                    </td>
-                    <td>{{ $product->price }}</td>
-                    <td>{{ $product->sale_price }}</td>
-                    <td>{{ $product->discount }}</td>
-                     
-                    {{-- <td>
-                        <img src="{{ asset('storage/product/'.$product->image) }}" alt="" width="60"> 
-                    </td> --}}
-                    {{-- <td>{{  $product->created_at->format('d-M-y') }}</td> --}}
-                    {{-- <td>{{ $product->created_at->diffForHumans() }}</td> --}}
-                    {{-- <td>{{ $product->parent_id }}</td> --}}
-                    <td>
-                        <a href="{{ route('dashboard.inventory.create',$product->id) }}" class="badge bg-warning">Inventory</a>
-                        @can('edit')
-                        <a href="{{ route('dashboard.product.edit', $product->id) }}" class="badge bg-success">Edit</a>
-                        @endcan
+                    <tr>
+                        <td>
+                            <img src="{{ asset('storage/products/' . $product->image) }}" alt="" width="60"
+                                style="border-radius: 10px">
+                        </td>
+                        <td>{{ $product->user->name }}</td>
+                        <td>{{ Str::limit($product->title, 15, '...') }}</td>
+                        <td>
+                            @foreach ($product->categories as $category)
+                                <a class="badge badge-info">
+                                    {{ $category->name ?? '' }}
+                                </a>
+                            @endforeach
+                        </td>
+                        <td>{{ $product->price }}</td>
+                        <td>{{ $product->sale_price }}</td>
+                        <td>{{ $product->discount }}</td>
+                        <td>
+                            <a href="{{ route('dashboard.inventory.create', $product->id) }}"
+                                class="badge bg-warning">Inventory</a>
+                            @can('edit')
+                                <a href="{{ route('dashboard.product.edit', $product->id) }}" class="badge bg-success">Edit</a>
+                            @endcan
 
-                        @can('edit')
-                        <form action="{{ route('dashboard.product.delete', $product->id) }}" method="post" style="display: inline-block;">
-                            @csrf
-                            @method('delete')
-                             <button class="badge bg-danger border-0 delete_btn" type="button">Delete</button>
-                        </form>
-                        @endcan
-                        
-                    </td>
-                    
-                </tr>
+                            @can('edit')
+                                <form action="{{ route('dashboard.product.delete', $product->id) }}" method="post"
+                                    style="display: inline-block;">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="badge bg-danger border-0 delete_btn" type="button">Delete</button>
+                                </form>
+                            @endcan
+
+                            <a
+                                href="whatsapp://send?text=Product_Name%20{{ $product->title }}%0APrice%20{{ $product->price }}%0ADiscount%20{{ $product->discount }}%0AClient_Name:%20{{ $product->user->name }}%0AImage:%20{{ asset('storage/products/' . $product->image) }}"><i
+                                    class="lab la-whatsapp text-success h3 vertical-align-center"></i></a>
+
+                        </td>
+
+                    </tr>
                 @empty
                     <td colspan="8" width="200" style="text-align:center;vertical-align:middle">
                         <div class="empty_img m-auto">
-                            <img src="{{ asset('assets/backend/images/logos/empty.png') }}" alt="" class="w-50" >
+                            <img src="{{ asset('assets/backend/images/logos/empty.png') }}" alt="" class="w-50">
                         </div>
                     </td>
                 @endforelse
-                 
-                
+
+
             </table>
             {{ $products->links('vendor.custome') }}
         </div>
@@ -104,7 +103,7 @@
 
 @section('sweet-js')
     <script>
-        $('.delete_btn').on('click',function(){
+        $('.delete_btn').on('click', function() {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -113,14 +112,11 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
-                     $(this).parent('form').submit();
+                    $(this).parent('form').submit();
                 }
-                })
+            })
         })
     </script>
 @endsection
-
-
- 
