@@ -61,7 +61,7 @@
                             @endforeach
                         </td>
                         <td>
-                            <p class="price">{{ $product->price }}</p>
+                            {{ $product->price }}
                             <input type="radio" name="price" class="price-checkbox" data-price="{{ $product->price }}">
                         </td>
                         <td>
@@ -86,7 +86,7 @@
                                 </form>
                             @endcan
 
-                            <button class="send-whatsapp-button" onclick="sendToWhatsApp()">
+                            <button class="send-whatsapp-button" onclick="sendToWhatsApp(this)">
                                 Send to WhatsApp
                             </button>
 
@@ -131,29 +131,29 @@
         })
     </script>
 
-    <script>
-        function sendToWhatsApp() {
-            const priceCheckbox = document.querySelector('.price-checkbox');
-            const salePriceCheckbox = document.querySelector('.sale-price-checkbox');
+<script>
+    function sendToWhatsApp(button) {
+        const row = button.closest('tr');
+        const priceCheckbox = row.querySelector('.price-checkbox');
+        const salePriceCheckbox = row.querySelector('.sale-price-checkbox');
 
-            let selectedPrice;
-            if (priceCheckbox.checked) {
-                selectedPrice = priceCheckbox.getAttribute('data-price');
-            } else if (salePriceCheckbox.checked) {
-                selectedPrice = salePriceCheckbox.getAttribute('data-sale-price');
-            } else {
-                // If neither checkbox is selected, you may handle this case as needed
-                alert('Please select a price.');
-                return;
-            }
-
-            const productTitle = encodeURIComponent("Product Title: {{ $product->title }}");
-            const productPrice = encodeURIComponent("Price: " + selectedPrice);
-            const clientName = encodeURIComponent("Client Name: {{ $product->user->name }}");
-            const productImage = encodeURIComponent("Image: {{ asset('storage/products/' . $product->image) }}");
-
-            const whatsappLink = `whatsapp://send?text=${productTitle}%0A${productPrice}%0A${clientName}%0A${productImage}`;
-            window.location.href = whatsappLink;
+        if (priceCheckbox.checked) {
+            sendToWhatsAppWithPrice(priceCheckbox.getAttribute('data-price'));
+        } else if (salePriceCheckbox.checked) {
+            sendToWhatsAppWithPrice(salePriceCheckbox.getAttribute('data-sale-price'));
+        } else {
+            alert('Please select a price.');
         }
-    </script>
+    }
+
+    function sendToWhatsAppWithPrice(selectedPrice) {
+        const productTitle = encodeURIComponent("Product Title: {{ $product->title }}");
+        const productPrice = encodeURIComponent("Price: " + selectedPrice);
+        const clientName = encodeURIComponent("Client Name: {{ $product->user->name }}");
+        const productImage = encodeURIComponent("Image: {{ asset('storage/products/' . $product->image) }}");
+
+        const whatsappLink = `whatsapp://send?text=${productTitle}%0A${productPrice}%0A${clientName}%0A${productImage}`;
+        window.location.href = whatsappLink;
+    }
+</script>
 @endsection
