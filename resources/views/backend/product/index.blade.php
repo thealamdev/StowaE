@@ -131,29 +131,29 @@
         })
     </script>
 
-<script>
-    function sendToWhatsApp(button) {
-        const row = button.closest('tr');
-        const priceCheckbox = row.querySelector('.price-checkbox');
-        const salePriceCheckbox = row.querySelector('.sale-price-checkbox');
+    <script>
+        function sendToWhatsApp(button) {
+            const row = button.closest('tr');
+            const priceCheckbox = row.querySelector('.price-checkbox');
+            const salePriceCheckbox = row.querySelector('.sale-price-checkbox');
 
-        if (priceCheckbox.checked) {
-            sendToWhatsAppWithPrice(priceCheckbox.getAttribute('data-price'));
-        } else if (salePriceCheckbox.checked) {
-            sendToWhatsAppWithPrice(salePriceCheckbox.getAttribute('data-sale-price'));
-        } else {
-            alert('Please select a price.');
+            if (priceCheckbox.checked) {
+                sendToWhatsAppWithPrice(priceCheckbox.getAttribute('data-price'));
+            } else if (salePriceCheckbox.checked) {
+                sendToWhatsAppWithPrice(salePriceCheckbox.getAttribute('data-sale-price'));
+            } else {
+                alert('Please select a price.');
+            }
         }
-    }
 
-    function sendToWhatsAppWithPrice(selectedPrice) {
-        const productTitle = encodeURIComponent("Product Title: {{ $product->title }}");
-        const productPrice = encodeURIComponent("Price: " + selectedPrice);
-        const clientName = encodeURIComponent("Client Name: {{ $product->user->name }}");
-        const productImage = encodeURIComponent("Image: {{ asset('storage/products/' . $product->image) }}");
+        function sendToWhatsAppWithPrice(selectedPrice) {
+            const productTitle = encodeURIComponent("Product Title: {{ $product->title }}");
+            const productPrice = encodeURIComponent("Price: " + selectedPrice);
+            const clientName = encodeURIComponent("Client Name: {{ $product->user->name }}");
+            const productImage = encodeURIComponent("Image: {{ asset('storage/products/' . $product->image) }}");
 
-        const whatsappLink = `whatsapp://send?text=${productTitle}%0A${productPrice}%0A${clientName}%0A${productImage}`;
-        window.location.href = whatsappLink;
-    }
-</script>
+            const whatsappLink = `whatsapp://send?text=${productTitle}%0A${productPrice}%0A${clientName}%0A${productImage}`;
+            window.location.href = whatsappLink;
+        }
+    </script>
 @endsection
